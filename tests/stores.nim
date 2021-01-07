@@ -10,21 +10,15 @@ import
   json
 
 type
-  DiscardStore = ref DiscardStoreObj
-  DiscardStoreObj = object of StoreObj
   JsonStore = ref JsonStoreObj
   JsonStoreObj = object of StoreObj
   
-proc discardPut(s: Store; r: Reference; b: openarray[byte]) =
-  discard
-
-proc newDiscardStore*(): DiscardStore =
-  new(result)
-  result.putImpl = discardPut
-
-proc jsonGet(s: Store; r: Reference): seq[byte] {.gcsafe.} =
+proc jsonGet(s: Store; r: Reference): seq[byte] =
   var s = JsonStore(s)
-  cast[seq[byte]](base32.decode(s.js["blocks"][$r].getStr))
+  try:
+    cast[seq[byte]](base32.decode(s.js["blocks"][$r].getStr))
+  except:
+    raise newException(IOError, $r & " not found")
 
 proc newJsonStore*(js: JsonNode): JsonStore =
   new(result)
