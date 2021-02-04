@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.0"
+version       = "0.1.1"
 author        = "Emery Hemingway"
 description   = "Utilities for working with the Encoding for Robust Immutable Storage (ERIS)"
 license       = "GPL-3.0"
@@ -10,4 +10,4 @@ bin           = @["erissum"]
 
 # Dependencies
 
-requires "nim >= 1.4.2", "eris"
+requires "nim >= 1.4.2", "eris >= 0.2.0"
