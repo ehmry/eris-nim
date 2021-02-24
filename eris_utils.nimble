@@ -10,4 +10,4 @@ bin           = @["erissum"]
 
 # Dependencies
 
-requires "nim >= 1.4.2", "eris >= 0.2.0"
+requires "nim >= 1.4.2", "eris >= 0.3.0"

