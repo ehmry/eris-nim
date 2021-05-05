@@ -1,24 +1,18 @@
 {
-  description = "Utilities for working with the Encoding for Robust Immutable Storage (ERIS)";
+  description =
+    "Utilities for working with the Encoding for Robust Immutable Storage (ERIS)";
 
-  outputs = { self, nixpkgs, nimble }:
+  outputs = { self, nimble }:
     let
       systems = [ "aarch64-linux" "x86_64-linux" ];
-      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
+      forAllSystems = nimble.inputs.nixpkgs.lib.genAttrs systems;
     in {
 
       defaultPackage = forAllSystems (system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-          nimpkgs = nimble.packages.${system};
-        in with pkgs;
-        stdenv.mkDerivation {
-          pname = "eris";
+        nimble.packages.${system}.eris_utils.overrideAttrs (attrs: {
           version = "unstable-" + self.lastModifiedDate;
           src = self;
-          nativeBuildInputs = [ nimpkgs.nim ];
-          buildInputs = [ pcre ];
-        });
+        }));
 
     };
 }
