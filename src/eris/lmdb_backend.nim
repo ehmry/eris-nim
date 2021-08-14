@@ -20,7 +20,7 @@ proc lmdbPut(s: ErisStore; r: Reference; blk: seq[byte]): Future[void] =
     val = Val(mvSize: blk.len.uint, mvData: blk[0].unsafeAddr)
   let err = put(s.txn, s.dbi, key.addr, val.addr, 0)
   result = newFuture[void]("ldbmPut")
-  if err != 0:
+  if err == 0:
     result.complete()
   else:
     result.fail(newException(Exception, $strerror(err)))
@@ -32,7 +32,7 @@ proc lmdbGet(s: ErisStore; r: Reference): Future[seq[byte]] =
     val: Val
   let err = get(s.txn, s.dbi, key.addr, val.addr)
   result = newFuture[seq[byte]]("ldbmGet")
-  if err != 0:
+  if err == 0:
     var blk = newSeq[byte](val.mvSize)
     copyMem(blk[0].addr, val.mvData, blk.len)
     result.complete(blk)
