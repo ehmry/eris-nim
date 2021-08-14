@@ -5,7 +5,7 @@ author        = "Emery Hemingway"
 description   = "Utilities for working with the Encoding for Robust Immutable Storage (ERIS)"
 license       = "GPL-3.0"
 srcDir        = "src"
-bin           = @["erissum", "erisserver", "erisget"]
+bin           = @["erissum"]
 
 
 # Dependencies
