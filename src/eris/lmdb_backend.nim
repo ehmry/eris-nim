@@ -39,7 +39,7 @@ proc lmdbGet(s: ErisStore; r: Reference): Future[seq[byte]] =
   else:
     result.fail(newException(Exception, $strerror(err)))
 
-proc newLmdbStore*(filePath: string; mapSize = Natural(1 shr 30)): LmdbStore =
+proc newLmdbStore*(filePath: string; mapSize = Natural(1 shl 30)): LmdbStore =
   result = LmdbStore(db: newLMDBEnv(filePath, openflags = CREATE),
                      putImpl: lmdbPut, getImpl: lmdbGet)
   discard result.db.envSetMapsize(mapSize.uint)
