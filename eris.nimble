@@ -10,8 +10,4 @@ srcDir        = "src"
 
 # Dependencies
 
-requires "nim >= 1.4.0", "base32 >= 0.1.3", "taps >= 0.2.0", "lmdb", "tkrzw >= 0.1.1"
-
-import distros
-if detectOs(NixOS):
-  foreignDep "lmdb"
+requires "nim >= 1.4.0", "base32 >= 0.1.3", "taps >= 0.2.0", "tkrzw >= 0.1.1"
