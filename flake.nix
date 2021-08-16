@@ -1,17 +1,17 @@
 {
-  description = "Encoding for Robust Immutable Storage";
-  outputs = { self, nimble }:
+  description = "Development flake";
+
+  outputs = { self, nixpkgs }:
     let
       systems = [ "aarch64-linux" "x86_64-linux" ];
-      forAllSystems = nimble.inputs.nixpkgs.lib.genAttrs systems;
+      forAllSystems = nixpkgs.lib.genAttrs systems;
     in {
 
-      defaultPackage = forAllSystems (system:
-        let nimpkgs = nimble.packages.${system};
-        in nimpkgs.eris.overrideAttrs (attrs: {
-          version = "unstable-" + self.lastModifiedDate;
-          src = self;
-        }));
-
+      devShell = forAllSystems (system:
+        with nixpkgs.legacyPackages.${system};
+        pkgs.mkShell {
+          nativeBuildInputs = [ nim pkg-config ];
+          buildInputs = [ tkrzw ];
+        });
     };
 }
