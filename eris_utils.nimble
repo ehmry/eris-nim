@@ -5,7 +5,7 @@ author        = "Emery Hemingway"
 description   = "Utilities for working with the Encoding for Robust Immutable Storage (ERIS)"
 license       = "Unlicense"
 srcDir        = "src"
-bin           = @["erisdb", "erissum"]
+bin           = @["erisdb", "erishttpd", "erissum"]
 backend       = "cpp"
 
 
