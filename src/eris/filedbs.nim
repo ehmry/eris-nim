@@ -2,7 +2,7 @@
 
 ## ERIS stores backed by Tkrzw databases.
 import
-  std / asyncfutures, std / strutils
+  std / asyncfutures
 
 import
   tkrzw
@@ -33,11 +33,14 @@ proc dbmGet[T](s: ErisStore; r: Reference): Future[seq[byte]] =
   except:
     result.fail(newException(KeyError, "reference not in store"))
 
+proc newDbmStore*[T: DBM](dbm: T): DbmStore[T] =
+  ## Open a store using a hash hatabase backed by file.
+  DbmStore[T](putImpl: dbmPut[T], getImpl: dbmGet[T], dbm: dbm)
+
 proc newDbmStore*[T](dbFilePath: string; rw = writeable;
                      opts: set[OpenOption] = {}): DbmStore[T] =
   ## Open a store using a hash hatabase backed by file.
-  result = DbmStore[T](putImpl: dbmPut[T], getImpl: dbmGet[T],
-                       dbm: newDBM[T](dbFilePath, rw, opts))
+  newDBM[T](dbFilePath, rw, opts).newDbmStore
 
 proc close*[T](ds: DbmStore[T]) =
   close(ds.dbm)
