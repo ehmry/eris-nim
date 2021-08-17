@@ -1,8 +1,18 @@
 # Utilities for the Encoding for Robust Immutable Storage (ERIS)
 
-Try it with Nix: `nix shell nimble#eris_utils`
+## Build
 
-## erisdb
+Requires a recent version of the [Nim](https://nim-lang.org/) compiler
+and the Nimble utility.
+```sh
+nimble install https://git.sr.ht/~ehmry/eris_utils
+export PATH="$PATH:$HOME/.nimble/bin"
+```
+
+
+## Usage
+
+### erisdb
 
 ```
 Usage: erisdb [OPTION]... [URI]...
@@ -19,7 +29,7 @@ read standard input into the database and print the corresponding URI.
 
 ```
 
-## erishttpd
+### erishttpd
 
 ```
 Usage: erishttpd [OPTION]…
@@ -40,7 +50,7 @@ Files may be uploaded using cURL:
 curl -i --upload-file <FILE> http://[::1]:<PORT>
 ```
 
-## ersissum
+### ersissum
 
 ```
 Usage: erissum [OPTION]... [FILE]...
