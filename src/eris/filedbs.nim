@@ -20,7 +20,7 @@ type
   DbmStore*[T] = ref DbmStoreObj[T]
 proc dbmPut[T](s: ErisStore; r: Reference; b: seq[byte]): Future[void] =
   var s = DbmStore[T](s)
-  s.dbm[r.bytes] = b
+  s.dbm.set(r.bytes, b, false)
   result = newFuture[void]("dbmPut")
   result.complete()
 
