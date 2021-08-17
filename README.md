@@ -22,13 +22,22 @@ read standard input into the database and print the corresponding URI.
 ## erishttpd
 
 ```
-Usage: erishttpd [OPTION]...
-Serves http://…/urn:erisx2:… from a database file.
+Usage: erishttpd [OPTION]…
+GET and PUT data to an ERIS store over HTTP.
+
+Command line arguments:
+
+  --port:…  HTTP listen port
+
+  --get     Enable downloads using GET requests
+  --head    Enable queries using HEAD requests
+  --put     Enable uploading using PUT requests
 
 The location of the database file is configured by the "eris_db_file"
 environment variable.
 
-  --port:PORTNUM  HTTP listen port
+Files may be uploaded using cURL:
+curl -i --upload-file <FILE> http://[::1]:<PORT>
 ```
 
 ## ersissum
