@@ -29,6 +29,18 @@ read standard input into the database and print the corresponding URI.
 
 ```
 
+### erisdbmerge
+
+```
+Usage: erisdbmerge DESTINATION_DB +SOURCE_DB
+Merge ERIS block databases.
+
+The first database file passed on the commandline is
+open and the contents of successive database files are
+copied into it.
+
+```
+
 ### erishttpd
 
 ```
