@@ -5,7 +5,7 @@ author        = "Emery Hemingway"
 description   = "Encoding for Robust Immutable Storage"
 license       = "ISC"
 srcDir        = "src"
-
+backend       = "cpp"
 
 
 # Dependencies

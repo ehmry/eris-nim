@@ -10,11 +10,12 @@ import
   eris
 
 type
-  TestVector* = tuple[js: JsonNode, urn: string, cap: Cap, secret: Secret,
+  TestVector* = tuple[js: JsonNode, urn: string, cap: ErisCap, secret: Secret,
                       data: string]
 template test*(v: TestVector; body: untyped): untyped =
-  test(intToStr(v.js["id"].getInt, 2) & ": " & v.js["name"].getStr):
+  test $v.js["id"]:
     checkpoint v.js["description"].getStr
+    body
 
 iterator testVectors*(): TestVector =
   for path in walkPattern("test-vectors/*.json"):
