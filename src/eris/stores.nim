@@ -12,18 +12,14 @@ import
 import
   asyncdispatch, asyncfutures
 
-proc hash(r: Reference): Hash =
-  hash(r.bytes)
-
 type
   MemoryErisStore = ref MemoryErisStoreObj
   MemoryErisStoreObj = object of ErisStoreObj
   
-proc memoryPut(s: ErisStore; r: Reference; b: seq[byte]): Future[void] =
+proc memoryPut(s: ErisStore; r: Reference; f: PutFuture) =
   var s = MemoryErisStore(s)
-  s.table[r] = b
-  result = newFuture[void]("memoryPut")
-  result.complete()
+  s.table[r] = f.mget
+  complete f
 
 proc memoryGet(s: ErisStore; r: Reference): Future[seq[byte]] =
   var s = MemoryErisStore(s)
