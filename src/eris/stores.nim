@@ -4,9 +4,6 @@ import
   eris
 
 import
-  base32
-
-import
   std / hashes, std / tables
 
 import

