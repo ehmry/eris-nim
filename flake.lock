@@ -1,22 +1,60 @@
 {
   "nodes": {
+    "eris": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1631180806,
+        "narHash": "sha256-s1OT7LaD7mRoncDc/aqkMiCaEgvUxjpt+0BlVc3ODWg=",
+        "ref": "trunk",
+        "rev": "a3d957dea98b9979ad520dc52ce2f0e61439d42d",
+        "revCount": 49,
+        "type": "git",
+        "url": "https://git.sr.ht/~ehmry/eris"
+      },
+      "original": {
+        "ref": "trunk",
+        "type": "git",
+        "url": "https://git.sr.ht/~ehmry/eris"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1628775176,
-        "narHash": "sha256-TR1D/Fs0g2bHrPRgYFGdTEkA9ujCH+ZilzFcl8f4wBI=",
-        "owner": "NixOS",
+        "lastModified": 1630833602,
+        "narHash": "sha256-iU9FVLvVb1LjmkjcauF0tQ1j0tN2mOX0iVcwxZj9jtA=",
+        "owner": "ehmry",
         "repo": "nixpkgs",
-        "rev": "3c471e76e881261f4610a57b10d929fe7ae3def9",
+        "rev": "35de51aa26aa3f2357984ebef214f3f380162b30",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
+        "owner": "ehmry",
+        "ref": "nimPackages",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1630833602,
+        "narHash": "sha256-iU9FVLvVb1LjmkjcauF0tQ1j0tN2mOX0iVcwxZj9jtA=",
+        "owner": "ehmry",
+        "repo": "nixpkgs",
+        "rev": "35de51aa26aa3f2357984ebef214f3f380162b30",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ehmry",
+        "ref": "nimPackages",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "eris": "eris",
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },

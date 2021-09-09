@@ -1,17 +1,33 @@
 {
   description = "Development flake";
 
-  outputs = { self, nixpkgs }:
+  inputs.nixpkgs.url = "github:ehmry/nixpkgs/nimPackages";
+  inputs.eris.url = "git+https://git.sr.ht/~ehmry/eris?ref=trunk";
+
+  outputs = { self, nixpkgs, eris }:
     let
       systems = [ "aarch64-linux" "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
     in {
 
-      devShell = forAllSystems (system:
-        with nixpkgs.legacyPackages.${system};
-        pkgs.mkShell {
-          nativeBuildInputs = [ nim pkg-config ];
-          buildInputs = [ tkrzw ];
+      overlay = final: prev:
+        with prev.extend eris.overlay; {
+          eris_utils = nimPackages.buildNimPackage {
+            pname = "eris_utils";
+            version = "HEAD";
+            nimBinOnly = true;
+            src = self;
+            buildInputs = [ nimPackages.eris ]
+              ++ nimPackages.eris.propagatedBuildInputs;
+          };
+        };
+
+      packages = forAllSystems (system:
+        with nixpkgs.legacyPackages.${system}.extend self.overlay; {
+          inherit eris_utils;
         });
+
+      defaultPackage =
+        forAllSystems (system: self.packages.${system}.eris_utils);
     };
 }
