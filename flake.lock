@@ -2,16 +2,18 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1628775176,
-        "narHash": "sha256-TR1D/Fs0g2bHrPRgYFGdTEkA9ujCH+ZilzFcl8f4wBI=",
-        "owner": "NixOS",
+        "lastModified": 1630833602,
+        "narHash": "sha256-iU9FVLvVb1LjmkjcauF0tQ1j0tN2mOX0iVcwxZj9jtA=",
+        "owner": "ehmry",
         "repo": "nixpkgs",
-        "rev": "3c471e76e881261f4610a57b10d929fe7ae3def9",
+        "rev": "35de51aa26aa3f2357984ebef214f3f380162b30",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
+        "owner": "ehmry",
+        "ref": "nimPackages",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "root": {
