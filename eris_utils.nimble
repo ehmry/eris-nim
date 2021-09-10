@@ -1,11 +1,11 @@
 # Package
 
-version       = "0.2.0"
+version       = "0.3.0"
 author        = "Emery Hemingway"
 description   = "Utilities for working with the Encoding for Robust Immutable Storage (ERIS)"
 license       = "Unlicense"
 srcDir        = "src"
-bin           = @["erisdb", "erisdbmerge", "erishttpd", "erissum"]
+bin           = @["erisencode", "erisdb", "erisdbmerge", "erishttpd", "erissum"]
 backend       = "cpp"
 
 

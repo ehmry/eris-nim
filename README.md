@@ -12,6 +12,23 @@ export PATH="$PATH:$HOME/.nimble/bin"
 
 ## Usage
 
+### erisencode
+
+```
+Usage: erissum [OPTION]... FILE [URI]...
+Encode or decode a file containing ERIS blocks.
+
+When URIs are supplied then data is read from FILE to stdout,
+otherwise data from stdin is written to FILE and a URN is
+written to stdout.
+
+  --1k           1KiB block size
+  --32k         32KiB block size (default)
+
+If FILE has already been initialized then its block size
+will override the requested block size.
+```
+
 ### erisdb
 
 ```
