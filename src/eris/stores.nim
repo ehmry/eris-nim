@@ -13,13 +13,11 @@ type
   MemoryErisStore = ref MemoryErisStoreObj
   MemoryErisStoreObj = object of ErisStoreObj
   
-proc memoryPut(s: ErisStore; r: Reference; f: PutFuture) =
-  var s = MemoryErisStore(s)
+method put(s: MemoryErisStore; r: Reference; f: PutFuture) =
   s.table[r] = f.mget
   complete f
 
-proc memoryGet(s: ErisStore; r: Reference): Future[seq[byte]] =
-  var s = MemoryErisStore(s)
+method get(s: MemoryErisStore; r: Reference): Future[seq[byte]] =
   result = newFuture[seq[byte]]("memoryGet")
   try:
     result.complete(s.table[r])
@@ -28,5 +26,4 @@ proc memoryGet(s: ErisStore; r: Reference): Future[seq[byte]] =
 
 proc newMemoryStore*(): MemoryErisStore =
   ## Create a new ``ErisStore`` that holds its content in-memory.
-  MemoryErisStore(table: initTable[Reference, seq[byte]](), putImpl: memoryPut,
-                  getImpl: memoryGet)
+  MemoryErisStore(table: initTable[Reference, seq[byte]]())

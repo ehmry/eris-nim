@@ -16,8 +16,7 @@ type
   JsonStore = ref JsonStoreObj
   JsonStoreObj = object of ErisStoreObj
   
-proc jsonGet(s: ErisStore; r: Reference): Future[seq[byte]] =
-  var s = JsonStore(s)
+method get(s: JsonStore; r: Reference): Future[seq[byte]] =
   result = newFuture[seq[byte]]("jsonGet")
   try:
     result.complete(cast[seq[byte]](base32.decode(s.js["blocks"][$r].getStr)))
@@ -27,4 +26,3 @@ proc jsonGet(s: ErisStore; r: Reference): Future[seq[byte]] =
 proc newJsonStore*(js: JsonNode): JsonStore =
   new(result)
   result.js = js
-  result.getImpl = jsonGet
