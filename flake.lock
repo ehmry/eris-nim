@@ -1,24 +1,39 @@
 {
   "nodes": {
-    "nixpkgs": {
+    "nimble": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
       "locked": {
-        "lastModified": 1630833602,
-        "narHash": "sha256-iU9FVLvVb1LjmkjcauF0tQ1j0tN2mOX0iVcwxZj9jtA=",
-        "owner": "ehmry",
-        "repo": "nixpkgs",
-        "rev": "35de51aa26aa3f2357984ebef214f3f380162b30",
+        "lastModified": 1641557115,
+        "narHash": "sha256-GVKm6LGTJEaLOoEyOiWXsjBiMbC52Y4ezhLJQDTqR2c=",
+        "owner": "nix-community",
+        "repo": "flake-nimble",
+        "rev": "c2df8f14d7c5e7179c9cd63bee0d969a431597a7",
         "type": "github"
       },
       "original": {
-        "owner": "ehmry",
-        "ref": "nimPackages",
+        "id": "nimble",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1641555862,
+        "narHash": "sha256-AJK1Q5djPXs/ba3K6gHsVAer9yDPVLic78ZIDsFSkHU=",
+        "owner": "nixos",
         "repo": "nixpkgs",
+        "rev": "d1acd89e0116ff88eba80541027429fc922612e9",
         "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
       }
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nimble": "nimble"
       }
     }
   },
