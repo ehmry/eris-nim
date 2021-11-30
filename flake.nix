@@ -1,7 +1,6 @@
 {
   description = "Development flake";
 
-  inputs.nixpkgs.url = "github:ehmry/nixpkgs/nimPackages";
   inputs.eris.url = "git+https://git.sr.ht/~ehmry/eris?ref=trunk";
 
   outputs = { self, nixpkgs, eris }:

