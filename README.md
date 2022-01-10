@@ -1,6 +1,9 @@
 # ⯰ ERIS
 
-See http://purl.org/eris
+See the [spec](https://eris.codeberg.page/spec/) for more information.
+
+The latest version of this library should be available at
+https://codeberg.org/eris/nim-eris
 
 ## Test
 
@@ -16,3 +19,4 @@ nim c -d:release -r test/test_large
 
 ## Todo
 * Optimise the Chacha20 and BLAKE2 primatives
+* Split unpure modules (TKRZW) to separate libraries
