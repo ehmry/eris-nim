@@ -10,7 +10,7 @@ backend       = "cpp"
 
 # Dependencies
 
-requires "nim >= 1.4.0", "base32 >= 0.1.3", "taps >= 0.2.0", "tkrzw >= 0.1.2"
+requires "nim >= 1.4.0", "base32 >= 0.1.3", "tkrzw >= 0.1.2"
 
 import distros
 if detectOs(NixOS):
