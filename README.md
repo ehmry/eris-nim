@@ -12,6 +12,20 @@ export PATH="$PATH:$HOME/.nimble/bin"
 
 ## Usage
 
+### eriscat
+
+```
+Usage: eriscat FILE [FILE …]
+
+Concatenate files to a stream with padding between ERIS block boundaries.
+If the average file size is less than 16KiB then the output stream is padded to
+align to 1KiB blocks, otherwise 32KiB.
+
+This utility is intending for joining files in formats that support
+concatenation such as Ogg containers. The resulting stream can be mostly
+deduplicated with the individual encodings of each file.
+```
+
 ### erisencode
 
 ```
