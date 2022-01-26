@@ -21,9 +21,9 @@ suite "decode":
     test v:
       let
         store = newJsonStore(v.js)
-        stream = newErisStream(store, v.cap, v.secret)
+        stream = newErisStream(store, v.cap)
         streamLength = waitFor stream.length()
-      check((streamLength - v.data.len) <= v.cap.blockSize.int)
+      check((streamLength - v.data.len) < v.cap.blockSize.int)
       let a = waitFor stream.readAll()
       check(a.len == v.data.len)
       check(a.toHex == v.data.toHex)
