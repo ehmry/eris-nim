@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.7.0"
+version       = "0.7.1"
 author        = "Emery Hemingway"
 description   = "Encoding for Robust Immutable Storage"
 license       = "ISC"
