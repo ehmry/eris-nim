@@ -28,10 +28,11 @@ template test*(v: TestVector; body: untyped): untyped =
 
 iterator testVectors*(): TestVector =
   for path in walkPattern(findVectorsDir() / "*.json"):
-    let
+    var
       js = parseFile(path)
       urn = js["urn"].getStr
       cap = parseErisUrn(urn)
-      secret = parseSecret(js["convergence-secret"].getStr)
+      secret: Secret
       data = base32.decode(js["content"].getStr)
+    doAssert secret.fromBase32(js["convergence-secret"].getStr)
     yield (js, urn, cap, secret, data)
