@@ -19,20 +19,26 @@ proc findVectorsDir(): string =
   raiseAssert "Could not find test vectors"
 
 type
-  TestVector* = tuple[js: JsonNode, urn: string, cap: ErisCap, secret: Secret,
-                      data: string]
+  TestVector* = tuple[js: JsonNode, kind: string, urn: string, cap: ErisCap,
+                      secret: Secret, data: string]
 template test*(v: TestVector; body: untyped): untyped =
   test $v.js["id"]:
     checkpoint v.js["description"].getStr
-    body
+    case v.kind
+    of "encode-decode-success":
+      body
+    of "negative":
+      expect KeyError, ValueError, IOError:
+        body
 
 iterator testVectors*(): TestVector =
   for path in walkPattern(findVectorsDir() / "*.json"):
     var
       js = parseFile(path)
+      kind = js["type"].getStr
       urn = js["urn"].getStr
       cap = parseErisUrn(urn)
       secret: Secret
-      data = base32.decode(js["content"].getStr)
-    doAssert secret.fromBase32(js["convergence-secret"].getStr)
-    yield (js, urn, cap, secret, data)
+      data = base32.decode(js.getOrDefault("content").getStr)
+    discard secret.fromBase32(js.getOrDefault("convergence-secret").getStr)
+    yield (js, kind, urn, cap, secret, data)
