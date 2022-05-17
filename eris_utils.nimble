@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.4.1"
+version       = "0.4.2"
 author        = "Emery Hemingway"
 description   = "Utilities for working with the Encoding for Robust Immutable Storage (ERIS)"
 license       = "Unlicense"
@@ -11,4 +11,4 @@ backend       = "cpp"
 
 # Dependencies
 
-requires "nim >= 1.4.2", "eris >= 0.6.0", "tkrzw >= 0.1.2"
+requires "nim >= 1.4.2", "eris >= 0.4.0", "eris_tkrzw", "eris_protocols"
