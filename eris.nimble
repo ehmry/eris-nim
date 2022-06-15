@@ -1,9 +1,9 @@
 # Package
 
 version       = "0.4.3"
-author        = "Emery Hemingway"
+author        = "Endo Renberg"
 description   = "Encoding for Robust Immutable Storage"
-license       = "ISC"
+license       = "Unlicense"
 srcDir        = "src"
 
 

@@ -3,7 +3,7 @@
 version       = "0.1.0"
 author        = "Emery Hemingway"
 description   = "ChaCha20 stream cipher"
-license       = "ISC"
+license       = "Unlicense"
 srcDir        = "src"
 
 
