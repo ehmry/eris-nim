@@ -1,0 +1,4 @@
+version 1 .
+Op = =Get / =Put .
+Ops = #{Op} .
+TkrzwFile = <tkrzw @path string @ops Ops @ref #!any> .
