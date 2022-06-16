@@ -9,4 +9,4 @@ srcDir        = "src"
 
 # Dependencies
 
-requires "nim >= 1.6.2", "eris >= 0.4.0", "coap >= 0.0.1"
+requires "nim >= 1.6.2", "eris >= 0.4.0", "coap >= 0.0.1", "syndicate"
