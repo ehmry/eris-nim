@@ -47,6 +47,21 @@ If FILE has already been initialized then its block size
 will override the requested block size.
 ```
 
+## eris_coap_client
+
+```
+Usage: eris_coap_client [OPTION]... (put | get URN [URN…])
+Get or put data to an ERIS store over the CoAP protocol.
+
+--url       ERIS store URL (example: --url:coap+tcp://[::1])
+--1k         1KiB block size
+--32k       32KiB block size (default for put from stdin)
+--unique    Generate URNs with random convergence secrets
+
+If FILE has already been initialized then its block size
+will override the requested block size.
+```
+
 ### erisdb
 
 ```
@@ -96,8 +111,20 @@ environment variable.
 Files may be uploaded using cURL:
 curl -i --upload-file <FILE> http://[::1]:<PORT>
 ```
+### erisresolver
 
-### ersissum
+The `erisresolver` utility is a CoAP and HTTP server that responds to get and put requests for encoded ERIS blocks as well as decoded ERIS streams.
+
+This server cannot be excuted normally, it must be supervised by a [Syndicate server](https://synit.org/book/operation/system-bus.html). This allows for dynamic configuration, the configuration schema is at [erisresolver_config.prs](./erisresolver_config.prs) and sample is at [erisresolver.config.sample.pr](./erisresolver.config.sample.pr).
+
+If you are using a UNIX you will need to remove the restriction on binding to port 80. This is can be done with `sysctl`:
+```sh
+doas sysctl net.ipv6.ip_unprivileged_port_start=80
+```
+
+The `eris_coap_client` utility can be used to put or get data to `erisresolver`.
+
+### erissum
 
 ```
 Usage: erissum [OPTION]... [FILE]...

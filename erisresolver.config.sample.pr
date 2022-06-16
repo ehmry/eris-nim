@@ -1,0 +1,15 @@
+<require-service <daemon erisresolver>>
+
+<daemon erisresolver {
+  argv: ".../erisresolver"
+  protocol: text/syndicate
+}>
+
+? <service-object <daemon erisresolver> ?cap> [
+  $cap [
+    <eris-coap-server "::" 5683 #{Get Put}>
+    <eris-http-server "::" 80 #{Get}>
+    <eris-neighbor "coap+tcp://friend.local" #{Get}>
+    <eris-neighbor "file:///tmp/eris.tkh" #{Get Put}>
+  ]
+]

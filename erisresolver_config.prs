@@ -1,0 +1,9 @@
+version 1 .
+
+Op = =Get / =Put .
+Ops = #{Op} .
+
+CoapServer = <eris-coap-server @ip string @port int @ops Ops> .
+HttpServer = <eris-http-server @ip string @port int @ops Ops> .
+
+ErisNeighbor = <eris-neighbor @uri string @ops Ops> .
