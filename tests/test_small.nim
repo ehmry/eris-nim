@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 import
-  std / [asyncdispatch, json, unittest, strutils]
+  std / [asyncdispatch, json, unittest, streams, strutils]
 
 import
   eris, ./jsonstores
@@ -15,7 +15,8 @@ suite "spec":
       block:
         let
           store = newDiscardStore()
-          a = $(waitFor store.encode(v.cap.blockSize, v.data, v.secret))
+          a = $(waitFor store.encode(v.cap.blockSize, v.data.newStringStream,
+                                     v.secret))
           b = v.urn
         if v.kind == "encode-decode-success":
           check(a == b)
