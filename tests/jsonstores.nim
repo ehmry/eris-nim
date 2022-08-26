@@ -16,7 +16,7 @@ type
   JsonStore = ref JsonStoreObj
   JsonStoreObj = object of ErisStoreObj
   
-method get(s: JsonStore; r: Reference): Future[seq[byte]] =
+method get(s: JsonStore; r: Reference; bs: BlockSize): Future[seq[byte]] =
   result = newFuture[seq[byte]]("jsonGet")
   try:
     result.complete(cast[seq[byte]](base32.decode(s.js["blocks"][$r].getStr)))

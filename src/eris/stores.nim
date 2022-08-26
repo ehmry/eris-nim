@@ -11,20 +11,45 @@ type
   MemoryErisStoreObj = object of ErisStoreObj
   
 method put(s: MemoryErisStore; r: Reference; f: PutFuture) =
-  s.table[r] = f.mget
+  case f.mget.len
+  of bs1k.int:
+    if not s.small.hasKey r:
+      var blk = newSeq[byte](f.mget.len)
+      copyMem(addr blk[0], addr f.mget[0], blk.len)
+      s.small[r] = blk
+  of bs32k.int:
+    if not s.big.hasKey r:
+      var blk = newSeq[byte](f.mget.len)
+      copyMem(addr blk[0], addr f.mget[0], blk.len)
+      s.big[r] = blk
+  else:
+    raiseAssert("invalid block size")
   complete f
 
-method get(s: MemoryErisStore; r: Reference): Future[seq[byte]] =
-  result = newFuture[seq[byte]]("memoryGet")
-  try:
-    result.complete(s.table[r])
-  except:
-    result.fail(newException(IOError, $r & " not found"))
+method get(s: MemoryErisStore; r: Reference; bs: BlockSize): Future[seq[byte]] =
+  result = newFuture[seq[byte]]("stores.MemoryErisStore.get")
+  case bs
+  of bs1k:
+    if s.small.hasKey r:
+      var blk = newSeq[byte](bs1k.int)
+      copyMem(addr blk[0], unsafeAddr s.small[r][0], blk.len)
+      complete result, blk
+  of bs32k:
+    if s.big.hasKey r:
+      var blk = newSeq[byte](bs32k.int)
+      copyMem(addr blk[0], unsafeAddr s.big[r][0], blk.len)
+      complete result, blk
+  if not result.finished:
+    fail(result, newException(KeyError, ""))
 
-method hasBlock(s: MemoryErisStore; r: Reference): Future[bool] =
+method hasBlock(s: MemoryErisStore; r: Reference; bs: BlockSize): Future[bool] =
   result = newFuture[bool]("DiscardStore.hasBlock")
-  result.complete(s.table.hasKey r)
+  case bs
+  of bs1k:
+    result.complete(s.small.hasKey r)
+  of bs32k:
+    result.complete(s.big.hasKey r)
 
 proc newMemoryStore*(): MemoryErisStore =
   ## Create a new ``ErisStore`` that holds its content in-memory.
-  MemoryErisStore(table: initTable[Reference, seq[byte]]())
+  MemoryErisStore()
