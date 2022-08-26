@@ -10,8 +10,8 @@ import
   coap / common
 
 suite "server_client":
-  var url: Uri
-  check url.fromString "coap+tcp://[::1]:5683"
+  const
+    url = "coap+tcp://[::1]:5683"
   var
     store = newMemoryStore()
     server = newServer(store)
