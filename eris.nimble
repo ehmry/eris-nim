@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.4.3"
+version       = "20220827"
 author        = "Endo Renberg"
 description   = "Encoding for Robust Immutable Storage"
 license       = "Unlicense"
@@ -10,4 +10,4 @@ backend       = "cpp"
 
 # Dependencies
 
-requires "nim >= 1.4.0", "base32 >= 0.1.3", "tkrzw >= 20220827"
+requires "nim >= 1.4.0", "base32 >= 0.1.3", "coap >= 20220827", "syndicate >= 20220629", "tkrzw >= 20220827"
