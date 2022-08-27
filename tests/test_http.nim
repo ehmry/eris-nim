@@ -1,31 +1,35 @@
 # SPDX-License-Identifier: MIT
 
 import
-  std / [asyncdispatch, random, unittest, uri]
+  std / [asyncdispatch, unittest, uri]
 
 import
   eris, eris / stores, eris_protocols / http
 
 suite "http":
-  var
-    store = newMemoryStore()
-    server = http.newServer(store)
-    port = rand(0x0000FFFF) or 1024
-    url = parseUri("http://[::1]:" & $port)
-  asyncCheck server.serve(port = Port port)
-  poll()
-  var client = http.newStoreClient(url)
-  var
+  const
     testString = "Hail ERIS!"
-    testData = cast[seq[byte]](testString)
-  test testString:
-    let cap = waitFor client.encode(bs1k, testString)
-    echo "got ", cap, " for encoding"
-    discard waitFor store.encode(bs1k, testString)
-    let serverData = waitFor store.decode(cap)
-    echo "got serverData"
-    check(serverData == testData)
-    let clientData = waitFor client.decode(cap)
-    check(clientData == testData)
-  close client
-  close server
+  var
+    port = 36199
+    url = "http://[::1]:" & $port
+    store = newMemoryStore()
+    server: StoreServer
+    client: StoreClient
+  block:
+    server = http.newServer(store)
+    asyncCheck server.serve(port = Port port)
+    checkpoint("listening on " & url)
+    poll()
+    client = http.newStoreClient(parseUri url)
+    poll()
+  for i in 0 .. 7:
+    test $i:
+      let cap = waitFor client.encode(bs1k, testString)
+      checkpoint $cap
+      let serverData = waitFor store.decode(cap)
+      check(cast[string](serverData) == testString)
+      let clientData = waitFor client.decode(cap)
+      check(cast[string](clientData) == testString)
+  block:
+    close client
+    close server
