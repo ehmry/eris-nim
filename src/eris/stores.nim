@@ -26,21 +26,19 @@ method put(s: MemoryErisStore; r: Reference; f: PutFuture) =
     raiseAssert("invalid block size")
   complete f
 
-method get(s: MemoryErisStore; r: Reference; bs: BlockSize): Future[seq[byte]] =
-  result = newFuture[seq[byte]]("stores.MemoryErisStore.get")
+method get(s: MemoryErisStore; r: Reference; bs: BlockSize; fut: FutureGet) =
+  assert(fut.mget.len == bs.int)
   case bs
   of bs1k:
     if s.small.hasKey r:
-      var blk = newSeq[byte](bs1k.int)
-      copyMem(addr blk[0], unsafeAddr s.small[r][0], blk.len)
-      complete result, blk
+      copyMem(addr fut.mget[0], unsafeAddr s.small[r][0], bs.int)
+      complete fut
   of bs32k:
     if s.big.hasKey r:
-      var blk = newSeq[byte](bs32k.int)
-      copyMem(addr blk[0], unsafeAddr s.big[r][0], blk.len)
-      complete result, blk
-  if not result.finished:
-    fail(result, newException(KeyError, ""))
+      copyMem(addr fut.mget[0], unsafeAddr s.big[r][0], bs.int)
+      complete fut
+  if not fut.finished:
+    fail cast[Future[void]](fut), newException(KeyError, "block not in memory")
 
 method hasBlock(s: MemoryErisStore; r: Reference; bs: BlockSize): Future[bool] =
   result = newFuture[bool]("DiscardStore.hasBlock")

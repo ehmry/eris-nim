@@ -10,4 +10,4 @@ backend       = "cpp"
 
 # Dependencies
 
-requires "nim >= 1.4.0", "base32 >= 0.1.3", "tkrzw >= 20210817"
+requires "nim >= 1.4.0", "base32 >= 0.1.3", "tkrzw >= 20220827"
