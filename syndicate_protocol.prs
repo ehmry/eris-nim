@@ -1,12 +1,14 @@
 version 1 .
 
+BlockSize = =a / =f .
+
 ; ERIS consumers observe blocks by reference and
 ; ERIS stores reply by asserting block content.
-ErisBlock = <erisx3 @reference bytes @content bytes> .
+ErisBlock = <eris-block @blockSize BlockSize @reference bytes @content bytes> .
 
 ; ERIS producers put blocks to storage by publishing
 ; blocks and observing cache assertions matching
 ; block references. ERIS stores respond by storing
-; blocks and asserting the reference and an (as yet arbitrary)
-; indicator of cache presistence.
-ErisCache = <erisx3-cache @reference bytes @persist int> .
+; blocks and asserting the reference.
+; TODO: cache perisistence indicator.
+ErisCache = <eris-cache @blockSize BlockSize @reference bytes> .

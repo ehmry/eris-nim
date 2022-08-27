@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: MIT
 
 import
-  std / typetraits, preserves
+  std / typetraits, preserves, eris
 
 type
-  ErisBlock* {.preservesRecord: "erisx3".} = object
+  ErisBlock* {.preservesRecord: "eris-block".} = object
   
-  ErisCache* {.preservesRecord: "erisx3-cache".} = object
+  ErisCache* {.preservesRecord: "eris-cache".} = object
   
 proc `$`*(x: ErisBlock | ErisCache): string =
   `$`(toPreserve(x))
