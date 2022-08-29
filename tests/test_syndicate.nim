@@ -7,7 +7,7 @@ import
   syndicate, syndicate / capabilities
 
 import
-  eris, eris / stores, eris_protocols / syndicate_protocol
+  eris, eris / [memory_stores, syndicate_stores]
 
 proc unixSocketPath(): string =
   result = getEnv("SYNDICATE_SOCK")
