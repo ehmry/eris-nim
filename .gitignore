@@ -1,3 +1,6 @@
-tests/test_ingest
-tests/test_large
-tests/test_small
+tests/test_http.nim
+tests/test_large.nim
+tests/test_server_client.nim
+tests/test_small.nim
+tests/test_syndicate.nim
+tests/test_tkrzw.nim
