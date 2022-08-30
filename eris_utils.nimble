@@ -11,4 +11,4 @@ backend       = "cpp"
 
 # Dependencies
 
-requires "nim >= 1.4.2", "eris >= 20220829"
+requires "nim >= 1.6.0", "eris >= 20220829"
