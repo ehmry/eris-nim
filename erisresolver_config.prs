@@ -3,10 +3,9 @@ version 1 .
 Op = =Get / =Put .
 Ops = #{Op} .
 
-CoapClient = <http-client @uri string @ops Ops> .
-CoapServer = <coap-server @ip string @port int @ops Ops> .
+Peer = <peer @uri string @ops Ops> .
 
-HttpClient = <http-client @uri string @ops Ops> .
+CoapServer = <coap-server @ip string @port int @ops Ops> .
 HttpServer = <http-server @ip string @port int @ops Ops> .
 
 TkrzwDatabase = <tkrzw @path string @ops Ops> .
