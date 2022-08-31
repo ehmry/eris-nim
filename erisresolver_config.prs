@@ -3,7 +3,12 @@ version 1 .
 Op = =Get / =Put .
 Ops = #{Op} .
 
-CoapServer = <eris-coap-server @ip string @port int @ops Ops> .
-HttpServer = <eris-http-server @ip string @port int @ops Ops> .
+CoapClient = <http-client @uri string @ops Ops> .
+CoapServer = <coap-server @ip string @port int @ops Ops> .
 
-ErisNeighbor = <eris-neighbor @uri string @ops Ops> .
+HttpClient = <http-client @uri string @ops Ops> .
+HttpServer = <http-server @ip string @port int @ops Ops> .
+
+TkrzwDatabase = <tkrzw @path string @ops Ops> .
+
+SyndicateRelay = <syndicate @dataspace #!any @ops Ops> .

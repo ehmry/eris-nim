@@ -3,18 +3,32 @@
 import
   std / typetraits, preserves
 
+from eris import Operations
+
 type
-  HttpServer* {.preservesRecord: "eris-http-server".} = object
+  HttpServer* {.preservesRecord: "http-server".} = object
   
-  ErisNeighbor* {.preservesRecord: "eris-neighbor".} = object
+  CoapClient* {.preservesRecord: "http-client".} = object
   
-  CoapServer* {.preservesRecord: "eris-coap-server".} = object
+  SyndicateRelay*[E] {.preservesRecord: "syndicate".} = ref object
   
-  `Op`* {.preservesOr, pure.} = enum
-    `Get`, `Put`
-  Ops* = set[Op]
-proc `$`*(x: HttpServer | ErisNeighbor | CoapServer | Ops): string =
+  TkrzwDatabase* {.preservesRecord: "tkrzw".} = object
+  
+  CoapServer* {.preservesRecord: "coap-server".} = object
+  
+  HttpClient* {.preservesRecord: "http-client".} = object
+  
+proc `$`*[E](x: SyndicateRelay[E]): string =
+  `$`(toPreserve(x, E))
+
+proc encode*[E](x: SyndicateRelay[E]): seq[byte] =
+  encode(toPreserve(x, E))
+
+proc `$`*(x: HttpServer | CoapClient | TkrzwDatabase | CoapServer | Operations |
+    HttpClient): string =
   `$`(toPreserve(x))
 
-proc encode*(x: HttpServer | ErisNeighbor | CoapServer | Ops): seq[byte] =
+proc encode*(x: HttpServer | CoapClient | TkrzwDatabase | CoapServer |
+    Operations |
+    HttpClient): seq[byte] =
   encode(toPreserve(x))
