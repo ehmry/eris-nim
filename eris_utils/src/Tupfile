@@ -1,0 +1,2 @@
+include_rules
+: foreach ../*.prs |> !preserves_schema_nim |> %B.nim
