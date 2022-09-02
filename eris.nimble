@@ -1,11 +1,12 @@
 # Package
 
-version = "20220831"
+version = "20220902"
 author        = "Endo Renberg"
 description   = "Encoding for Robust Immutable Storage"
 license       = "Unlicense"
 srcDir        = "src"
 backend       = "cpp"
+bin           = @["eris/eriscmd"]
 
 
 # Dependencies

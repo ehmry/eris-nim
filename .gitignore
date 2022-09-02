@@ -1,6 +1,8 @@
-tests/test_http.nim
-tests/test_large.nim
-tests/test_server_client.nim
-tests/test_small.nim
-tests/test_syndicate.nim
-tests/test_tkrzw.nim
+eriscmd
+tests/test_cbor
+tests/test_http
+tests/test_large
+tests/test_server_client
+tests/test_small
+tests/test_syndicate
+tests/test_tkrzw

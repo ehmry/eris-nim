@@ -3,7 +3,7 @@
 import
   std / typetraits, preserves
 
-from eris import Operations
+from ../../eris import Operations
 
 type
   HttpServer* {.preservesRecord: "http-server".} = object

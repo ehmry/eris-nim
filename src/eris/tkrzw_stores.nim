@@ -8,7 +8,7 @@ import
   tkrzw
 
 import
-  eris
+  ../eris
 
 export
   tkrzw.RW, tkrzw.OpenOption
