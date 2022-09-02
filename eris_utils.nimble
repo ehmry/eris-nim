@@ -1,6 +1,6 @@
 # Package
 
-version = "20220831"
+version = "20220902"
 author        = "Emery Hemingway"
 description   = "Utilities for working with the Encoding for Robust Immutable Storage (ERIS)"
 license       = "Unlicense"
