@@ -28,5 +28,5 @@ The server configuration is inspired by [Genode](https://genode.org/)'s [dynamic
 
 If you are using UNIX you will need to ask a system administrator or a grownup that you trust to remove the restriction on binding to port 80. This is can be done with `sysctl`:
 ```sh
-doas sysctl net.ipv6.ip_unprivileged_port_start=80
+doas sysctl net.ipv4.ip_unprivileged_port_start=80
 ```

