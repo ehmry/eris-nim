@@ -1,22 +1,23 @@
 # SPDX-License-Identifier: MIT
 
 import
-  std / [asyncdispatch, json, streams, unittest, uri]
+  std / [asyncdispatch, json, streams, unittest]
+
+from std / net import parseIpAddress
 
 import
-  eris, eris / [memory_stores, http_stores]
+  eris, eris / [memory_stores, coap_stores]
 
 import
-  vectors
+  ./vectors
 
 const
-  port = 36199
-  url = "http://[::1]:" & $port
+  url = "coap+tcp://[::1]:5685"
 var
   store = newMemoryStore()
   server = newServer(store)
-asyncCheck server.serve(port = Port port)
-var client = waitFor http_stores.newStoreClient(parseUri url)
+server.serve(parseIpAddress"::1", Port 5685)
+var client = waitFor newStoreClient(url)
 suite "get":
   setup:
     clear(store)

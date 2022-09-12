@@ -1,2 +1,2 @@
 include_rules
-: foreach ../protocols/*.prs |> !preserves_schema_nim |> %B.nim
+: ../../../protocols/erisresolver_config.prs |> !preserves_schema_nim |> %B.nim

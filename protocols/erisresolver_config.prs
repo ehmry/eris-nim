@@ -1,13 +1,22 @@
 version 1 .
+include "syndicate_protocol.prs".
 
 Op = =Get / =Put .
 Ops = #{Op} .
 
+; Adds a network client to the resolver.
+; URI can be a coap+tcp:// or http:// URL.
 Peer = <peer @uri string @ops Ops> .
 
+; Facets that serve the resolver over the CoAP and HTTP protocols.
 CoapServer = <coap-server @ip string @port int @ops Ops> .
 HttpServer = <http-server @ip string @port int @ops Ops> .
 
+; Adds a tkrzw database containing blocks at `path` to the resolver.
 TkrzwDatabase = <tkrzw @path string @ops Ops> .
 
+; A facet that resolves <eris-block …> and <eris-cache …> assertions.
 SyndicateRelay = <syndicate @dataspace #!any @ops Ops> .
+
+; A facet that responds to observers of <file …> assertions.
+FileIngester = <ingester @ds #!any> .

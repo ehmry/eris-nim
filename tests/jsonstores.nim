@@ -9,21 +9,16 @@ import
 import
   std / json
 
-import
-  asyncdispatch, asyncfutures
-
 type
   JsonStore = ref JsonStoreObj
   JsonStoreObj = object of ErisStoreObj
   
-method get(s: JsonStore; r: Reference; bs: BlockSize; fut: FutureGet) =
+method get(s: JsonStore; blk: FutureGet) =
   try:
-    var blk = base32.decode(s.js["blocks"][$r].getStr)
-    doAssert blk.len == bs.int
-    copyMem(addr fut.mget[0], addr blk[0], bs.int)
-    complete fut
+    complete(blk, cast[seq[byte]](base32.decode(
+        s.js["blocks"][$blk.`ref`].getStr)), BlockStatus.verified)
   except:
-    fail cast[Future[void]](fut), newException(IOError, $r & " not found")
+    fail(blk, newException(IOError, $blk.`ref` & " not found"))
 
 proc newJsonStore*(js: JsonNode): JsonStore =
   new(result)

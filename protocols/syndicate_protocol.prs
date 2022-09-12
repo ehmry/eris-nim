@@ -1,5 +1,12 @@
 version 1 .
 
+; ERIS capabilities are binary encoded as per the specification:
+; https://eris.codeberg.page/spec/#section-2.6.
+ErisCapability = <eris @bytes bytes> .
+
+; Block sizes are encoded as their binary logarithm in hexadecimal form:
+; - log₂( 1 Ki) = a
+; - log₂(32 Ki) = f
 BlockSize = =a / =f .
 
 ; ERIS consumers observe blocks by reference and
@@ -12,3 +19,11 @@ ErisBlock = <eris-block @blockSize BlockSize @reference bytes @content bytes> .
 ; blocks and asserting the reference.
 ; TODO: cache perisistence indicator.
 ErisCache = <eris-cache @blockSize BlockSize @reference bytes> .
+
+; For any given content there is one ERIS capability for each block size in
+; "convergent" mode but an unbounded number of capabilities in "unique" mode.
+SecretMode = =convergent / =unique .
+
+; An assertion that a capability exists for the content of a file at path at
+; an unspecified moment in time.
+; FileCap = <file @path string @cap bytes @secret SecretMode> .

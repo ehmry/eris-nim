@@ -21,6 +21,8 @@ proc findVectorsDir(): string =
 type
   TestVector* = tuple[js: JsonNode, kind: string, urn: string, cap: ErisCap,
                       secret: Secret, data: string]
+  TestKind* = enum
+    Positive, Negative
 template test*(v: TestVector; body: untyped): untyped =
   test $v.js["id"]:
     checkpoint v.js["description"].getStr
@@ -31,14 +33,17 @@ template test*(v: TestVector; body: untyped): untyped =
       expect KeyError, ValueError, IOError:
         body
 
-iterator testVectors*(): TestVector =
+iterator testVectors*(kinds = {Positive}): TestVector =
   for path in walkPattern(findVectorsDir() / "*.json"):
     var
       js = parseFile(path)
       kind = js["type"].getStr
-      urn = js["urn"].getStr
-      cap = parseErisUrn(urn)
-      secret: Secret
-      data = base32.decode(js.getOrDefault("content").getStr)
-    discard secret.fromBase32(js.getOrDefault("convergence-secret").getStr)
-    yield (js, kind, urn, cap, secret, data)
+    if ((kind == "positive") and (Positive in kinds)) or
+        ((kind == "negative") and (Negative in kinds)):
+      var
+        urn = js["urn"].getStr
+        cap = parseErisUrn(urn)
+        secret: Secret
+        data = base32.decode(js.getOrDefault("content").getStr)
+      discard secret.fromBase32(js.getOrDefault("convergence-secret").getStr)
+      yield (js, kind, urn, cap, secret, data)

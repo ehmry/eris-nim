@@ -22,31 +22,28 @@ proc main*(opt: var OptParser): string =
     connectStdio(ds, turn)
     stderr.writeLine "Connected."
     during(turn, ds, ?TkrzwDatabase)do (path: string; ops: Operations):
-      let
-        uri = $Uri(scheme: "tkrzw", path: path)
-        dbStore = newDbmStore(path, ops)
-      resolver.add(uri, dbStore, ops)
-      stderr.writeLine("opened store at ", uri)
+      stderr.writeLine("opening store at ", path, ". This could take a while…")
+      var dbStore = newDbmStore(path, ops)
+      resolver.add(dbStore, ops)
+      stderr.writeLine("opened store at ", dbStore)
     do:
-      close(resolver[uri])
-      resolver.del(uri)
-      stderr.writeLine("closed store at ", uri)
+      close(resolver, dbStore)
+      stderr.writeLine("closed store at ", dbStore)
     during(turn, ds, ?Peer)do (s: string; ops: Operations):
-      let
-        uri = parseUri(s)
-        key = $uri
+      let uri = parseUri(s)
+      var store: ErisStore
       url_stores.newStoreClient(uri).addCallback(turn)do (turn: var Turn;
           fut: Future[ErisStore]):
-        resolver.add(key, fut.read, ops)
-        stderr.writeLine("opened store at ", key)
+        store = fut.read
+        resolver.add(store, ops)
+        stderr.writeLine("opened store at ", uri)
     do:
-      close(resolver[key])
-      resolver.del(key)
-      stderr.writeLine("closed store at ", key)
+      close(resolver, store)
+      stderr.writeLine("closed store at ", uri)
     during(turn, ds, ?CoapServer)do (ip: string; port: Port; ops: Operations):
       var server = coap_stores.newServer(resolver, ops)
       server.serve(ip.parseIpAddress, port)
-      stderr.writeLine("serving CoAP sessions on ", ip)
+      stderr.writeLine("serving CoAP sessions on ", ip, ":", port)
     do:
       close(server)
       stderr.writeLine("stopped listening for CoAP sessions on ", ip)
