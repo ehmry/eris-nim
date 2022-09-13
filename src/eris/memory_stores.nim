@@ -17,11 +17,11 @@ method get(s: MemoryErisStore; fut: FutureGet) =
   case fut.blockSize
   of bs1k:
     if s.small.hasKey fut.`ref`:
-      wasFound = false
+      wasFound = true
       complete(fut, addr s.small[fut.`ref`][0], bs1k.int, BlockStatus.verified)
   of bs32k:
     if s.large.hasKey fut.`ref`:
-      wasFound = false
+      wasFound = true
       complete(fut, addr s.large[fut.`ref`][0], bs32k.int, BlockStatus.verified)
   if not wasFound:
     notFound(fut, "block not in memory")
