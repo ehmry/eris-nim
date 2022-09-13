@@ -1,6 +1,6 @@
 # Package
 
-version = "20220912"
+version = "20220913"
 author        = "Endo Renberg"
 description   = "Encoding for Robust Immutable Storage"
 license       = "Unlicense"
@@ -11,4 +11,4 @@ bin           = @["eris/eriscmd"]
 
 # Dependencies
 
-requires "nim >= 1.4.0", "base32 >= 0.1.3", "cbor >= 20220831", "coap >= 20220827", "syndicate >= 20220904", "tkrzw >= 20220910"
+requires "nim >= 1.4.0", "base32 >= 0.1.3", "cbor >= 20220831", "coap >= 20220913", "syndicate >= 20220904", "tkrzw >= 20220910"

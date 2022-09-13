@@ -40,7 +40,7 @@ method put(s: DbmStore; fut: FuturePut) =
   if Put notin s.ops:
     fail(fut, newException(IOError, "put denied"))
   s.dbm.set(toStringView(fut.`ref`.bytes),
-            toStringView(fut.buffer, fut.blockSize.int), true)
+            toStringView(fut.buffer, fut.blockSize.int), false)
   complete(fut)
 
 method close(ds: DbmStore) =
