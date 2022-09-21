@@ -21,9 +21,11 @@ method id(s: DbmStore): string =
   "tkrzw+file://" & s.path
 
 method get(s: DbmStore; fut: FutureGet) =
+  assert not fut.verified
   if Get notin s.ops:
     fail(fut, newException(IOError, "get denied"))
   elif s.dbm.get(fut.`ref`.bytes.toStringView, fut.buffer, fut.blockSize.int):
+    assert not fut.verified
     verify(fut)
     complete(fut)
   else:
