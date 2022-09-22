@@ -5,6 +5,8 @@ import
 
 from std / strutils import join
 
+when not defined(release):
+  stderr.writeLine "Warning: this not a release build!"
 proc die*(e: ref CatchableError; args: varargs[string, `$`]): string =
   result = join(args)
   if defined(release):
