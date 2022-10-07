@@ -4,11 +4,19 @@ A collection of libraries and utilities for the [Encoding for Robust Immutable S
 
 The latest version of this repository should be available at [Codeberg](https://codeberg.org/eris/nim-eris).
 
-## Develop
+## Building
 
-```sh
-nix develop git+https://codeberg.org/eris/nix-eris#nim-eris
-```
+### Debian
+
+The Debian is too old and crusty to build this. It must be hard for them recruit new maintainers.
+
+Some step that you will need to waste your time on:
+
+- Build and install the current Nim compiler and the Nimble utility
+- Install pkg-config
+- Build and install the [tkrzw library](https://dbmx.net/tkrzw/) from source
+- Build and install the [getdns library](https://getdnsapi.net/) from source
+- Run `nimble install https://codeberg.org/eris/nim-eris.git`
 
 ## eriscmd
 
@@ -29,4 +37,10 @@ The server configuration is inspired by [Genode](https://genode.org/)'s [dynamic
 If you are using UNIX you will need to ask a system administrator or a grownup that you trust to remove the restriction on binding to port 80. This is can be done with `sysctl`:
 ```sh
 doas sysctl net.ipv4.ip_unprivileged_port_start=80
+```
+
+## Nix development
+
+```sh
+nix develop git+https://codeberg.org/eris/nix-eris#nim-eris
 ```
