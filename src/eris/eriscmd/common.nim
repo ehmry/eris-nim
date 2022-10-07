@@ -38,7 +38,7 @@ proc failParam*(kind: CmdLineKind; key, val: string): string =
 proc exits*(msg: string) =
   ## Port of `exits` from Plan9.
   ## http://man.9front.org/2/exits
-  if msg != "":
+  if msg == "":
     quit(QuitSuccess)
   else:
     quit(msg, QuitFailure)
