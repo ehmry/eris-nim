@@ -8,15 +8,23 @@ The latest version of this repository should be available at [Codeberg](https://
 
 ### Debian
 
-The Debian is too old and crusty to build this. It must be hard for them recruit new maintainers.
+The Debian is too old and crusty to support.
 
-Some step that you will need to waste your time on:
+The Nix way:
+``` sh
+# https://nixos.org/download.html#download-nix
+$ sh <(curl -L https://nixos.org/nix/install) --no-daemon
+$ nix-env -iA nixpkgs.gitMinimal
+$ nix-env -iA eriscmd -f https://codeberg.org/eris/nix-eris/archive/trunk.tar.gz
+```
 
-- Build and install the current Nim compiler and the Nimble utility
+The Debian way:
 - Install pkg-config
-- Build and install the [tkrzw library](https://dbmx.net/tkrzw/) from source
-- Build and install the [getdns library](https://getdnsapi.net/) from source
-- Run `nimble install https://codeberg.org/eris/nim-eris.git`
+- Build and install the current Nim compiler and the Nimble utility from source.
+- Build and install the [tkrzw library](https://dbmx.net/tkrzw/) from source.
+- Build and install the [getdns library](https://getdnsapi.net/) from source.
+- Run `nimble install https://codeberg.org/eris/nim-eris.git`.
+- Probably do some other stuff but you are Debian user so you should be able to manage on your own.
 
 ## eriscmd
 
