@@ -62,27 +62,27 @@ window.addEventListener('DOMContentLoaded', main);
       </svg>
     </a>
   <div class="container">
-    <h1 class="title">eris</h1>
+    <h1 class="title">src/eris</h1>
     <div class="row">
   <div class="three columns">
   <ul class="simple simple-toc" id="toc-list">
 <li>
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#BlockSize"
-    title="BlockSize = enum
-  bs1k = 1024,              ## 1 KiB
-  bs32k = 32768              ## 32 KiB">BlockSize</a></li>
-  <li><a class="reference" href="#BlockStatus"
+      <li><a class="reference" href="#BlockStatus"
     title="BlockStatus = enum
   unknown, verified, plaintext">BlockStatus</a></li>
+  <li><a class="reference" href="#ChunkSize"
+    title="ChunkSize = enum
+  bs1k = 1024,              ## 1 KiB
+  bs32k = 32768              ## 32 KiB">ChunkSize</a></li>
   <li><a class="reference" href="#DiscardStore"
     title="DiscardStore {.final.} = ref object of ErisStoreObj">DiscardStore</a></li>
   <li><a class="reference" href="#ErisCap"
     title="ErisCap = object
   pair*: Pair
   level*: uint8
-  blockSize*: BlockSize">ErisCap</a></li>
+  chunkSize*: ChunkSize">ErisCap</a></li>
   <li><a class="reference" href="#ErisIngest"
     title="ErisIngest = ref ErisIngestObj">ErisIngest</a></li>
   <li><a class="reference" href="#ErisStore"
@@ -141,8 +141,8 @@ window.addEventListener('DOMContentLoaded', main);
 
   </ul>
   <ul class="simple nested-toc-section">*
-      <li><a class="reference" href="#%2A%2CT%2CBlockSize"
-    title="`*`[T: SomeUnsignedInt](x: T; bs: BlockSize): T">`*`[T: SomeUnsignedInt](x: T; bs: BlockSize): T</a></li>
+      <li><a class="reference" href="#%2A%2CT%2CChunkSize"
+    title="`*`[T: SomeUnsignedInt](x: T; bs: ChunkSize): T">`*`[T: SomeUnsignedInt](x: T; bs: ChunkSize): T</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">==
@@ -165,8 +165,8 @@ window.addEventListener('DOMContentLoaded', main);
 
   </ul>
   <ul class="simple nested-toc-section">arity
-      <li><a class="reference" href="#arity%2CBlockSize"
-    title="arity(bs: BlockSize): int">arity(bs: BlockSize): int</a></li>
+      <li><a class="reference" href="#arity%2CChunkSize"
+    title="arity(bs: ChunkSize): int">arity(bs: ChunkSize): int</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">assertVerified
@@ -177,13 +177,6 @@ window.addEventListener('DOMContentLoaded', main);
   <ul class="simple nested-toc-section">atEnd
       <li><a class="reference" href="#atEnd%2CErisStream"
     title="atEnd(s: ErisStream): bool">atEnd(s: ErisStream): bool</a></li>
-
-  </ul>
-  <ul class="simple nested-toc-section">blockSize
-      <li><a class="reference" href="#blockSize%2CFutureBlock"
-    title="blockSize(blk: FutureBlock): BlockSize">blockSize(blk: FutureBlock): BlockSize</a></li>
-  <li><a class="reference" href="#blockSize%2CErisIngest"
-    title="blockSize(ingest: ErisIngest): BlockSize">blockSize(ingest: ErisIngest): BlockSize</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">buffer
@@ -201,6 +194,13 @@ window.addEventListener('DOMContentLoaded', main);
     title="cap(ingest: ErisIngest): Future[ErisCap]">cap(ingest: ErisIngest): Future[ErisCap]</a></li>
   <li><a class="reference" href="#cap%2CErisStream"
     title="cap(s: ErisStream): ErisCap">cap(s: ErisStream): ErisCap</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">chunkSize
+      <li><a class="reference" href="#chunkSize%2CFutureBlock"
+    title="chunkSize(blk: FutureBlock): ChunkSize">chunkSize(blk: FutureBlock): ChunkSize</a></li>
+  <li><a class="reference" href="#chunkSize%2CErisIngest"
+    title="chunkSize(ingest: ErisIngest): ChunkSize">chunkSize(ingest: ErisIngest): ChunkSize</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">close
@@ -230,8 +230,8 @@ window.addEventListener('DOMContentLoaded', main);
 
   </ul>
   <ul class="simple nested-toc-section">div
-      <li><a class="reference" href="#div%2CT%2CBlockSize"
-    title="`div`[T: SomeUnsignedInt](x: T; bs: BlockSize): T">`div`[T: SomeUnsignedInt](x: T; bs: BlockSize): T</a></li>
+      <li><a class="reference" href="#div%2CT%2CChunkSize"
+    title="`div`[T: SomeUnsignedInt](x: T; bs: ChunkSize): T">`div`[T: SomeUnsignedInt](x: T; bs: ChunkSize): T</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">dump
@@ -240,25 +240,25 @@ window.addEventListener('DOMContentLoaded', main);
 
   </ul>
   <ul class="simple nested-toc-section">encode
-      <li><a class="reference" href="#encode%2C%2CBlockSize%2CStream"
-    title="encode(store; blockSize: BlockSize; content: Stream; mode = uniqueMode): Future[
-    ErisCap]">encode(store; blockSize: BlockSize; content: Stream; mode = uniqueMode): Future[
+      <li><a class="reference" href="#encode%2C%2CChunkSize%2CStream"
+    title="encode(store; chunkSize: ChunkSize; content: Stream; mode = uniqueMode): Future[
+    ErisCap]">encode(store; chunkSize: ChunkSize; content: Stream; mode = uniqueMode): Future[
     ErisCap]</a></li>
-  <li><a class="reference" href="#encode%2C%2CBlockSize%2CStream%2CSecret"
-    title="encode(store; blockSize: BlockSize; content: Stream; secret: Secret): Future[
-    ErisCap]">encode(store; blockSize: BlockSize; content: Stream; secret: Secret): Future[
+  <li><a class="reference" href="#encode%2C%2CChunkSize%2CStream%2CSecret"
+    title="encode(store; chunkSize: ChunkSize; content: Stream; secret: Secret): Future[
+    ErisCap]">encode(store; chunkSize: ChunkSize; content: Stream; secret: Secret): Future[
     ErisCap]</a></li>
-  <li><a class="reference" href="#encode%2C%2CBlockSize%2Cstring"
-    title="encode(store; blockSize: BlockSize; content: string; mode = uniqueMode): Future[
-    ErisCap]">encode(store; blockSize: BlockSize; content: string; mode = uniqueMode): Future[
+  <li><a class="reference" href="#encode%2C%2CChunkSize%2Cstring"
+    title="encode(store; chunkSize: ChunkSize; content: string; mode = uniqueMode): Future[
+    ErisCap]">encode(store; chunkSize: ChunkSize; content: string; mode = uniqueMode): Future[
     ErisCap]</a></li>
   <li><a class="reference" href="#encode%2C%2CStream"
     title="encode(store; content: Stream; mode = uniqueMode): Future[ErisCap]">encode(store; content: Stream; mode = uniqueMode): Future[ErisCap]</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">erisCap
-      <li><a class="reference" href="#erisCap%2Cstring%2CBlockSize"
-    title="erisCap(content: string; blockSize: BlockSize): ErisCap">erisCap(content: string; blockSize: BlockSize): ErisCap</a></li>
+      <li><a class="reference" href="#erisCap%2Cstring%2CChunkSize"
+    title="erisCap(content: string; chunkSize: ChunkSize): ErisCap">erisCap(content: string; chunkSize: ChunkSize): ErisCap</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">fail
@@ -277,8 +277,8 @@ window.addEventListener('DOMContentLoaded', main);
 
   </ul>
   <ul class="simple nested-toc-section">get
-      <li><a class="reference" href="#get%2C%2CPair%2CTreeLevel%2CBlockSize"
-    title="get(store; pair: Pair; level: TreeLevel; bs: BlockSize): Future[seq[byte]]">get(store; pair: Pair; level: TreeLevel; bs: BlockSize): Future[seq[byte]]</a></li>
+      <li><a class="reference" href="#get%2C%2CPair%2CTreeLevel%2CChunkSize"
+    title="get(store; pair: Pair; level: TreeLevel; bs: ChunkSize): Future[seq[byte]]">get(store; pair: Pair; level: TreeLevel; bs: ChunkSize): Future[seq[byte]]</a></li>
   <li><a class="reference" href="#get%2C%2CReference%2CFutureGet"
     title="get(store; ref: Reference; blk: FutureGet)">get(store; ref: Reference; blk: FutureGet)</a></li>
 
@@ -327,9 +327,9 @@ window.addEventListener('DOMContentLoaded', main);
   </ul>
   <ul class="simple nested-toc-section">newErisIngest
       <li><a class="reference" href="#newErisIngest%2CErisStore"
-    title="newErisIngest(store: ErisStore; blockSize = bs32k; mode = uniqueMode): ErisIngest">newErisIngest(store: ErisStore; blockSize = bs32k; mode = uniqueMode): ErisIngest</a></li>
+    title="newErisIngest(store: ErisStore; chunkSize = bs32k; mode = uniqueMode): ErisIngest">newErisIngest(store: ErisStore; chunkSize = bs32k; mode = uniqueMode): ErisIngest</a></li>
   <li><a class="reference" href="#newErisIngest%2CErisStore%2CSecret"
-    title="newErisIngest(store: ErisStore; blockSize = bs32k; secret: Secret): ErisIngest">newErisIngest(store: ErisStore; blockSize = bs32k; secret: Secret): ErisIngest</a></li>
+    title="newErisIngest(store: ErisStore; chunkSize = bs32k; secret: Secret): ErisIngest">newErisIngest(store: ErisStore; chunkSize = bs32k; secret: Secret): ErisIngest</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">newErisStream
@@ -338,17 +338,17 @@ window.addEventListener('DOMContentLoaded', main);
 
   </ul>
   <ul class="simple nested-toc-section">newFutureGet
-      <li><a class="reference" href="#newFutureGet%2CBlockSize"
-    title="newFutureGet(bs: BlockSize): FutureGet">newFutureGet(bs: BlockSize): FutureGet</a></li>
-  <li><a class="reference" href="#newFutureGet%2CReference%2CBlockSize"
-    title="newFutureGet(ref: Reference; bs: BlockSize): FutureGet">newFutureGet(ref: Reference; bs: BlockSize): FutureGet</a></li>
+      <li><a class="reference" href="#newFutureGet%2CChunkSize"
+    title="newFutureGet(bs: ChunkSize): FutureGet">newFutureGet(bs: ChunkSize): FutureGet</a></li>
+  <li><a class="reference" href="#newFutureGet%2CReference%2CChunkSize"
+    title="newFutureGet(ref: Reference; bs: ChunkSize): FutureGet">newFutureGet(ref: Reference; bs: ChunkSize): FutureGet</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">newFuturePut
-      <li><a class="reference" href="#newFuturePut%2CBlockSize"
-    title="newFuturePut(bs: BlockSize): FuturePut">newFuturePut(bs: BlockSize): FuturePut</a></li>
-  <li><a class="reference" href="#newFuturePut%2CReference%2CBlockSize"
-    title="newFuturePut(ref: Reference; bs: BlockSize): FuturePut">newFuturePut(ref: Reference; bs: BlockSize): FuturePut</a></li>
+      <li><a class="reference" href="#newFuturePut%2CChunkSize"
+    title="newFuturePut(bs: ChunkSize): FuturePut">newFuturePut(bs: ChunkSize): FuturePut</a></li>
+  <li><a class="reference" href="#newFuturePut%2CReference%2CChunkSize"
+    title="newFuturePut(ref: Reference; bs: ChunkSize): FuturePut">newFuturePut(ref: Reference; bs: ChunkSize): FuturePut</a></li>
   <li><a class="reference" href="#newFuturePut%2CopenArray%5BT%5D"
     title="newFuturePut[T: byte | char](buffer: openArray[T]): FuturePut">newFuturePut[T: byte | char](buffer: openArray[T]): FuturePut</a></li>
 
@@ -403,9 +403,9 @@ window.addEventListener('DOMContentLoaded', main);
     title="readLine(s: ErisStream): Future[string]">readLine(s: ErisStream): Future[string]</a></li>
 
   </ul>
-  <ul class="simple nested-toc-section">recommendedBlockSize
-      <li><a class="reference" href="#recommendedBlockSize%2CNatural"
-    title="recommendedBlockSize(dataLength: Natural): BlockSize">recommendedBlockSize(dataLength: Natural): BlockSize</a></li>
+  <ul class="simple nested-toc-section">recommendedChunkSize
+      <li><a class="reference" href="#recommendedChunkSize%2CNatural"
+    title="recommendedChunkSize(dataLength: Natural): ChunkSize">recommendedChunkSize(dataLength: Natural): ChunkSize</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">ref
@@ -460,8 +460,8 @@ window.addEventListener('DOMContentLoaded', main);
 
   </ul>
   <ul class="simple nested-toc-section">toByte
-      <li><a class="reference" href="#toByte%2CBlockSize"
-    title="toByte(bs: BlockSize): uint8">toByte(bs: BlockSize): uint8</a></li>
+      <li><a class="reference" href="#toByte%2CChunkSize"
+    title="toByte(bs: ChunkSize): uint8">toByte(bs: ChunkSize): uint8</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">toBytes
@@ -470,8 +470,8 @@ window.addEventListener('DOMContentLoaded', main);
 
   </ul>
   <ul class="simple nested-toc-section">toChar
-      <li><a class="reference" href="#toChar%2CBlockSize"
-    title="toChar(bs: BlockSize): char">toChar(bs: BlockSize): char</a></li>
+      <li><a class="reference" href="#toChar%2CChunkSize"
+    title="toChar(bs: ChunkSize): char">toChar(bs: ChunkSize): char</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">verified
@@ -503,8 +503,8 @@ window.addEventListener('DOMContentLoaded', main);
 
   </ul>
   <ul class="simple nested-toc-section">hasBlock
-      <li><a class="reference" href="#hasBlock.e%2C%2CReference%2CBlockSize"
-    title="hasBlock(store; r: Reference; bs: BlockSize): Future[bool]">hasBlock(store; r: Reference; bs: BlockSize): Future[bool]</a></li>
+      <li><a class="reference" href="#hasBlock.e%2C%2CReference%2CChunkSize"
+    title="hasBlock(store; r: Reference; bs: ChunkSize): Future[bool]">hasBlock(store; r: Reference; bs: ChunkSize): Future[bool]</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">id
@@ -538,7 +538,7 @@ window.addEventListener('DOMContentLoaded', main);
 
   </div>
   &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L1"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L1"
 class="link-seesrc" target="_blank">Source</a>
 
   <div class="nine columns" id="content">
@@ -548,7 +548,7 @@ class="link-seesrc" target="_blank">Source</a>
 <p><tt class="docutils literal"><span class="pre"><span class="Identifier">ErisStore</span></span></tt> objects are implemented in additional modules.</p>
 
 <p><strong class="examples_text">Example:</strong></p>
-<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">eris</span>
+<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">src</span><span class="Operator">/</span><span class="Identifier">eris</span>
 <span class="Keyword">import</span> <span class="Identifier">eris</span><span class="Operator">/</span><span class="Identifier">memory_stores</span>
 <span class="Keyword">import</span> <span class="Identifier">std</span><span class="Operator">/</span><span class="Punctuation">[</span><span class="Identifier">asyncdispatch</span><span class="Punctuation">,</span> <span class="Identifier">streams</span><span class="Punctuation">]</span>
 
@@ -563,7 +563,7 @@ class="link-seesrc" target="_blank">Source</a>
 <span class="Identifier">assert</span> <span class="Identifier">waitFor</span><span class="Punctuation">(</span><span class="Identifier">decode</span><span class="Punctuation">(</span><span class="Identifier">store</span><span class="Punctuation">,</span> <span class="Identifier">capA</span><span class="Punctuation">)</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Identifier">waitFor</span><span class="Punctuation">(</span><span class="Identifier">decode</span><span class="Punctuation">(</span><span class="Identifier">store</span><span class="Punctuation">,</span> <span class="Identifier">capB</span><span class="Punctuation">)</span><span class="Punctuation">)</span>
 <span class="Identifier">assert</span> <span class="Identifier">waitFor</span><span class="Punctuation">(</span><span class="Identifier">decode</span><span class="Punctuation">(</span><span class="Identifier">store</span><span class="Punctuation">,</span> <span class="Identifier">capB</span><span class="Punctuation">)</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Identifier">waitFor</span><span class="Punctuation">(</span><span class="Identifier">decode</span><span class="Punctuation">(</span><span class="Identifier">store</span><span class="Punctuation">,</span> <span class="Identifier">capC</span><span class="Punctuation">)</span><span class="Punctuation">)</span></pre>An <tt class="docutils literal"><span class="pre"><span class="Identifier">ErisStore</span></span></tt> is implemented by <tt class="docutils literal"><span class="pre"><span class="Identifier">get</span></span></tt> and <tt class="docutils literal"><span class="pre"><span class="Identifier">put</span></span></tt> methods. Both operate on a variant of the <tt class="docutils literal"><span class="pre"><span class="Identifier">FutureBlock</span></span></tt> type which holds a buffer, parameters, and callbacks.
 <p><strong class="examples_text">Example:</strong></p>
-<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">eris</span>
+<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">src</span><span class="Operator">/</span><span class="Identifier">eris</span>
 <span class="Keyword">import</span> <span class="Identifier">eris</span><span class="Operator">/</span><span class="Identifier">memory_stores</span>
 <span class="Keyword">import</span> <span class="Identifier">std</span><span class="Operator">/</span><span class="Punctuation">[</span><span class="Identifier">asyncdispatch</span><span class="Punctuation">,</span> <span class="Identifier">streams</span><span class="Punctuation">]</span>
 
@@ -576,17 +576,17 @@ class="link-seesrc" target="_blank">Source</a>
 <span class="Keyword">method</span> <span class="Identifier">get</span><span class="Punctuation">(</span><span class="Identifier">logger</span><span class="Punctuation">:</span> <span class="Identifier">LoggerStore</span><span class="Punctuation">;</span> <span class="Identifier">fut</span><span class="Punctuation">:</span> <span class="Identifier">FutureGet</span><span class="Punctuation">)</span> <span class="Operator">=</span>
   <span class="Identifier">fut</span><span class="Operator">.</span><span class="Identifier">addCallback</span><span class="Punctuation">:</span>
     <span class="Keyword">if</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Identifier">failed</span><span class="Punctuation">:</span>
-      <span class="Identifier">stderr</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="StringLit">&quot;failed to get &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Identifier">blockSize</span><span class="Operator">.</span><span class="Identifier">int</span><span class="Punctuation">,</span> <span class="StringLit">&quot; byte block &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Punctuation">`</span><span class="Keyword">ref</span><span class="Punctuation">`</span><span class="Punctuation">)</span>
+      <span class="Identifier">stderr</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="StringLit">&quot;failed to get &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Identifier">chunkSize</span><span class="Operator">.</span><span class="Identifier">int</span><span class="Punctuation">,</span> <span class="StringLit">&quot; byte chunk &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Punctuation">`</span><span class="Keyword">ref</span><span class="Punctuation">`</span><span class="Punctuation">)</span>
     <span class="Keyword">else</span><span class="Punctuation">:</span>
-      <span class="Identifier">stderr</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="StringLit">&quot;got &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Identifier">blockSize</span><span class="Operator">.</span><span class="Identifier">int</span><span class="Punctuation">,</span> <span class="StringLit">&quot; byte block &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Punctuation">`</span><span class="Keyword">ref</span><span class="Punctuation">`</span><span class="Punctuation">)</span>
+      <span class="Identifier">stderr</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="StringLit">&quot;got &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Identifier">chunkSize</span><span class="Operator">.</span><span class="Identifier">int</span><span class="Punctuation">,</span> <span class="StringLit">&quot; byte chunk &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Punctuation">`</span><span class="Keyword">ref</span><span class="Punctuation">`</span><span class="Punctuation">)</span>
   <span class="Identifier">get</span><span class="Punctuation">(</span><span class="Identifier">logger</span><span class="Operator">.</span><span class="Identifier">other</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Punctuation">)</span>
 
 <span class="Keyword">method</span> <span class="Identifier">put</span><span class="Punctuation">(</span><span class="Identifier">logger</span><span class="Punctuation">:</span> <span class="Identifier">LoggerStore</span><span class="Punctuation">;</span> <span class="Identifier">fut</span><span class="Punctuation">:</span> <span class="Identifier">FuturePut</span><span class="Punctuation">)</span> <span class="Operator">=</span>
   <span class="Identifier">fut</span><span class="Operator">.</span><span class="Identifier">addCallback</span><span class="Punctuation">:</span>
     <span class="Keyword">if</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Identifier">failed</span><span class="Punctuation">:</span>
-      <span class="Identifier">stderr</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="StringLit">&quot;failed to put &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Identifier">blockSize</span><span class="Operator">.</span><span class="Identifier">int</span><span class="Punctuation">,</span> <span class="StringLit">&quot; byte block &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Punctuation">`</span><span class="Keyword">ref</span><span class="Punctuation">`</span><span class="Punctuation">)</span>
+      <span class="Identifier">stderr</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="StringLit">&quot;failed to put &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Identifier">chunkSize</span><span class="Operator">.</span><span class="Identifier">int</span><span class="Punctuation">,</span> <span class="StringLit">&quot; byte chunk &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Punctuation">`</span><span class="Keyword">ref</span><span class="Punctuation">`</span><span class="Punctuation">)</span>
     <span class="Keyword">else</span><span class="Punctuation">:</span>
-      <span class="Identifier">stderr</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="StringLit">&quot;put &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Identifier">blockSize</span><span class="Operator">.</span><span class="Identifier">int</span><span class="Punctuation">,</span> <span class="StringLit">&quot; byte block &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Punctuation">`</span><span class="Keyword">ref</span><span class="Punctuation">`</span><span class="Punctuation">)</span>
+      <span class="Identifier">stderr</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="StringLit">&quot;put &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Identifier">chunkSize</span><span class="Operator">.</span><span class="Identifier">int</span><span class="Punctuation">,</span> <span class="StringLit">&quot; byte chunk &quot;</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Operator">.</span><span class="Punctuation">`</span><span class="Keyword">ref</span><span class="Punctuation">`</span><span class="Punctuation">)</span>
   <span class="Identifier">put</span><span class="Punctuation">(</span><span class="Identifier">logger</span><span class="Operator">.</span><span class="Identifier">other</span><span class="Punctuation">,</span> <span class="Identifier">fut</span><span class="Punctuation">)</span>
 
 <span class="Keyword">let</span>
@@ -597,19 +597,6 @@ class="link-seesrc" target="_blank">Source</a>
   <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<div id="BlockSize">
-<dt><pre><a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a> <span class="Other">=</span> <span class="Keyword">enum</span>
-  <span class="Identifier">bs1k</span> <span class="Other">=</span> <span class="DecNumber">1024</span><span class="Other">,</span>              <span class="Comment">## 1 KiB</span>
-  <span class="Identifier">bs32k</span> <span class="Other">=</span> <span class="DecNumber">32768</span>              <span class="Comment">## 32 KiB</span></pre></dt>
-<dd>
-
-Valid block sizes.
-&nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L75"
-class="link-seesrc" target="_blank">Source</a>
-
-</dd>
-</div>
 <div id="BlockStatus">
 <dt><pre><a href="eris.html#BlockStatus"><span class="Identifier">BlockStatus</span></a> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">unknown</span><span class="Other">,</span> <span class="Identifier">verified</span><span class="Other">,</span> <span class="Identifier">plaintext</span></pre></dt>
@@ -617,7 +604,20 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L213"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L216"
+class="link-seesrc" target="_blank">Source</a>
+
+</dd>
+</div>
+<div id="ChunkSize">
+<dt><pre><a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a> <span class="Other">=</span> <span class="Keyword">enum</span>
+  <span class="Identifier">bs1k</span> <span class="Other">=</span> <span class="DecNumber">1024</span><span class="Other">,</span>              <span class="Comment">## 1 KiB</span>
+  <span class="Identifier">bs32k</span> <span class="Other">=</span> <span class="DecNumber">32768</span>              <span class="Comment">## 32 KiB</span></pre></dt>
+<dd>
+
+Valid chunk sizes.
+&nbsp;&nbsp;<a
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L78"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -628,7 +628,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L517"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L520"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -637,13 +637,13 @@ class="link-seesrc" target="_blank">Source</a>
 <dt><pre><a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a> <span class="Other">=</span> <span class="Keyword">object</span>
   <span class="Identifier">pair</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Pair</span>
   <span class="Identifier">level</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">uint8</span>
-  <span class="Identifier">blockSize</span><span class="Operator">*</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a>
+  <span class="Identifier">chunkSize</span><span class="Operator">*</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a>
 </pre></dt>
 <dd>
 
 A capability for retrieving ERIS encoded data.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L89"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L92"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -654,7 +654,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L701"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L704"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -665,7 +665,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Object for interfacing ERIS storage.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L446"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L449"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -678,7 +678,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L447"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L450"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -689,7 +689,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 An object representing data streams.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L531"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L534"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -700,7 +700,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L214"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L217"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -711,7 +711,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L225"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L228"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -722,7 +722,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L229"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L232"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -733,9 +733,9 @@ class="link-seesrc" target="_blank">Source</a>
 </pre></dt>
 <dd>
 
-Key for decrypting a block.
+Key for decrypting a chunk.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L82"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L85"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -747,7 +747,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Type for specifying if an encoding shall be unique or convergent. See <a class="reference external" href="https://eris.codeberg.page/spec/#section-2.3">section 2.3</a> for an explaination of encoding modes.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L69"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L72"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -759,7 +759,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L444"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L447"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -770,7 +770,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L445"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L448"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -781,9 +781,9 @@ class="link-seesrc" target="_blank">Source</a>
 </pre></dt>
 <dd>
 
-Reference to an encrypted block.
+Reference to an encrypted chunk.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L80"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L83"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -796,7 +796,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Secret for salting a <tt class="docutils literal"><span class="pre"><span class="Identifier">Key</span></span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L84"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L87"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -807,7 +807,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L79"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L82"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -823,7 +823,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 CBOR tag for ERIS binary read capabilities. <a class="reference external" href="https://www.iana.org/assignments/cbor-tags/cbor-tags.xhtml">https://www.iana.org/assignments/cbor-tags/cbor-tags.xhtml</a>
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L64"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L67"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -839,7 +839,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Encode a <tt class="docutils literal"><span class="pre">ErisCap</span></tt> to standard URN form. <a class="reference external" href="https://inqlab.net/projects/eris/#_urn">https://inqlab.net/projects/eris/#_urn</a>
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L175"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L178"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -850,7 +850,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L456"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L459"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -861,18 +861,18 @@ class="link-seesrc" target="_blank">Source</a>
 
 Encode to Base32.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L141"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L144"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="*,T,BlockSize">
-<dt><pre><span class="Keyword">func</span> <a href="#%2A%2CT%2CBlockSize"><span class="Identifier">`*`</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">:</span> <span class="Identifier">SomeUnsignedInt</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+<div id="*,T,ChunkSize">
+<dt><pre><span class="Keyword">func</span> <a href="#%2A%2CT%2CChunkSize"><span class="Identifier">`*`</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">:</span> <span class="Identifier">SomeUnsignedInt</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
 
-Convenience function to multiply an integer by a <tt class="docutils literal"><span class="pre"><span class="Identifier">BlockSize</span></span></tt> value.
+Convenience function to multiply an integer by a <tt class="docutils literal"><span class="pre"><span class="Identifier">ChunkSize</span></span></tt> value.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L116"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L119"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -883,18 +883,18 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L145"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L148"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="div,T,BlockSize">
-<dt><pre><span class="Keyword">func</span> <a href="#div%2CT%2CBlockSize"><span class="Identifier">`div`</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">:</span> <span class="Identifier">SomeUnsignedInt</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+<div id="div,T,ChunkSize">
+<dt><pre><span class="Keyword">func</span> <a href="#div%2CT%2CChunkSize"><span class="Identifier">`div`</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">:</span> <span class="Identifier">SomeUnsignedInt</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
 
-Convenience function to divide an integer by a <tt class="docutils literal"><span class="pre"><span class="Identifier">BlockSize</span></span></tt> value.
+Convenience function to divide an integer by a <tt class="docutils literal"><span class="pre"><span class="Identifier">ChunkSize</span></span></tt> value.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L122"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L125"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -905,7 +905,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L309"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L312"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -917,7 +917,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Add a callback to a <tt class="docutils literal"><span class="pre"><span class="Identifier">FutureBlock</span></span></tt>. Callbacks are called last-in-first-out when <tt class="docutils literal"><span class="pre"><span class="Identifier">complete</span></span></tt> is called on <tt class="docutils literal"><span class="pre"><span class="Identifier">blk</span></span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L243"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L246"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -928,7 +928,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L279"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L282"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -940,7 +940,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Ingest content.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L806"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L817"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -952,18 +952,18 @@ class="link-seesrc" target="_blank">Source</a>
 
 Ingest content from a <tt class="docutils literal"><span class="pre"><span class="Identifier">Stream</span></span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L821"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L832"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="arity,BlockSize">
-<dt><pre><span class="Keyword">func</span> <a href="#arity%2CBlockSize"><span class="Identifier">arity</span></a><span class="Other">(</span><span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<div id="arity,ChunkSize">
+<dt><pre><span class="Keyword">func</span> <a href="#arity%2CChunkSize"><span class="Identifier">arity</span></a><span class="Other">(</span><span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L102"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L105"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -974,7 +974,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L240"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L243"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -985,29 +985,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Check if an <tt class="docutils literal"><span class="pre">ErisStream</span></tt> is positioned at its end. May return false negatives.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L578"
-class="link-seesrc" target="_blank">Source</a>
-
-</dd>
-</div>
-<div id="blockSize,FutureBlock">
-<dt><pre><span class="Keyword">func</span> <a href="#blockSize%2CFutureBlock"><span class="Identifier">blockSize</span></a><span class="Other">(</span><span class="Identifier">blk</span><span class="Other">:</span> <a href="eris.html#FutureBlock"><span class="Identifier">FutureBlock</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L312"
-class="link-seesrc" target="_blank">Source</a>
-
-</dd>
-</div>
-<div id="blockSize,ErisIngest">
-<dt><pre><span class="Keyword">proc</span> <a href="#blockSize%2CErisIngest"><span class="Identifier">blockSize</span></a><span class="Other">(</span><span class="Identifier">ingest</span><span class="Other">:</span> <a href="eris.html#ErisIngest"><span class="Identifier">ErisIngest</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L773"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L581"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1018,7 +996,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L314"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L317"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1029,7 +1007,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Binary encoding of the read-capability.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L164"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L167"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1041,7 +1019,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Derive the <tt class="docutils literal"><span class="pre">ErisCap</span></tt> of <tt class="docutils literal"><span class="pre">ingest</span></tt>. The state of <tt class="docutils literal"><span class="pre"><span class="Identifier">ingest</span></span></tt> is afterwards invalid until <tt class="docutils literal"><span class="pre"><span class="Identifier">reinit</span></span></tt> or <tt class="docutils literal"><span class="pre"><span class="Identifier">reopen</span></span></tt> is called.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L842"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L853"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1052,7 +1030,29 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L554"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L557"
+class="link-seesrc" target="_blank">Source</a>
+
+</dd>
+</div>
+<div id="chunkSize,FutureBlock">
+<dt><pre><span class="Keyword">func</span> <a href="#chunkSize%2CFutureBlock"><span class="Identifier">chunkSize</span></a><span class="Other">(</span><span class="Identifier">blk</span><span class="Other">:</span> <a href="eris.html#FutureBlock"><span class="Identifier">FutureBlock</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L315"
+class="link-seesrc" target="_blank">Source</a>
+
+</dd>
+</div>
+<div id="chunkSize,ErisIngest">
+<dt><pre><span class="Keyword">proc</span> <a href="#chunkSize%2CErisIngest"><span class="Identifier">chunkSize</span></a><span class="Other">(</span><span class="Identifier">ingest</span><span class="Other">:</span> <a href="eris.html#ErisIngest"><span class="Identifier">ErisIngest</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L784"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1063,7 +1063,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Release the resources of an <tt class="docutils literal"><span class="pre">ErisStream</span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L548"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L551"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1074,7 +1074,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Complete a <tt class="docutils literal"><span class="pre"><span class="Identifier">FutureBlock</span></span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L338"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L341"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1086,7 +1086,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L354"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L357"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1096,9 +1096,9 @@ class="link-seesrc" target="_blank">Source</a>
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
-Complete a <tt class="docutils literal"><span class="pre"><span class="Identifier">Get</span></span></tt> <tt class="docutils literal"><span class="pre"><span class="Identifier">FutureBlock</span></span></tt> with the block at <tt class="docutils literal"><span class="pre"><span class="Identifier">src</span></span></tt>.
+Complete a <tt class="docutils literal"><span class="pre"><span class="Identifier">Get</span></span></tt> <tt class="docutils literal"><span class="pre"><span class="Identifier">FutureBlock</span></span></tt> with the chunk at <tt class="docutils literal"><span class="pre"><span class="Identifier">src</span></span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L346"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L349"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1110,7 +1110,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L361"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L364"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1120,9 +1120,9 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
-Copy block data out of a <tt class="docutils literal"><span class="pre"><span class="Identifier">FutureBlock</span></span></tt>.
+Copy chunk data out of a <tt class="docutils literal"><span class="pre"><span class="Identifier">FutureBlock</span></span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L368"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L371"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1134,7 +1134,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Asynchronously decode <tt class="docutils literal"><span class="pre">cap</span></tt> from <tt class="docutils literal"><span class="pre">store</span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L696"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L699"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1146,43 +1146,43 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L675"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L678"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="encode,,BlockSize,Stream">
-<dt><pre><span class="Keyword">proc</span> <a href="#encode%2C%2CBlockSize%2CStream"><span class="Identifier">encode</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">blockSize</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">;</span> <span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">Stream</span><span class="Other">;</span> <span class="Identifier">mode</span> <span class="Other">=</span> <span class="Identifier">uniqueMode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span>
+<div id="encode,,ChunkSize,Stream">
+<dt><pre><span class="Keyword">proc</span> <a href="#encode%2C%2CChunkSize%2CStream"><span class="Identifier">encode</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">chunkSize</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">;</span> <span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">Stream</span><span class="Other">;</span> <span class="Identifier">mode</span> <span class="Other">=</span> <span class="Identifier">uniqueMode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span>
     <a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Asychronously encode <tt class="docutils literal"><span class="pre">content</span></tt> into <tt class="docutils literal"><span class="pre">store</span></tt> and derive its <tt class="docutils literal"><span class="pre">ErisCap</span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L872"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L883"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="encode,,BlockSize,Stream,Secret">
-<dt><pre><span class="Keyword">proc</span> <a href="#encode%2C%2CBlockSize%2CStream%2CSecret"><span class="Identifier">encode</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">blockSize</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">;</span> <span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">Stream</span><span class="Other">;</span> <span class="Identifier">secret</span><span class="Other">:</span> <a href="eris.html#Secret"><span class="Identifier">Secret</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span>
+<div id="encode,,ChunkSize,Stream,Secret">
+<dt><pre><span class="Keyword">proc</span> <a href="#encode%2C%2CChunkSize%2CStream%2CSecret"><span class="Identifier">encode</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">chunkSize</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">;</span> <span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">Stream</span><span class="Other">;</span> <span class="Identifier">secret</span><span class="Other">:</span> <a href="eris.html#Secret"><span class="Identifier">Secret</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span>
     <a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Asychronously encode <tt class="docutils literal"><span class="pre">content</span></tt> into <tt class="docutils literal"><span class="pre">store</span></tt> and derive its <tt class="docutils literal"><span class="pre">ErisCap</span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L865"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L876"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="encode,,BlockSize,string">
-<dt><pre><span class="Keyword">proc</span> <a href="#encode%2C%2CBlockSize%2Cstring"><span class="Identifier">encode</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">blockSize</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">;</span> <span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">mode</span> <span class="Other">=</span> <span class="Identifier">uniqueMode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span>
+<div id="encode,,ChunkSize,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#encode%2C%2CChunkSize%2Cstring"><span class="Identifier">encode</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">chunkSize</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">;</span> <span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">mode</span> <span class="Other">=</span> <span class="Identifier">uniqueMode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span>
     <a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Asychronously encode <tt class="docutils literal"><span class="pre">content</span></tt> into <tt class="docutils literal"><span class="pre">store</span></tt> and derive its <tt class="docutils literal"><span class="pre">ErisCap</span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L891"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L906"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1192,15 +1192,15 @@ class="link-seesrc" target="_blank">Source</a>
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
-Asychronously encode <tt class="docutils literal"><span class="pre">content</span></tt> into <tt class="docutils literal"><span class="pre">store</span></tt> and derive its <tt class="docutils literal"><span class="pre">ErisCap</span></tt>. The block size is 1KiB unless the content is at least 16KiB.
+Asychronously encode <tt class="docutils literal"><span class="pre">content</span></tt> into <tt class="docutils literal"><span class="pre">store</span></tt> and derive its <tt class="docutils literal"><span class="pre">ErisCap</span></tt>. The chunk size is 1KiB unless the content is at least 16KiB.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L878"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L893"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="erisCap,string,BlockSize">
-<dt><pre><span class="Keyword">proc</span> <a href="#erisCap%2Cstring%2CBlockSize"><span class="Identifier">erisCap</span></a><span class="Other">(</span><span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">blockSize</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a> {.
+<div id="erisCap,string,ChunkSize">
+<dt><pre><span class="Keyword">proc</span> <a href="#erisCap%2Cstring%2CChunkSize"><span class="Identifier">erisCap</span></a><span class="Other">(</span><span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">chunkSize</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a> {.
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">TimeEffect</span><span class="Other">,</span> <span class="Identifier">ReadIOEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
@@ -1211,7 +1211,7 @@ Derive a convergent <tt class="docutils literal"><span class="pre">ErisCap</span
   <span class="Operator">$</span><span class="Identifier">erisCap</span><span class="Punctuation">(</span><span class="StringLit">&quot;Hello world!&quot;</span><span class="Punctuation">,</span> <span class="Identifier">bs1k</span><span class="Punctuation">)</span> <span class="Operator">==</span>
     <span class="StringLit">&quot;urn:eris:BIAD77QDJMFAKZYH2DXBUZYAP3MXZ3DJZVFYQ5DFWC6T65WSFCU5S2IT4YZGJ7AC4SYQMP2DM2ANS2ZTCP3DJJIRV733CRAAHOSWIYZM3M&quot;</span></pre>
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L895"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L910"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1222,7 +1222,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L364"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L367"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1233,7 +1233,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L307"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L310"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1244,19 +1244,19 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L180"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L183"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="get,,Pair,TreeLevel,BlockSize">
-<dt><pre><span class="Keyword">proc</span> <a href="#get%2C%2CPair%2CTreeLevel%2CBlockSize"><span class="Identifier">get</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">pair</span><span class="Other">:</span> <span class="Identifier">Pair</span><span class="Other">;</span> <span class="Identifier">level</span><span class="Other">:</span> <a href="eris.html#TreeLevel"><span class="Identifier">TreeLevel</span></a><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">byte</span><span class="Other">]</span><span class="Other">]</span> {.
+<div id="get,,Pair,TreeLevel,ChunkSize">
+<dt><pre><span class="Keyword">proc</span> <a href="#get%2C%2CPair%2CTreeLevel%2CChunkSize"><span class="Identifier">get</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">pair</span><span class="Other">:</span> <span class="Identifier">Pair</span><span class="Other">;</span> <span class="Identifier">level</span><span class="Other">:</span> <a href="eris.html#TreeLevel"><span class="Identifier">TreeLevel</span></a><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">byte</span><span class="Other">]</span><span class="Other">]</span> {.
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L484"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L487"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1267,7 +1267,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L463"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L466"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1277,9 +1277,9 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
-Get all blocks that constitute <tt class="docutils literal"><span class="pre"><span class="Identifier">cap</span></span></tt> from <tt class="docutils literal"><span class="pre"><span class="Identifier">store</span></span></tt>. No data is returned, this procedure is for ensuring that all blocks are present at some store.
+Get all chunks that constitute <tt class="docutils literal"><span class="pre"><span class="Identifier">cap</span></span></tt> from <tt class="docutils literal"><span class="pre"><span class="Identifier">store</span></span></tt>. No data is returned, this procedure is for ensuring that all chunks are present at some store.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L937"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L952"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1292,9 +1292,9 @@ class="link-seesrc" target="_blank">Source</a>
     <b>Deprecated</b> 
   </div>
 
-This requests a small block and with a fallback to a large block. Do not use it.
+This requests a small chunk and with a fallback to a large chunk. Do not use it.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L477"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L480"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1305,7 +1305,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Return the position of an <tt class="docutils literal"><span class="pre">ErisStream</span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L588"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L591"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1316,7 +1316,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L152"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L155"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1327,7 +1327,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Reduce a <tt class="docutils literal"><span class="pre"><span class="Identifier">Reference</span></span></tt> to a <tt class="docutils literal"><span class="pre"><span class="Identifier">Hash</span></span></tt> value.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L147"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L150"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1337,9 +1337,9 @@ class="link-seesrc" target="_blank">Source</a>
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
-Estimate the length of an <tt class="docutils literal"><span class="pre">ErisStream</span></tt>. The result is the length of <tt class="docutils literal"><span class="pre">s</span></tt> rounded up to the next block boundary.
+Estimate the length of an <tt class="docutils literal"><span class="pre">ErisStream</span></tt>. The result is the length of <tt class="docutils literal"><span class="pre">s</span></tt> rounded up to the next chunk boundary.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L602"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L605"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1351,7 +1351,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L592"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L595"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1362,7 +1362,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Move the <tt class="docutils literal"><span class="pre"><span class="Identifier">seq</span><span class="Punctuation">[</span><span class="Identifier">byte</span><span class="Punctuation">]</span></span></tt> out of a <tt class="docutils literal"><span class="pre"><span class="Identifier">FutureBlock</span></span></tt>. This is only safe to use in the first callback added to <tt class="docutils literal"><span class="pre"><span class="Identifier">blk</span></span></tt> because it will be called last.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L379"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L382"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1373,31 +1373,31 @@ class="link-seesrc" target="_blank">Source</a>
 
 Create an <tt class="docutils literal"><span class="pre">ErisStore</span></tt> that discards writes and fails to read.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L526"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L529"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
 <div id="newErisIngest,ErisStore">
-<dt><pre><span class="Keyword">proc</span> <a href="#newErisIngest%2CErisStore"><span class="Identifier">newErisIngest</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">:</span> <a href="eris.html#ErisStore"><span class="Identifier">ErisStore</span></a><span class="Other">;</span> <span class="Identifier">blockSize</span> <span class="Other">=</span> <span class="Identifier">bs32k</span><span class="Other">;</span> <span class="Identifier">mode</span> <span class="Other">=</span> <span class="Identifier">uniqueMode</span><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#ErisIngest"><span class="Identifier">ErisIngest</span></a> {.
+<dt><pre><span class="Keyword">proc</span> <a href="#newErisIngest%2CErisStore"><span class="Identifier">newErisIngest</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">:</span> <a href="eris.html#ErisStore"><span class="Identifier">ErisStore</span></a><span class="Other">;</span> <span class="Identifier">chunkSize</span> <span class="Other">=</span> <span class="Identifier">bs32k</span><span class="Other">;</span> <span class="Identifier">mode</span> <span class="Other">=</span> <span class="Identifier">uniqueMode</span><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#ErisIngest"><span class="Identifier">ErisIngest</span></a> {.
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Create a new <tt class="docutils literal"><span class="pre"><span class="Identifier">ErisIngest</span></span></tt> object. If <tt class="docutils literal"><span class="pre"><span class="Identifier">mode</span></span></tt> is <tt class="docutils literal"><span class="pre"><span class="Identifier">uniqueMode</span></span></tt> then a random convergence secret will be generated using entropy from the operating system. For <tt class="docutils literal"><span class="pre"><span class="Identifier">convergentMode</span></span></tt> a zero-secret will be used and the encoding will be deterministic and reproducible.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L723"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L726"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
 <div id="newErisIngest,ErisStore,Secret">
-<dt><pre><span class="Keyword">proc</span> <a href="#newErisIngest%2CErisStore%2CSecret"><span class="Identifier">newErisIngest</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">:</span> <a href="eris.html#ErisStore"><span class="Identifier">ErisStore</span></a><span class="Other">;</span> <span class="Identifier">blockSize</span> <span class="Other">=</span> <span class="Identifier">bs32k</span><span class="Other">;</span> <span class="Identifier">secret</span><span class="Other">:</span> <a href="eris.html#Secret"><span class="Identifier">Secret</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#ErisIngest"><span class="Identifier">ErisIngest</span></a> {.
+<dt><pre><span class="Keyword">proc</span> <a href="#newErisIngest%2CErisStore%2CSecret"><span class="Identifier">newErisIngest</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">:</span> <a href="eris.html#ErisStore"><span class="Identifier">ErisStore</span></a><span class="Other">;</span> <span class="Identifier">chunkSize</span> <span class="Other">=</span> <span class="Identifier">bs32k</span><span class="Other">;</span> <span class="Identifier">secret</span><span class="Other">:</span> <a href="eris.html#Secret"><span class="Identifier">Secret</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#ErisIngest"><span class="Identifier">ErisIngest</span></a> {.
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Create a new <tt class="docutils literal"><span class="pre"><span class="Identifier">ErisIngest</span></span></tt> object.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L714"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L717"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1408,53 +1408,53 @@ class="link-seesrc" target="_blank">Source</a>
 
 Open a new stream for reading ERIS data.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L542"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L545"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="newFutureGet,BlockSize">
-<dt><pre><span class="Keyword">proc</span> <a href="#newFutureGet%2CBlockSize"><span class="Identifier">newFutureGet</span></a><span class="Other">(</span><span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#FutureGet"><span class="Identifier">FutureGet</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<div id="newFutureGet,ChunkSize">
+<dt><pre><span class="Keyword">proc</span> <a href="#newFutureGet%2CChunkSize"><span class="Identifier">newFutureGet</span></a><span class="Other">(</span><span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#FutureGet"><span class="Identifier">FutureGet</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L286"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L289"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="newFutureGet,Reference,BlockSize">
-<dt><pre><span class="Keyword">proc</span> <a href="#newFutureGet%2CReference%2CBlockSize"><span class="Identifier">newFutureGet</span></a><span class="Other">(</span><span class="Identifier">ref</span><span class="Other">:</span> <a href="eris.html#Reference"><span class="Identifier">Reference</span></a><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#FutureGet"><span class="Identifier">FutureGet</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+<div id="newFutureGet,Reference,ChunkSize">
+<dt><pre><span class="Keyword">proc</span> <a href="#newFutureGet%2CReference%2CChunkSize"><span class="Identifier">newFutureGet</span></a><span class="Other">(</span><span class="Identifier">ref</span><span class="Other">:</span> <a href="eris.html#Reference"><span class="Identifier">Reference</span></a><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#FutureGet"><span class="Identifier">FutureGet</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L289"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L292"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="newFuturePut,BlockSize">
-<dt><pre><span class="Keyword">proc</span> <a href="#newFuturePut%2CBlockSize"><span class="Identifier">newFuturePut</span></a><span class="Other">(</span><span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#FuturePut"><span class="Identifier">FuturePut</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<div id="newFuturePut,ChunkSize">
+<dt><pre><span class="Keyword">proc</span> <a href="#newFuturePut%2CChunkSize"><span class="Identifier">newFuturePut</span></a><span class="Other">(</span><span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#FuturePut"><span class="Identifier">FuturePut</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L292"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L295"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="newFuturePut,Reference,BlockSize">
-<dt><pre><span class="Keyword">proc</span> <a href="#newFuturePut%2CReference%2CBlockSize"><span class="Identifier">newFuturePut</span></a><span class="Other">(</span><span class="Identifier">ref</span><span class="Other">:</span> <a href="eris.html#Reference"><span class="Identifier">Reference</span></a><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#FuturePut"><span class="Identifier">FuturePut</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+<div id="newFuturePut,Reference,ChunkSize">
+<dt><pre><span class="Keyword">proc</span> <a href="#newFuturePut%2CReference%2CChunkSize"><span class="Identifier">newFuturePut</span></a><span class="Other">(</span><span class="Identifier">ref</span><span class="Other">:</span> <a href="eris.html#Reference"><span class="Identifier">Reference</span></a><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#FuturePut"><span class="Identifier">FuturePut</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L295"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L298"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1465,7 +1465,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L298"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L301"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1477,7 +1477,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Fail <tt class="docutils literal"><span class="pre"><span class="Identifier">f</span></span></tt> with a <tt class="docutils literal"><span class="pre"><span class="Identifier">KeyError</span></span></tt> exception.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L375"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L378"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1487,9 +1487,9 @@ class="link-seesrc" target="_blank">Source</a>
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
-Pad the ingest stream with <tt class="docutils literal"><span class="pre"><span class="HexNumber">0x80</span></span></tt> until the start of the next block.
+Pad the ingest stream with <tt class="docutils literal"><span class="pre"><span class="HexNumber">0x80</span></span></tt> until the start of the next chunk.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L834"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L845"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1500,7 +1500,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L188"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L191"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1511,7 +1511,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Decode a URN to a <tt class="docutils literal"><span class="pre">ErisCap</span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L201"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L204"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1522,7 +1522,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Get the current append position of <tt class="docutils literal"><span class="pre">ingest</span></tt>. This is same as the number of bytes appended.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L775"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L786"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1534,7 +1534,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L634"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L637"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1546,7 +1546,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Reads all data from the specified <tt class="docutils literal"><span class="pre">ErisStream</span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L666"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L669"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1558,7 +1558,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L612"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L615"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1570,7 +1570,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L663"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L666"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1582,18 +1582,18 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L640"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L643"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="recommendedBlockSize,Natural">
-<dt><pre><span class="Keyword">func</span> <a href="#recommendedBlockSize%2CNatural"><span class="Identifier">recommendedBlockSize</span></a><span class="Other">(</span><span class="Identifier">dataLength</span><span class="Other">:</span> <span class="Identifier">Natural</span><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<div id="recommendedChunkSize,Natural">
+<dt><pre><span class="Keyword">func</span> <a href="#recommendedChunkSize%2CNatural"><span class="Identifier">recommendedChunkSize</span></a><span class="Other">(</span><span class="Identifier">dataLength</span><span class="Other">:</span> <span class="Identifier">Natural</span><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
-Return the recommended <tt class="docutils literal"><span class="pre"><span class="Identifier">BlockSize</span></span></tt> for encoding data of the given length. The current implementation selects 1KiB blocks for lengths less than 16KiB otherwise 32KiB. The reasoning is that anything less 16KiB is encoded in a tree with a depth of no more than two block. A 16KiB block would waste nearly half of a 32KiB block but only requires a single block to be fetched, whereas 16KiB-1 rould require 17 block requests. The behavior of this function is not guaranted to remain constant and because of storage efficiency and latency tradeoffs may not yield the best choice for all applications.
+Return the recommended <tt class="docutils literal"><span class="pre"><span class="Identifier">ChunkSize</span></span></tt> for encoding data of the given length. The current implementation selects 1KiB chunks for lengths less than 16KiB otherwise 32KiB. The reasoning is that anything less 16KiB is encoded in a tree with a depth of no more than two chunk. A 16KiB chunk would waste nearly half of a 32KiB chunk but only requires a single chunk to be fetched, whereas 16KiB-1 rould require 17 chunk requests. The behavior of this function is not guaranted to remain constant and because of storage efficiency and latency tradeoffs may not yield the best choice for all applications.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L128"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L131"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1604,7 +1604,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L310"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L313"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1615,7 +1615,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Derive the <tt class="docutils literal"><span class="pre"><span class="Identifier">Reference</span></span></tt> for a 1KiB or 32KiB buffer.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L156"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L159"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1627,7 +1627,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Collect the set of <tt class="docutils literal"><span class="pre"><span class="Identifier">Reference</span></span></tt>s that constitute an <tt class="docutils literal"><span class="pre"><span class="Identifier">ErisCap</span></span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L927"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L942"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1638,7 +1638,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Re-initialize an <tt class="docutils literal"><span class="pre"><span class="Identifier">ErisIngest</span></span></tt> object.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L732"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L739"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1650,7 +1650,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Re-open an <tt class="docutils literal"><span class="pre"><span class="Identifier">ErisIngest</span></span></tt> for appending to an <tt class="docutils literal"><span class="pre"><span class="Identifier">ErisCap</span></span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L740"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L747"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1662,7 +1662,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Re-open a <tt class="docutils literal"><span class="pre"><span class="Identifier">ErisCap</span></span></tt> for appending.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L767"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L774"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1674,7 +1674,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Re-open a <tt class="docutils literal"><span class="pre"><span class="Identifier">ErisCap</span></span></tt> for appending.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L760"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L767"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1685,7 +1685,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Seek an <tt class="docutils literal"><span class="pre">ErisStream</span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L582"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L585"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1696,18 +1696,18 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L172"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L175"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="toByte,BlockSize">
-<dt><pre><span class="Keyword">func</span> <a href="#toByte%2CBlockSize"><span class="Identifier">toByte</span></a><span class="Other">(</span><span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint8</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<div id="toByte,ChunkSize">
+<dt><pre><span class="Keyword">func</span> <a href="#toByte%2CChunkSize"><span class="Identifier">toByte</span></a><span class="Other">(</span><span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint8</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L104"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L107"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1718,18 +1718,18 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L386"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L389"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="toChar,BlockSize">
-<dt><pre><span class="Keyword">func</span> <a href="#toChar%2CBlockSize"><span class="Identifier">toChar</span></a><span class="Other">(</span><span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">char</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<div id="toChar,ChunkSize">
+<dt><pre><span class="Keyword">func</span> <a href="#toChar%2CChunkSize"><span class="Identifier">toChar</span></a><span class="Other">(</span><span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">char</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L109"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L112"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1740,7 +1740,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L318"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L321"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1749,9 +1749,9 @@ class="link-seesrc" target="_blank">Source</a>
 <dt><pre><span class="Keyword">proc</span> <a href="#verify%2CFutureBlock"><span class="Identifier">verify</span></a><span class="Other">(</span><span class="Identifier">blk</span><span class="Other">:</span> <a href="eris.html#FutureBlock"><span class="Identifier">FutureBlock</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">discardable</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
-Verify that <tt class="docutils literal"><span class="pre"><span class="Identifier">blk</span></span></tt> corresponds to <tt class="docutils literal"><span class="pre"><span class="Keyword">ref</span></span></tt> and set the block error otherwise.
+Verify that <tt class="docutils literal"><span class="pre"><span class="Identifier">blk</span></span></tt> corresponds to <tt class="docutils literal"><span class="pre"><span class="Keyword">ref</span></span></tt> and set the chunk error otherwise.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L320"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L323"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1766,7 +1766,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L334"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L337"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1782,7 +1782,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Method for closing a <tt class="docutils literal"><span class="pre"><span class="Identifier">Store</span></span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L514"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L517"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1791,21 +1791,21 @@ class="link-seesrc" target="_blank">Source</a>
 <dt><pre><span class="Keyword">method</span> <a href="#get.e%2C%2CFutureGet"><span class="Identifier">get</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">blk</span><span class="Other">:</span> <a href="eris.html#FutureGet"><span class="Identifier">FutureGet</span></a><span class="Other">)</span> {.<span class="Identifier">base</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
-Method for getting a block from a <tt class="docutils literal"><span class="pre">Store</span></tt>. The result is not decrypted but should be verified.
+Method for getting a chunk from a <tt class="docutils literal"><span class="pre">Store</span></tt>. The result is not decrypted but should be verified.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L458"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L461"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
-<div id="hasBlock.e,,Reference,BlockSize">
-<dt><pre><span class="Keyword">method</span> <a href="#hasBlock.e%2C%2CReference%2CBlockSize"><span class="Identifier">hasBlock</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">:</span> <a href="eris.html#Reference"><span class="Identifier">Reference</span></a><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#BlockSize"><span class="Identifier">BlockSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">bool</span><span class="Other">]</span> {.<span class="Identifier">base</span><span class="Other">,</span>
+<div id="hasBlock.e,,Reference,ChunkSize">
+<dt><pre><span class="Keyword">method</span> <a href="#hasBlock.e%2C%2CReference%2CChunkSize"><span class="Identifier">hasBlock</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">:</span> <a href="eris.html#Reference"><span class="Identifier">Reference</span></a><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">bool</span><span class="Other">]</span> {.<span class="Identifier">base</span><span class="Other">,</span>
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
-Test if <tt class="docutils literal"><span class="pre"><span class="Identifier">store</span></span></tt> has a block for a <tt class="docutils literal"><span class="pre"><span class="Identifier">Reference</span></span></tt>. For some stores this is cheaper than retrieving a block.
+Test if <tt class="docutils literal"><span class="pre"><span class="Identifier">store</span></span></tt> has a chunk for a <tt class="docutils literal"><span class="pre"><span class="Identifier">Reference</span></span></tt>. For some stores this is cheaper than retrieving a chunk.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L500"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L503"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1816,7 +1816,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Get an <tt class="docutils literal"><span class="pre"><span class="Identifier">id</span></span></tt> for <tt class="docutils literal"><span class="pre"><span class="Identifier">store</span></span></tt>. Should be unique within a running program.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L452"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L455"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1825,9 +1825,9 @@ class="link-seesrc" target="_blank">Source</a>
 <dt><pre><span class="Keyword">method</span> <a href="#put.e%2C%2CFuturePut"><span class="Identifier">put</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">blk</span><span class="Other">:</span> <a href="eris.html#FuturePut"><span class="Identifier">FuturePut</span></a><span class="Other">)</span> {.<span class="Identifier">base</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
-Method for putting an encrypted block to a <tt class="docutils literal"><span class="pre">Store</span></tt>.
+Method for putting an encrypted chunk to a <tt class="docutils literal"><span class="pre">Store</span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L496"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L499"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1843,7 +1843,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L271"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L274"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1854,7 +1854,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/commit/64c4444/src/eris.nim#L259"
+href="https://codeberg.org/eris/nim-eris/src/commit/4c6bc1a/src/eris.nim#L262"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1869,7 +1869,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2022-10-05 17:26:04 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-11-16 18:28:10 UTC</small>
       </div>
     </div>
   </div>

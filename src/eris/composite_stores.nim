@@ -59,8 +59,8 @@ proc sortStores(multi: MultiStore) =
   sort(multi.stores, cmpAverage)
 
 method get(multi: MultiStore; futGet: FutureGet) =
-  ## Get a block from the multiplexed stores. If a store does not
-  ## have a block then retry at the next fastest store.
+  ## Get a chunk from the multiplexed stores. If a store does not
+  ## have a chunk then retry at the next fastest store.
   var keys = multi.stores.keys.toSeq
   proc getWithRetry() {.gcsafe.} =
     if not futGet.verified:
@@ -95,10 +95,10 @@ method put(multi: MultiStore; futPut: FuturePut) =
 
 type
   ReplicatorStore* = ref object of ErisStoreObj
-    ## A store that replicates blocks.
+    ## A store that replicates chunk..
   
 proc newReplicator*(source: ErisStore; sinks: sink seq[ErisStore]): ReplicatorStore =
-  ## Create a new `ErisStore` that replicates any blocks that are `get` or `put` to the
+  ## Create a new `ErisStore` that replicates any chunks that are `get` or `put` to the
   ## stores in `sinks`. The `source` is the store from which `get` and `put` operations
   ## are first directed to. The `sinks` are only `put` to.
   ReplicatorStore(source: source, sinks: move sinks)

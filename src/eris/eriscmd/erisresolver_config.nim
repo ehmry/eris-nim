@@ -6,10 +6,6 @@ import
 type
   HttpServer* {.preservesRecord: "http-server".} = object
   
-  `BlockSize`* {.preservesOr, pure.} = enum
-    `a`, `f`
-  ErisBlock* {.preservesRecord: "eris-block".} = object
-  
   Peer* {.preservesRecord: "peer".} = object
   
   SyndicateRelay*[E] {.preservesRecord: "syndicate".} = ref object
@@ -20,6 +16,8 @@ type
   
   ErisCapability* {.preservesRecord: "eris".} = object
   
+  `ChunkSize`* {.preservesOr, pure.} = enum
+    `a`, `f`
   CoapServer* {.preservesRecord: "coap-server".} = object
   
   ErisCache* {.preservesRecord: "eris-cache".} = object
@@ -29,20 +27,22 @@ type
   `Op`* {.preservesOr, pure.} = enum
     `Get`, `Put`
   Ops* = set[Op]
+  ErisChunk* {.preservesRecord: "eris-chunk".} = object
+  
 proc `$`*[E](x: SyndicateRelay[E] | FileIngester[E]): string =
   `$`(toPreserve(x, E))
 
 proc encode*[E](x: SyndicateRelay[E] | FileIngester[E]): seq[byte] =
   encode(toPreserve(x, E))
 
-proc `$`*(x: HttpServer | ErisBlock | Peer | TkrzwDatabase | ErisCapability |
-    CoapServer |
+proc `$`*(x: HttpServer | Peer | TkrzwDatabase | ErisCapability | CoapServer |
     ErisCache |
-    Ops): string =
+    Ops |
+    ErisChunk): string =
   `$`(toPreserve(x))
 
-proc encode*(x: HttpServer | ErisBlock | Peer | TkrzwDatabase | ErisCapability |
-    CoapServer |
+proc encode*(x: HttpServer | Peer | TkrzwDatabase | ErisCapability | CoapServer |
     ErisCache |
-    Ops): seq[byte] =
+    Ops |
+    ErisChunk): seq[byte] =
   encode(toPreserve(x))

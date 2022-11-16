@@ -16,7 +16,7 @@ suite "tkrzw":
       case v.kind
       of "positive":
         let
-          a = $(waitFor store.encode(v.cap.blockSize, v.data.newStringStream,
+          a = $(waitFor store.encode(v.cap.chunkSize, v.data.newStringStream,
                                      v.secret))
           b = v.urn
         check(a == b)

@@ -4,23 +4,23 @@ version 1 .
 ; https://eris.codeberg.page/spec/#section-2.6.
 ErisCapability = <eris @bytes bytes> .
 
-; Block sizes are encoded as their binary logarithm in hexadecimal form:
+; Chunk sizes are encoded as their binary logarithm in hexadecimal form:
 ; - log₂( 1 Ki) = a
 ; - log₂(32 Ki) = f
-BlockSize = =a / =f .
+ChunkSize = =a / =f .
 
-; ERIS consumers observe blocks by reference and
-; ERIS stores reply by asserting block content.
-ErisBlock = <eris-block @blockSize BlockSize @reference bytes @content bytes> .
+; ERIS consumers observe chunks by reference and
+; ERIS stores reply by asserting chunk content.
+ErisChunk = <eris-chunk @chunkSize ChunkSize @reference bytes @content bytes> .
 
-; ERIS producers put blocks to storage by publishing
-; blocks and observing cache assertions matching
-; block references. ERIS stores respond by storing
-; blocks and asserting the reference.
+; ERIS producers put chunks to storage by publishing
+; chunks and observing cache assertions matching
+; chunk references. ERIS stores respond by storing
+; chunks and asserting the reference.
 ; TODO: cache perisistence indicator.
-ErisCache = <eris-cache @blockSize BlockSize @reference bytes> .
+ErisCache = <eris-cache @chunkSize ChunkSize @reference bytes> .
 
-; For any given content there is one ERIS capability for each block size in
+; For any given content there is one ERIS capability for each chunk size in
 ; "convergent" mode but an unbounded number of capabilities in "unique" mode.
 SecretMode = =convergent / =unique .
 

