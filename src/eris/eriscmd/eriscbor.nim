@@ -91,7 +91,7 @@ proc main*(opts: var OptParser): string =
       parser: CborParser
     open(parser, fileStream)
     parser.next()
-    if parser.kind == CborEventKind.cborTag or parser.tag == 55799:
+    if parser.kind == CborEventKind.cborTag and parser.tag == 55799:
       fileStream.setPosition(0)
     var store = newCborDecoder(fileStream)
     for cap in caps:
