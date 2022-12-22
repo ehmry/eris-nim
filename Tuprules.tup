@@ -1,3 +1,0 @@
-.gitignore
-SHELL_NIX = $(TUP_CWD)/shell.nix
-!nim_run = |> nix-shell $(SHELL_NIX) --run '$(NIM) c $(NIM_PATH) --hints:off -o:%o -r %f' |> %B.run

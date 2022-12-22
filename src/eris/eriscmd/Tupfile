@@ -1,2 +1,1 @@
 include_rules
-: ../../../protocols/erisresolver_config.prs |> !preserves_schema_nim |> %B.nim

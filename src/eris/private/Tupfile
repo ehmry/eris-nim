@@ -1,2 +1,2 @@
 include_rules
-: ../../../protocols/syndicate_protocol.prs |> !preserves_schema_nim |> %B.nim
+: foreach ../../../protocols/*.prs |> !preserves_schema_nim |> %B.nim | ../../../<protocols>

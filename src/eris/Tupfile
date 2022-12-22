@@ -2,4 +2,3 @@ include_rules
 
 !nim_solo5 = |> nix-shell $(SHELL_NIX) --run '$(NIM) c $(NIM_PATH) --os:solo5 -d:solo5tender=spt -o:%o %f' |> %B.spt
 
-: block_device_stores.nim | ../../../../<syndicate> ../../../../taps/<sources> ./<private> |> !nim_solo5 |> block_device_stores.spt

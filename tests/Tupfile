@@ -1,0 +1,13 @@
+include_rules
+
+TESTS += test_cbor.nim
+TESTS += test_coap.nim
+TESTS += test_http.nim
+TESTS += test_large.nim
+TESTS += test_small.nim
+
+: foreach $(TESTS) |> !nim_run |>
+: test_syndicate.nim | ../../syndicate-nim/<protocols> ../<protocols> |> !nim_run |>
+
+!nim_run_cpp = |> $(DIRENV) nim cpp -o:%o -r %f |> %B.run
+: test_tkrzw.nim |> !nim_run_cpp ; rm store.tkh |> %B.run |
