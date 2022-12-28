@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: MIT
 
 import
-  std / typetraits, preserves
+  std / typetraits, preserves, ../../eris
 
 type
   ErisCapability* {.preservesRecord: "eris".} = object
   
-  `ChunkSize`* {.preservesOr, pure.} = enum
+  `ChunkSize` {.preservesOr, pure.} = enum
     `a`, `f`
   ErisCache* {.preservesRecord: "eris-cache".} = object
   

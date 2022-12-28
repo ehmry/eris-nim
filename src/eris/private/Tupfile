@@ -1,2 +1,8 @@
 include_rules
 : foreach ../../../protocols/*.prs |> !preserves_schema_nim |> %B.nim | ../../../<protocols>
+
+REPLACEMENTS += -e 's|, preserves|, preserves, ../../eris|g'
+REPLACEMENTS += -e 's|`ChunkSize`\*|`ChunkSize`|g'
+REPLACEMENTS += -e 's|`reference`\*: seq\[byte\]|`reference`*: Reference|g'
+REPLACEMENTS += -e 's|: ChunkSize|: eris.ChunkSize|g'
+: syndicate_protocol.nim |> $(DIRENV) sed $(REPLACEMENTS) < %f > %o |> protocol.nim | ../../../<protocols>
