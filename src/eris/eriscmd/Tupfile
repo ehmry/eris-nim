@@ -1,1 +1,2 @@
 include_rules
+: foreach eris*.nim |> !eris_program |>

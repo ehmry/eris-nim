@@ -24,7 +24,8 @@ method get(s: DbmStore; fut: FutureGet) =
   assert not fut.verified
   if Get notin s.ops:
     fail(fut, newException(IOError, "get denied"))
-  elif s.dbm.get(fut.`ref`.bytes.toStringView, fut.buffer, fut.chunkSize.int):
+  elif s.dbm.get(fut.`ref`.bytes.toStringView, unsafeAddr fut.buffer[0],
+                 fut.chunkSize.int):
     assert not fut.verified
     verify(fut)
     complete(fut)
@@ -41,8 +42,7 @@ method hasBlock(store: DbmStore; r: Reference; bs: ChunkSize): Future[bool] =
 method put(s: DbmStore; fut: FuturePut) =
   if Put notin s.ops:
     fail(fut, newException(IOError, "put denied"))
-  s.dbm.set(toStringView(fut.`ref`.bytes),
-            toStringView(fut.buffer, fut.chunkSize.int), true)
+  s.dbm.set(toStringView(fut.`ref`.bytes), fut.buffer.toStringView, true)
   complete(fut)
 
 method close(ds: DbmStore) =

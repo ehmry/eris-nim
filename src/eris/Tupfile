@@ -1,4 +1,2 @@
 include_rules
-
-!nim_solo5 = |> nix-shell $(SHELL_NIX) --run '$(NIM) c $(NIM_PATH) --os:solo5 -d:solo5tender=spt -o:%o %f' |> %B.spt
-
+: eriscmd.nim |> !eris_program |>
