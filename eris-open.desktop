@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.5
+Type=Application
+Name=eris-open
+Description=ERIS link handler
+Exec=eriscmd open %f
+MimeType=application/x-eris-link+cbor;
+Categories=Utility;ConsoleOnly

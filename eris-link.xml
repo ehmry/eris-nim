@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-eris-link+cbor">
+    <comment xml:lang="en">ERIS link</comment>
+    <acronym>ERIS</acronym>
+    <expanded-acronym xml:lang="en">Encoding for Robust Immutable Storage</expanded-acronym>
+    <glob pattern="*.eris"/>
+    <magic>
+      <match type="string" value="\xD9\xD9\xF7\x84\xD9\x01\x14\x58\x42" offset="0"/>
+    </magic>
+    <icon name="eris"/>
+    <generic-icon name="application-octet-stream"/>
+  </mime-type>
+</mime-info>

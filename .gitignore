@@ -1,4 +1,4 @@
-/eriscmd
+/.direnv
 /tests/test_cbor
 /tests/test_http
 /tests/test_large
