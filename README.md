@@ -1,4 +1,4 @@
-# ⯰ ERIS
+# ERIS
 
 A collection of libraries and utilities for the [Encoding for Robust Immutable Storage](https://eris.codeberg.page).
 
@@ -52,3 +52,9 @@ doas sysctl net.ipv4.ip_unprivileged_port_start=80
 ```sh
 nix develop git+https://codeberg.org/eris/nix-eris#nim-eris
 ```
+
+---
+
+The drafting of the ERIS specification and this implementation was funded by the [NGI Assure](https://nlnet.nl/assure) Fund, a fund established by [NLnet](https://nlnet.nl/) with financial support from the European Commission's [Next Generation Internet](https://ngi.eu/) program.
+
+[![NGIAssure](https://nlnet.nl/image/logos/NGIAssure_tag.svg)](https://nlnet.nl/assure)
