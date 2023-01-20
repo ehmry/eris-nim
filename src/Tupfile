@@ -1,7 +1,7 @@
 include_rules
 
 NIMDOC_FLAGS += --git.url:"https://codeberg.org/eris/nim-eris"
-NIMDOC_FLAGS += --git.commit:`git describe --always`
+NIMDOC_FLAGS += --git.devel:trunk
 
 DOCSDIR = ../htmldocs
 
