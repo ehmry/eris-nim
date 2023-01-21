@@ -1,3 +1,4 @@
+![ERIS logo](./eris48.png "ERIS")
 # ERIS
 
 A collection of libraries and utilities for the [Encoding for Robust Immutable Storage](https://eris.codeberg.page).
