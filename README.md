@@ -35,11 +35,26 @@ The Debian way:
 
 The `eriscmd link` utility creates [ERIS link files](https://codeberg.org/eris/eer/pulls/15).
 
+This utility requires the location of an ERIS CoAP server which should be passed with the environmental variable `ERIS_STORE_URL`.
+
+A simple example:
+```sh
+test "$ERIS_STORE_URL = coap+tcp://[::1]:5683"
+```
+
 ### open
 
 The `eriscmd open` utility opens [ERIS link files](https://codeberg.org/eris/eer/pulls/15) in an application that is locally configured for the given MIME type of the link file. To integrate it within a [Freedesktop.org](https://www.freedesktop.org/) environment the [eris-open.desktop](./eris-open.desktop), [eris-link.xml](./eris-link.xml), and [eris48.png](./eris48.png) should be installed in their appropriate locations.
 
 The utility only works as well as the associations that are configured for different MIME types, see the `xdg-mime` utility from [xdg-utils](https://freedesktop.org/wiki/Software/xdg-utils/) for more information.
+
+The utility requires a configuration file that describes the location of the preferred HTTP decoder service. The file is called `eris-open.ini` and must be located in the `XDG_CONFIG_HOME` `XDG_CONFIG_DIRS` hierarchy (`~./config/` is good enough).
+
+A simple example:
+```ini
+[Decoder]
+URL=http://[::1]:80
+```
 
 ### resolver
 
