@@ -23,9 +23,6 @@ Option flags:
 
 """
 proc main*(opts: var OptParser): string =
-  let store = waitFor newSystemStore()
-  if store.isEmpty:
-    return die("no ERIS stores configured")
   var
     linkStream, fileStream: Stream
     link = initCborMap()
@@ -78,18 +75,22 @@ proc main*(opts: var OptParser): string =
         fileStream = openFileStream(filePath)
     of cmdEnd:
       discard
-  if linkStream.isNil:
-    linkStream = if filePath == "-":
-      newFileStream(stdout) else:
-      openFileStream(filePath.extractFilename & ".eris", fmWrite)
+  let store = waitFor newSystemStore()
+  if store.isEmpty:
+    return die("no ERIS stores configured")
   let
     cap = waitFor encode(store, fileStream, mode)
     size = fileStream.getPosition
   close(fileStream)
+  close(store)
   if mime == "":
     mime = matchFile(filePath).mime.value
   if mime == "":
     return die("MIME type not determined for ", filePath)
+  if linkStream.isNil:
+    linkStream = if filePath == "-":
+      newFileStream(stdout) else:
+      openFileStream(filePath.extractFilename & ".eris", fmWrite)
   linkStream.writeCborTag(55799)
   linkStream.writeCborArrayLen(4)
   linkStream.writeCbor(cap.toCbor)
@@ -97,7 +98,7 @@ proc main*(opts: var OptParser): string =
   linkStream.writeCbor(mime)
   linkStream.writeCborMapLen(0)
   close(linkStream)
-  stdout.writeLine(cap)
+  stdout.writeLine(cap, " ", mime)
 
 when isMainModule:
   var opts = initOptParser()
