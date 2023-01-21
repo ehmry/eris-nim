@@ -29,11 +29,21 @@ The Debian way:
 
 ## eriscmd
 
-`eriscmd` is a utility program with a bunch of subcommands. They should be self describing except for `resolver`.
+`eriscmd` is a utility program with a bunch of subcommands. They are mostly self-describing.
+
+### link
+
+The `eriscmd link` utility creates [ERIS link files](https://codeberg.org/eris/eer/pulls/15).
+
+### open
+
+The `eriscmd open` utility opens [ERIS link files](https://codeberg.org/eris/eer/pulls/15) in an application that is locally configured for the given MIME type of the link file. To integrate it within a [Freedesktop.org](https://www.freedesktop.org/) environment the [eris-open.desktop](./eris-open.desktop), [eris-link.xml](./eris-link.xml), and [eris48.png](./eris48.png) should be installed in their appropriate locations.
+
+The utility only works as well as the associations that are configured for different MIME types, see the `xdg-mime` utility from [xdg-utils](https://freedesktop.org/wiki/Software/xdg-utils/) for more information.
 
 ### resolver
 
-The `eris resolver` utility that resolves ERIS blocks between the following:
+The `eriscmd resolver` utility that resolves ERIS blocks between the following:
   - [CoAP](https://en.wikipedia.org/wiki/Constrained_Application_Protocol) clients
   - CoAP servers
   - HTTP clients (see [ERIS over HTTP](https://eris.codeberg.page/eer/eer-001/))
