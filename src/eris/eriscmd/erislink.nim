@@ -7,7 +7,7 @@ import
   cbor, filetype
 
 import
-  ../../eris, ../cbor_stores, ../url_stores, ./common
+  ../../eris, ../cbor_stores, ../composite_stores, ../url_stores, ./common
 
 const
   usage = """Usage: erislink [OPTION]… FILE_PATH
@@ -22,6 +22,8 @@ Option flags:
 """
 proc main*(opts: var OptParser): string =
   let store = waitFor newSystemStore()
+  if store.isEmpty:
+    return die("no ERIS stores configured")
   var
     linkStream, fileStream: Stream
     link = initCborMap()
