@@ -15,9 +15,11 @@ Create an ERIS link file.
 
 Option flags:
 	--convergent  generate convergent URNs (unique by default)
-	--source:"…"  optional string describing source of data
+	 -c
+
 	--output:"…"  path to output link file at
 	 -o:"…"
+
 	--mime:"…"    override MIME type of data
 	 -m:"…"
 
@@ -40,14 +42,10 @@ proc main*(opts: var OptParser): string =
     of cmdLongOption:
       case key
       of "convergent":
-        if val != "":
-          return failParam(kind, key, val)
         mode = convergentMode
       of "output":
         openOutput(val)
-      of "source":
-        link[toCbor"source"] = toCbor(val)
-      of "m":
+      of "mime":
         mime = val
       of "help":
         return usage
@@ -57,6 +55,8 @@ proc main*(opts: var OptParser): string =
       case key
       of "h", "?":
         return usage
+      of "c":
+        mode = convergentMode
       of "o":
         openOutput(val)
       of "m":
