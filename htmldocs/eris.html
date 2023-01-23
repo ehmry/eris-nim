@@ -242,18 +242,18 @@ window.addEventListener('DOMContentLoaded', main);
   <ul class="simple nested-toc-section">encode
       <li><a class="reference" href="#encode%2C%2CChunkSize%2CStream"
     title="encode(store; chunkSize: ChunkSize; content: Stream; mode = uniqueMode): Future[
-    ErisCap]">encode(store; chunkSize: ChunkSize; content: Stream; mode = uniqueMode): Future[
-    ErisCap]</a></li>
+    (ErisCap, uint64)]">encode(store; chunkSize: ChunkSize; content: Stream; mode = uniqueMode): Future[
+    (ErisCap, uint64)]</a></li>
   <li><a class="reference" href="#encode%2C%2CChunkSize%2CStream%2CSecret"
     title="encode(store; chunkSize: ChunkSize; content: Stream; secret: Secret): Future[
-    ErisCap]">encode(store; chunkSize: ChunkSize; content: Stream; secret: Secret): Future[
-    ErisCap]</a></li>
+    (ErisCap, uint64)]">encode(store; chunkSize: ChunkSize; content: Stream; secret: Secret): Future[
+    (ErisCap, uint64)]</a></li>
   <li><a class="reference" href="#encode%2C%2CChunkSize%2Cstring"
     title="encode(store; chunkSize: ChunkSize; content: string; mode = uniqueMode): Future[
-    ErisCap]">encode(store; chunkSize: ChunkSize; content: string; mode = uniqueMode): Future[
-    ErisCap]</a></li>
+    (ErisCap, uint64)]">encode(store; chunkSize: ChunkSize; content: string; mode = uniqueMode): Future[
+    (ErisCap, uint64)]</a></li>
   <li><a class="reference" href="#encode%2C%2CStream"
-    title="encode(store; content: Stream; mode = uniqueMode): Future[ErisCap]">encode(store; content: Stream; mode = uniqueMode): Future[ErisCap]</a></li>
+    title="encode(store; content: Stream; mode = uniqueMode): Future[(ErisCap, uint64)]">encode(store; content: Stream; mode = uniqueMode): Future[(ErisCap, uint64)]</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">erisCap
@@ -555,9 +555,9 @@ class="link-seesrc" target="_blank">Source</a>
 <span class="Keyword">let</span>
   <span class="Identifier">text</span> <span class="Operator">=</span> <span class="StringLit">&quot;Hello world!&quot;</span>
   <span class="Identifier">store</span> <span class="Operator">=</span> <span class="Identifier">newMemoryStore</span><span class="Punctuation">(</span><span class="Punctuation">)</span>
-  <span class="Identifier">capA</span> <span class="Operator">=</span> <span class="Identifier">waitFor</span> <span class="Identifier">encode</span><span class="Punctuation">(</span><span class="Identifier">store</span><span class="Punctuation">,</span> <span class="Identifier">newStringStream</span><span class="Punctuation">(</span><span class="Identifier">text</span><span class="Punctuation">)</span><span class="Punctuation">)</span>
-  <span class="Identifier">capB</span> <span class="Operator">=</span> <span class="Identifier">waitFor</span> <span class="Identifier">encode</span><span class="Punctuation">(</span><span class="Identifier">store</span><span class="Punctuation">,</span> <span class="Identifier">newStringStream</span><span class="Punctuation">(</span><span class="Identifier">text</span><span class="Punctuation">)</span><span class="Punctuation">,</span> <span class="Identifier">convergentMode</span><span class="Punctuation">)</span>
-  <span class="Identifier">capC</span> <span class="Operator">=</span> <span class="Identifier">waitFor</span> <span class="Identifier">encode</span><span class="Punctuation">(</span><span class="Identifier">store</span><span class="Punctuation">,</span> <span class="Identifier">newStringStream</span><span class="Punctuation">(</span><span class="Identifier">text</span><span class="Punctuation">)</span><span class="Punctuation">,</span> <span class="Identifier">convergentMode</span><span class="Punctuation">)</span>
+  <span class="Punctuation">(</span><span class="Identifier">capA</span><span class="Punctuation">,</span> <span class="Identifier">_</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="Identifier">waitFor</span> <span class="Identifier">encode</span><span class="Punctuation">(</span><span class="Identifier">store</span><span class="Punctuation">,</span> <span class="Identifier">newStringStream</span><span class="Punctuation">(</span><span class="Identifier">text</span><span class="Punctuation">)</span><span class="Punctuation">)</span>
+  <span class="Punctuation">(</span><span class="Identifier">capB</span><span class="Punctuation">,</span> <span class="Identifier">_</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="Identifier">waitFor</span> <span class="Identifier">encode</span><span class="Punctuation">(</span><span class="Identifier">store</span><span class="Punctuation">,</span> <span class="Identifier">newStringStream</span><span class="Punctuation">(</span><span class="Identifier">text</span><span class="Punctuation">)</span><span class="Punctuation">,</span> <span class="Identifier">convergentMode</span><span class="Punctuation">)</span>
+  <span class="Punctuation">(</span><span class="Identifier">capC</span><span class="Punctuation">,</span> <span class="Identifier">_</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="Identifier">waitFor</span> <span class="Identifier">encode</span><span class="Punctuation">(</span><span class="Identifier">store</span><span class="Punctuation">,</span> <span class="Identifier">newStringStream</span><span class="Punctuation">(</span><span class="Identifier">text</span><span class="Punctuation">)</span><span class="Punctuation">,</span> <span class="Identifier">convergentMode</span><span class="Punctuation">)</span>
 <span class="Identifier">assert</span> <span class="Identifier">capA</span> <span class="Operator">!=</span> <span class="Identifier">capB</span>
 <span class="Identifier">assert</span> <span class="Identifier">capB</span> <span class="Operator">==</span> <span class="Identifier">capC</span>
 <span class="Identifier">assert</span> <span class="Identifier">waitFor</span><span class="Punctuation">(</span><span class="Identifier">decode</span><span class="Punctuation">(</span><span class="Identifier">store</span><span class="Punctuation">,</span> <span class="Identifier">capA</span><span class="Punctuation">)</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Identifier">waitFor</span><span class="Punctuation">(</span><span class="Identifier">decode</span><span class="Punctuation">(</span><span class="Identifier">store</span><span class="Punctuation">,</span> <span class="Identifier">capB</span><span class="Punctuation">)</span><span class="Punctuation">)</span>
@@ -592,7 +592,7 @@ class="link-seesrc" target="_blank">Source</a>
 <span class="Keyword">let</span>
   <span class="Identifier">store</span> <span class="Operator">=</span> <span class="Identifier">newMemoryStore</span><span class="Punctuation">(</span><span class="Punctuation">)</span>
   <span class="Identifier">logger</span> <span class="Operator">=</span> <span class="Identifier">newLogger</span><span class="Punctuation">(</span><span class="Identifier">store</span><span class="Punctuation">)</span>
-  <span class="Identifier">cap</span> <span class="Operator">=</span> <span class="Identifier">waitFor</span> <span class="Identifier">encode</span><span class="Punctuation">(</span><span class="Identifier">logger</span><span class="Punctuation">,</span> <span class="Identifier">newStringStream</span><span class="Punctuation">(</span><span class="StringLit">&quot;Hail ERIS!&quot;</span><span class="Punctuation">)</span><span class="Punctuation">)</span>
+  <span class="Punctuation">(</span><span class="Identifier">cap</span><span class="Punctuation">,</span> <span class="Identifier">_</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="Identifier">waitFor</span> <span class="Identifier">encode</span><span class="Punctuation">(</span><span class="Identifier">logger</span><span class="Punctuation">,</span> <span class="Identifier">newStringStream</span><span class="Punctuation">(</span><span class="StringLit">&quot;Hail ERIS!&quot;</span><span class="Punctuation">)</span><span class="Punctuation">)</span>
 <span class="Keyword">discard</span> <span class="Identifier">waitFor</span> <span class="Identifier">decode</span><span class="Punctuation">(</span><span class="Identifier">logger</span><span class="Punctuation">,</span> <span class="Identifier">cap</span><span class="Punctuation">)</span></pre></p>
   <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
@@ -1153,7 +1153,8 @@ class="link-seesrc" target="_blank">Source</a>
 </div>
 <div id="encode,,ChunkSize,Stream">
 <dt><pre><span class="Keyword">proc</span> <a href="#encode%2C%2CChunkSize%2CStream"><span class="Identifier">encode</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">chunkSize</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">;</span> <span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">Stream</span><span class="Other">;</span> <span class="Identifier">mode</span> <span class="Other">=</span> <span class="Identifier">uniqueMode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span>
-    <a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
+    <span class="Other">(</span><a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a><span class="Other">,</span> <span class="Identifier">uint64</span><span class="Other">)</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span>
+                         <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Asychronously encode <tt class="docutils literal"><span class="pre">content</span></tt> into <tt class="docutils literal"><span class="pre">store</span></tt> and derive its <tt class="docutils literal"><span class="pre">ErisCap</span></tt>.
@@ -1165,7 +1166,8 @@ class="link-seesrc" target="_blank">Source</a>
 </div>
 <div id="encode,,ChunkSize,Stream,Secret">
 <dt><pre><span class="Keyword">proc</span> <a href="#encode%2C%2CChunkSize%2CStream%2CSecret"><span class="Identifier">encode</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">chunkSize</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">;</span> <span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">Stream</span><span class="Other">;</span> <span class="Identifier">secret</span><span class="Other">:</span> <a href="eris.html#Secret"><span class="Identifier">Secret</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span>
-    <a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
+    <span class="Other">(</span><a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a><span class="Other">,</span> <span class="Identifier">uint64</span><span class="Other">)</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span>
+                         <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Asychronously encode <tt class="docutils literal"><span class="pre">content</span></tt> into <tt class="docutils literal"><span class="pre">store</span></tt> and derive its <tt class="docutils literal"><span class="pre">ErisCap</span></tt>.
@@ -1177,7 +1179,8 @@ class="link-seesrc" target="_blank">Source</a>
 </div>
 <div id="encode,,ChunkSize,string">
 <dt><pre><span class="Keyword">proc</span> <a href="#encode%2C%2CChunkSize%2Cstring"><span class="Identifier">encode</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">chunkSize</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">;</span> <span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">mode</span> <span class="Other">=</span> <span class="Identifier">uniqueMode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span>
-    <a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
+    <span class="Other">(</span><a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a><span class="Other">,</span> <span class="Identifier">uint64</span><span class="Other">)</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span>
+                         <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Asychronously encode <tt class="docutils literal"><span class="pre">content</span></tt> into <tt class="docutils literal"><span class="pre">store</span></tt> and derive its <tt class="docutils literal"><span class="pre">ErisCap</span></tt>.
@@ -1188,8 +1191,9 @@ class="link-seesrc" target="_blank">Source</a>
 </dd>
 </div>
 <div id="encode,,Stream">
-<dt><pre><span class="Keyword">proc</span> <a href="#encode%2C%2CStream"><span class="Identifier">encode</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">Stream</span><span class="Other">;</span> <span class="Identifier">mode</span> <span class="Other">=</span> <span class="Identifier">uniqueMode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span><a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a><span class="Other">]</span> {.
-    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#encode%2C%2CStream"><span class="Identifier">encode</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">Stream</span><span class="Other">;</span> <span class="Identifier">mode</span> <span class="Other">=</span> <span class="Identifier">uniqueMode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span>
+    <span class="Other">(</span><a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a><span class="Other">,</span> <span class="Identifier">uint64</span><span class="Other">)</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span>
+                         <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Asychronously encode <tt class="docutils literal"><span class="pre">content</span></tt> into <tt class="docutils literal"><span class="pre">store</span></tt> and derive its <tt class="docutils literal"><span class="pre">ErisCap</span></tt>. The chunk size is 1KiB unless the content is at least 16KiB.
@@ -1279,7 +1283,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Get all chunks that constitute <tt class="docutils literal"><span class="pre"><span class="Identifier">cap</span></span></tt> from <tt class="docutils literal"><span class="pre"><span class="Identifier">store</span></span></tt>. No data is returned, this procedure is for ensuring that all chunks are present at some store.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/branch/trunk/src/eris.nim#L938"
+href="https://codeberg.org/eris/nim-eris/src/branch/trunk/src/eris.nim#L940"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1627,7 +1631,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Collect the set of <tt class="docutils literal"><span class="pre"><span class="Identifier">Reference</span></span></tt>s that constitute an <tt class="docutils literal"><span class="pre"><span class="Identifier">ErisCap</span></span></tt>.
 &nbsp;&nbsp;<a
-href="https://codeberg.org/eris/nim-eris/src/branch/trunk/src/eris.nim#L928"
+href="https://codeberg.org/eris/nim-eris/src/branch/trunk/src/eris.nim#L930"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
