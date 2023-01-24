@@ -1,0 +1,3 @@
+PROTOCOLS += $(TUP_CWD)/../syndicate-nim/<protocols>
+PROTOCOLS +=  $(TUP_CWD)/<protocols>
+!eris_program = | $(PROTOCOLS) |> $(DIRENV) nim cpp -d:release -o:%o %f |> $(BIN_DIR)/%B | $(BIN_DIR)/<%B>

