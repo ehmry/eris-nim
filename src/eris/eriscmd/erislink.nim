@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 import
-  std / [asyncdispatch, os, parseopt, streams, uri]
+  std / [asyncdispatch, options, os, parseopt, streams, uri]
 
 import
   cbor, freedesktop_org
@@ -23,6 +23,9 @@ Option flags:
 	--mime:"…"    override MIME type of data
 	 -m:"…"
 
+	--1k         1KiB chunk size
+	--32k       32KiB chunk size
+
 """
 proc main*(opts: var OptParser): string =
   var
@@ -30,6 +33,9 @@ proc main*(opts: var OptParser): string =
     linkStream, fileStream: Stream
     filePath, mime: string
     mode = uniqueMode
+    chunkSize: Option[ChunkSize]
+  defer:
+    close(store)
   proc openOutput(path: string) =
     if not linkStream.isNil:
       discard die("multiple outputs specified")
@@ -47,6 +53,10 @@ proc main*(opts: var OptParser): string =
         openOutput(val)
       of "mime":
         mime = val
+      of "1k":
+        chunkSize = some chunk1k
+      of "32k":
+        chunkSize = some chunk32k
       of "help":
         return usage
       else:
@@ -95,7 +105,9 @@ proc main*(opts: var OptParser): string =
     linkStream = if filePath == "-":
       newFileStream(stdout) else:
       openFileStream(filePath.extractFilename & ".eris", fmWrite)
-  let (cap, size) = waitFor encode(store, fileStream, mode)
+  let (cap, size) = if chunkSize.isSome:
+    waitFor encode(store, get chunkSize, fileStream, mode) else:
+    waitFor encode(store, fileStream, mode)
   close(fileStream)
   close(store)
   linkStream.writeCborTag(55799)
