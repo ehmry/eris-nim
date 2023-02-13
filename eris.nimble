@@ -1,12 +1,12 @@
 # Package
 
-version = "20230210"
+version = "20230212"
 author        = "Endo Renberg"
 description   = "Encoding for Robust Immutable Storage"
 license       = "Unlicense"
 srcDir        = "src"
 backend       = "cpp"
-bin           = @["eris/eriscmd"]
+bin           = @["eris/eriscmd", "eris/helpers/rclerislink"]
 
 
 # Dependencies
