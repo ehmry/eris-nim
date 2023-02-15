@@ -44,7 +44,7 @@ test "$ERIS_STORE_URL = coap+tcp://[::1]:5683"
 
 ### open
 
-The `eriscmd open` utility opens [ERIS link files](https://codeberg.org/eris/eer/pulls/15) in an application that is locally configured for the given MIME type of the link file. To integrate it within a [Freedesktop.org](https://www.freedesktop.org/) environment the [eris-open.desktop](./eris-open.desktop), [eris-link.xml](./eris-link.xml), and [eris48.png](./eris48.png) should be installed in their appropriate locations.
+The `eriscmd open` utility opens [ERIS link files](https://eris.codeberg.page/eer/linkfile.xml) in an application that is locally configured for the given MIME type of the link file. To integrate it within a [Freedesktop.org](https://www.freedesktop.org/) environment the [eris-open.desktop](./eris-open.desktop), [eris-link.xml](./eris-link.xml), and [eris48.png](./eris48.png) should be installed in their appropriate locations.
 
 The utility only works as well as the associations that are configured for different MIME types, see the `xdg-mime` utility from [xdg-utils](https://freedesktop.org/wiki/Software/xdg-utils/) for more information.
 
@@ -71,6 +71,19 @@ The server configuration is inspired by [Genode](https://genode.org/)'s [dynamic
 If you are using UNIX you will need to ask a system administrator or a grownup that you trust to remove the restriction on binding to port 80. This is can be done with `sysctl`:
 ```sh
 doas sysctl net.ipv4.ip_unprivileged_port_start=80
+```
+
+## Helpers
+
+### rclerislink
+
+The `rclerislink` utility is a document input handler for the [Recoll](https://www.recoll.org/) indexer that allows [ERIS link file](https://eris.codeberg.page/eer/linkfile.xml) content to be dereferenced and indexed.
+
+This input handler  needs to be registered in the `~/.recoll/mimeconf` file so that it is invoked for the `application/x-eris-link+cbor` file MIME type. For detection of this MIME type to work the [eris-link.xml](./eris-link.xml) file should be installed in a location where it is discoverable by `xdg-mime query filetype …`.
+```
+[index]
+application/x-eris-link+cbor = execm /some/path/to/rclerislink
+
 ```
 
 ## Nix development
