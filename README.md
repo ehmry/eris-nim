@@ -73,6 +73,16 @@ If you are using UNIX you will need to ask a system administrator or a grownup t
 doas sysctl net.ipv4.ip_unprivileged_port_start=80
 ```
 
+### verify
+
+The `eriscmd verify` utility will fetch all blocks that constitute a read capability. It parses capabilities on the command-line in URN form and otherwise parses CBOR on standard input to find capabilities.
+
+```sh
+eriscmd verify urn:eris:BIAMSY42PLVLXF2GQAVOONCNWPEU2PLOYXZXAVFZIRVACKI424N24CMJPPRK7QNWH3LNRE7Q3ENOAJWPKCNUJOLCHIWSEOO6RW5KH7MJ2A
+
+cat *.eris | eriscmd verify
+```
+
 ## Helpers
 
 ### rclerislink
