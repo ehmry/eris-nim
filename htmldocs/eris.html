@@ -109,6 +109,10 @@ window.addEventListener('DOMContentLoaded', main);
   Get, Put">Operation</a></li>
   <li><a class="reference" href="#Operations"
     title="Operations = set[Operation]">Operations</a></li>
+  <li><a class="reference" href="#Pair"
+    title="Pair {.packed.} = object
+  r*: Reference
+  k*: Key">Pair</a></li>
   <li><a class="reference" href="#Reference"
     title="Reference = object
   bytes*: array[32, byte]">Reference</a></li>
@@ -222,6 +226,11 @@ window.addEventListener('DOMContentLoaded', main);
   <ul class="simple nested-toc-section">copy
       <li><a class="reference" href="#copy%2CFutureBlock%2Cpointer%2CNatural"
     title="copy(blk: FutureBlock; dst: pointer; len: Natural)">copy(blk: FutureBlock; dst: pointer; len: Natural)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">crypto
+      <li><a class="reference" href="#crypto%2CFutureBlock%2C%2CTreeLevel"
+    title="crypto(blk: FutureBlock; key; level: TreeLevel)">crypto(blk: FutureBlock; key; level: TreeLevel)</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">decode
@@ -521,6 +530,17 @@ window.addEventListener('DOMContentLoaded', main);
   </ul>
 </li>
 <li>
+  <a class="reference reference-toplevel" href="#15" id="65">Iterators</a>
+  <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">chunkPairs
+      <li><a class="reference" href="#chunkPairs.i%2Cseq%5Bbyte%5D"
+    title="chunkPairs(blk: seq[byte]): Pair">chunkPairs(blk: seq[byte]): Pair</a></li>
+
+  </ul>
+
+  </ul>
+</li>
+<li>
   <a class="reference reference-toplevel" href="#18" id="68">Templates</a>
   <ul class="simple simple-toc-section">
       <ul class="simple nested-toc-section">asFuture
@@ -635,7 +655,7 @@ class="link-seesrc" target="_blank">Source</a>
 </div>
 <div id="ErisCap">
 <dt><pre><a href="eris.html#ErisCap"><span class="Identifier">ErisCap</span></a> <span class="Other">=</span> <span class="Keyword">object</span>
-  <span class="Identifier">pair</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Pair</span>
+  <span class="Identifier">pair</span><span class="Operator">*</span><span class="Other">:</span> <a href="eris.html#Pair"><span class="Identifier">Pair</span></a>
   <span class="Identifier">level</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">uint8</span>
   <span class="Identifier">chunkSize</span><span class="Operator">*</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a>
 </pre></dt>
@@ -771,6 +791,20 @@ class="link-seesrc" target="_blank">Source</a>
 
 &nbsp;&nbsp;<a
 href="https://codeberg.org/eris/nim-eris/src/branch/trunk/src/eris.nim#L445"
+class="link-seesrc" target="_blank">Source</a>
+
+</dd>
+</div>
+<div id="Pair">
+<dt><pre><a href="eris.html#Pair"><span class="Identifier">Pair</span></a> {.<span class="Identifier">packed</span>.} <span class="Other">=</span> <span class="Keyword">object</span>
+  <span class="Identifier">r</span><span class="Operator">*</span><span class="Other">:</span> <a href="eris.html#Reference"><span class="Identifier">Reference</span></a>
+  <span class="Identifier">k</span><span class="Operator">*</span><span class="Other">:</span> <a href="eris.html#Key"><span class="Identifier">Key</span></a>
+</pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://codeberg.org/eris/nim-eris/src/branch/trunk/src/eris.nim#L86"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
@@ -1127,6 +1161,17 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 </div>
+<div id="crypto,FutureBlock,,TreeLevel">
+<dt><pre><span class="Keyword">proc</span> <a href="#crypto%2CFutureBlock%2C%2CTreeLevel"><span class="Identifier">crypto</span></a><span class="Other">(</span><span class="Identifier">blk</span><span class="Other">:</span> <a href="eris.html#FutureBlock"><span class="Identifier">FutureBlock</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">;</span> <span class="Identifier">level</span><span class="Other">:</span> <a href="eris.html#TreeLevel"><span class="Identifier">TreeLevel</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://codeberg.org/eris/nim-eris/src/branch/trunk/src/eris.nim#L390"
+class="link-seesrc" target="_blank">Source</a>
+
+</dd>
+</div>
 <div id="decode,,">
 <dt><pre><span class="Keyword">proc</span> <a href="#decode%2C%2C"><span class="Identifier">decode</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">cap</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">byte</span><span class="Other">]</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
@@ -1254,7 +1299,7 @@ class="link-seesrc" target="_blank">Source</a>
 </dd>
 </div>
 <div id="get,,Pair,TreeLevel,ChunkSize">
-<dt><pre><span class="Keyword">proc</span> <a href="#get%2C%2CPair%2CTreeLevel%2CChunkSize"><span class="Identifier">get</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">pair</span><span class="Other">:</span> <span class="Identifier">Pair</span><span class="Other">;</span> <span class="Identifier">level</span><span class="Other">:</span> <a href="eris.html#TreeLevel"><span class="Identifier">TreeLevel</span></a><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">byte</span><span class="Other">]</span><span class="Other">]</span> {.
+<dt><pre><span class="Keyword">proc</span> <a href="#get%2C%2CPair%2CTreeLevel%2CChunkSize"><span class="Identifier">get</span></a><span class="Other">(</span><span class="Identifier">store</span><span class="Other">;</span> <span class="Identifier">pair</span><span class="Other">:</span> <a href="eris.html#Pair"><span class="Identifier">Pair</span></a><span class="Other">;</span> <span class="Identifier">level</span><span class="Other">:</span> <a href="eris.html#TreeLevel"><span class="Identifier">TreeLevel</span></a><span class="Other">;</span> <span class="Identifier">bs</span><span class="Other">:</span> <a href="eris.html#ChunkSize"><span class="Identifier">ChunkSize</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">byte</span><span class="Other">]</span><span class="Other">]</span> {.
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
@@ -1832,6 +1877,22 @@ class="link-seesrc" target="_blank">Source</a>
 Method for putting an encrypted chunk to a <tt class="docutils literal"><span class="pre">Store</span></tt>.
 &nbsp;&nbsp;<a
 href="https://codeberg.org/eris/nim-eris/src/branch/trunk/src/eris.nim#L496"
+class="link-seesrc" target="_blank">Source</a>
+
+</dd>
+</div>
+
+</dl></div>
+<div class="section" id="15">
+<h1><a class="toc-backref" href="#15">Iterators</a></h1>
+<dl class="item">
+<div id="chunkPairs.i,seq[byte]">
+<dt><pre><span class="Keyword">iterator</span> <a href="#chunkPairs.i%2Cseq%5Bbyte%5D"><span class="Identifier">chunkPairs</span></a><span class="Other">(</span><span class="Identifier">blk</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">byte</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="eris.html#Pair"><span class="Identifier">Pair</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://codeberg.org/eris/nim-eris/src/branch/trunk/src/eris.nim#L436"
 class="link-seesrc" target="_blank">Source</a>
 
 </dd>
