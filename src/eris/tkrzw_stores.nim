@@ -36,7 +36,7 @@ method hasBlock(store: DbmStore; r: Reference; bs: ChunkSize): Future[bool] =
   result = newFuture[bool]("DbmStore.hasBlock")
   try:
     result.complete(store.dbm.hasKey r.bytes)
-  except:
+  except CatchableError:
     result.fail getCurrentException()
 
 method put(s: DbmStore; fut: FuturePut) =
