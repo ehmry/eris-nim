@@ -37,4 +37,4 @@ NIMDOC_OUTPUTS += $(DOCSDIR)/eriscmd/eriscbor.html
 NIMDOC_OUTPUTS += $(DOCSDIR)/eriscmd/eriscbor.idx
 NIMDOC_OUTPUTS += $(DOCSDIR)/tkrzw_stores.html
 
-: eris.nim |> $(DIRENV) nim doc $(NIMDOC_FLAGS) --outdir:$(DOCSDIR) %f |> $(DOCSDIR)/%B.html $(DOCSDIR)/nimdoc.out.css
+: eris.nim |> $(DIRENV) nim doc $(NIM_FLAGS) $(NIMDOC_FLAGS) --outdir:$(DOCSDIR) %f |> $(DOCSDIR)/%B.html $(DOCSDIR)/nimdoc.out.css
