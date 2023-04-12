@@ -1,2 +1,4 @@
 include_rules
-: eriscmd.nim |> !eris_program |>
+NIM_FLAGS_eriscmd += --backend:cpp
+NIM_FLAGS_eriscmd += --path:%<illwill>
+: eriscmd.nim |> !nim_bin |>

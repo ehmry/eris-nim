@@ -8,5 +8,5 @@ TESTS += test_small.nim
 : foreach $(TESTS) |> !nim_run |>
 : test_syndicate.nim | $(SYNDICATE_PROTOCOL) ../<protocols> |> !nim_run |>
 
-!nim_run_cpp = |> $(DIRENV) nim cpp -o:%o -r %f |> %B.run
-: test_tkrzw.nim |> !nim_run_cpp ; rm store.tkh |> %B.run |
+NIM_FLAGS_test_tkrzw += --backend:cpp
+: test_tkrzw.nim |> !nim_run ; rm store.tkh |> %B.run

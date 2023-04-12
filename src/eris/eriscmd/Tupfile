@@ -1,2 +1,7 @@
 include_rules
-: foreach eris*.nim |> !eris_program |>
+NIM_FLAGS_erisdb += --backend:cpp
+NIM_FLAGS_erisdbmerge += --backend:cpp
+NIM_FLAGS_erisserve += --backend:cpp
+NIM_FLAGS_erisresolver += --backend:cpp
+NIM_FLAGS_erisverify += --path:%<illwill>
+: foreach eris*.nim |> !nim_bin |>

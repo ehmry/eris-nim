@@ -1,0 +1,2 @@
+NIM_FLAGS += --path:%<base32>
+NIM_GROUPS += $(TUP_CWD)/../nimble/<base32>
