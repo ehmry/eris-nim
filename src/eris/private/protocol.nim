@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 import
-  std / typetraits, preserves, ../../eris
+  preserves, ../../eris
 
 type
   ErisCapability* {.preservesRecord: "eris".} = object

