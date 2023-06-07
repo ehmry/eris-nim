@@ -1,6 +1,6 @@
 # Package
 
-version = "20230518"
+version = "20230607"
 author        = "Endo Renberg"
 description   = "Encoding for Robust Immutable Storage"
 license       = "Unlicense"
