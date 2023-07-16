@@ -2,6 +2,7 @@
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
   <mime-type type="application/x-eris-link+cbor">
     <comment xml:lang="en">ERIS link</comment>
+    <comment xml:lang="de">ERIS Verbindung</comment>
     <acronym>ERIS</acronym>
     <expanded-acronym xml:lang="en">Encoding for Robust Immutable Storage</expanded-acronym>
     <glob pattern="*.eris"/>
@@ -10,5 +11,9 @@
     </magic>
     <icon name="eris"/>
     <generic-icon name="application-octet-stream"/>
+  </mime-type>
+  <mime-type type="x-scheme-handler/urn:eris">
+    <comment xml:lang="en">ERIS capability URN</comment>
+    <comment xml:lang="de">ERIS Berechtigung URN</comment>
   </mime-type>
 </mime-info>

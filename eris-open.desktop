@@ -4,5 +4,5 @@ Type=Application
 Name=eris-open
 Description=ERIS link handler
 Exec=eriscmd open %f
-MimeType=application/x-eris-link+cbor;
+MimeType=application/x-eris-link+cbor;x-scheme-handler/urn:eris
 Categories=Utility;ConsoleOnly
