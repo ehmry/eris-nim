@@ -56,23 +56,6 @@ A simple example:
 URL=http://[::1]:80
 ```
 
-### resolver
-
-The `eriscmd resolver` utility that resolves ERIS blocks between the following:
-  - [CoAP](https://en.wikipedia.org/wiki/Constrained_Application_Protocol) clients
-  - CoAP servers
-  - HTTP clients (see [ERIS over HTTP](https://eris.codeberg.page/eer/eer-001/))
-  - HTTP servers
-  - [tkrzw](https://dbmx.net/tkrzw/) database files
-  - [Syndicate](https://syndicate-lang.org) [actors](./protocols/syndicate_protocol.prs)
-
-The server configuration is inspired by [Genode](https://genode.org/)'s [dynamic component reconfiguration](https://genode.org/documentation/genode-foundations/21.05/components/Component_configuration.html) and implemented by the Syndicated actor model. The server cannot be excuted normally, it must be supervised by a [Syndicate server](https://synit.org/book/operation/system-bus.html). The configuration schema is at [erisresolver_config.prs](./protocols/erisresolver_config.prs) and sample is at [erisresolver.config.sample.pr](./erisresolver.config.sample.pr).
-
-If you are using UNIX you will need to ask a system administrator or a grownup that you trust to remove the restriction on binding to port 80. This is can be done with `sysctl`:
-```sh
-doas sysctl net.ipv4.ip_unprivileged_port_start=80
-```
-
 ### verify
 
 The `eriscmd verify` utility will fetch all blocks that constitute a read capability. It parses capabilities on the command-line in URN form and otherwise parses CBOR on standard input to find capabilities.

@@ -1,12 +1,9 @@
 include ../coap/depends.tup
-include ../syndicate-nim/depends.tup
 include ../freedesktop_org/depends.tup
 include depends.tup
 NIM_FLAGS += --path:$(TUP_CWD)/../cbor/src
 NIM_FLAGS += --path:$(TUP_CWD)/../coap/src
 NIM_FLAGS += --path:$(TUP_CWD)/../freedesktop_org/src
-NIM_FLAGS += --path:$(TUP_CWD)/../preserves-nim/src
-NIM_FLAGS += --path:$(TUP_CWD)/../syndicate-nim/src
 NIM_FLAGS += --path:$(TUP_CWD)/../tkrzw/src
 NIM_GROUPS += $(TUP_CWD)/../nimble/<illwill>
 NIM_GROUPS += $(TUP_CWD)/<protocols>
