@@ -7,7 +7,7 @@ import
   eris, eris / composite_stores, ./jsonstores
 
 import
-  vectors
+  eris / test_vectors
 
 suite "spec":
   for v in testVectors({TestKind.Positive, TestKind.Negative}):

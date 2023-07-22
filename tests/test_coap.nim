@@ -9,7 +9,7 @@ import
   eris, eris / [memory_stores, coap_stores]
 
 import
-  ./vectors
+  eris / test_vectors
 
 const
   url = "coap+tcp://[::1]:5685"

