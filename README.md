@@ -42,6 +42,10 @@ A simple example:
 test "$ERIS_STORE_URL = coap+tcp://[::1]:5683"
 ```
 
+### linkedit
+
+Replace the MIME-type and metadata of ERIS­link files.
+
 ### open
 
 The `eriscmd open` utility opens [ERIS link files](https://eris.codeberg.page/eer/linkfile.xml) in an application that is locally configured for the given MIME type of the link file. To integrate it within a [Freedesktop.org](https://www.freedesktop.org/) environment the [eris-open.desktop](./eris-open.desktop), [eris-link.xml](./eris-link.xml), and [eris48.png](./eris48.png) should be installed in their appropriate locations.

