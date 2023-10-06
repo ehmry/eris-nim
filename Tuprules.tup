@@ -1,12 +1,8 @@
 include ../coap/depends.tup
 include ../freedesktop_org/depends.tup
 include depends.tup
-NIM_FLAGS += --path:$(TUP_CWD)/../cbor/src
-NIM_FLAGS += --path:$(TUP_CWD)/../coap/src
-NIM_FLAGS += --path:$(TUP_CWD)/../freedesktop_org/src
-NIM_FLAGS += --path:$(TUP_CWD)/../tkrzw/src
-NIM_GROUPS += $(TUP_CWD)/../nimble/<illwill>
-NIM_GROUPS += $(TUP_CWD)/<protocols>
 
 NIM_FLAGS += --git.url:"https://codeberg.org/eris/nim-eris"
 NIM_FLAGS += --git.devel:trunk
+NIM_GROUPS += $(TUP_CWD)/<lock>
+NIM_GROUPS += $(TUP_CWD)/<protocols>

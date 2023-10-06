@@ -1,4 +1,1 @@
-let
-  eris = builtins.getFlake "eris";
-  pkgs = import <nixpkgs> { overlays = builtins.attrValues eris.overlays; };
-in pkgs.nim2Packages.eris
+let pkgs = import <nixpkgs> { }; in pkgs.nim2Packages.eris

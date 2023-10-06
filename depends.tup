@@ -1,2 +1,4 @@
-NIM_FLAGS += --path:%<base32>
-NIM_GROUPS += $(TUP_CWD)/../nimble/<base32>
+NIM_FLAGS += --path:$(TUP_CWD)/../cbor/src
+NIM_FLAGS += --path:$(TUP_CWD)/../coap/src
+NIM_FLAGS += --path:$(TUP_CWD)/../freedesktop_org/src
+NIM_FLAGS += --path:$(TUP_CWD)/../tkrzw/src
