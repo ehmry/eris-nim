@@ -1,3 +1,4 @@
+include ../coap/depends.tup
 NIM_FLAGS += --path:$(TUP_CWD)/../cbor/src
 NIM_FLAGS += --path:$(TUP_CWD)/../coap/src
 NIM_FLAGS += --path:$(TUP_CWD)/../freedesktop_org/src

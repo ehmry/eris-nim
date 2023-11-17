@@ -1,1 +1,1 @@
-let pkgs = import <nixpkgs> { }; in pkgs.nim2Packages.eris
+let pkgs = import <nixpkgs> { }; in pkgs.eriscmd
