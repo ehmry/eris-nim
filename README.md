@@ -33,13 +33,15 @@ The Debian way:
 
 ### link
 
-The `eriscmd link` utility creates [ERIS link files](https://codeberg.org/eris/eer/pulls/15).
+The `eriscmd link` utility creates [ERIS link files](https://codeberg.org/eris/eer/pulls/15) from ERIS URNs.
+A URN is read from stdin or passed as an argument an a link file is written to stdout.
 
 This utility requires the location of an ERIS CoAP server which should be passed with the environmental variable `ERIS_STORE_URL`.
 
 A simple example:
 ```sh
-test "$ERIS_STORE_URL = coap+tcp://[::1]:5683"
+$ ERIS_STORE_URL="coap+tcp://[::1]:5683"
+$ pv ./some.data | eris-go put --convergent "$ERIS_STORE_URL" | eriscmd link > some.data.eris
 ```
 
 ### linkedit

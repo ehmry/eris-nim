@@ -44,9 +44,9 @@ proc main*(opts: var OptParser): string =
     of cmdLongOption, cmdShortOption:
       case key
       of "get", "g":
-        ops.excl Get
+        ops.incl Get
       of "put", "p":
-        ops.excl Put
+        ops.incl Put
       of "tkrzw", "t":
         dbPaths.add absolutePath(val)
       of "url", "u":
