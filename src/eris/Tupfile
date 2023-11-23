@@ -1,3 +1,2 @@
 include_rules
-NIM_FLAGS_eriscmd += --backend:cpp
 : eriscmd.nim |> !nim_bin |>
