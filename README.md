@@ -31,7 +31,7 @@ The Debian way:
 
 `eriscmd` is a utility program with a bunch of subcommands. They are mostly self-describing.
 
-### link
+### eriscmd link
 
 The `eriscmd link` utility creates [ERIS link files](https://codeberg.org/eris/eer/pulls/15) from ERIS URNs.
 A URN is read from stdin or passed as an argument an a link file is written to stdout.
@@ -44,11 +44,11 @@ $ ERIS_STORE_URL="coap+tcp://[::1]:5683"
 $ pv ./some.data | eris-go put --convergent "$ERIS_STORE_URL" | eriscmd link > some.data.eris
 ```
 
-### linkedit
+### eriscmd linkedit
 
 Replace the MIME-type and metadata of ERIS­link files.
 
-### open
+### eriscmd open
 
 The `eriscmd open` utility opens [ERIS link files](https://eris.codeberg.page/eer/linkfile.xml) in an application that is locally configured for the given MIME type of the link file. To integrate it within a [Freedesktop.org](https://www.freedesktop.org/) environment the [eris-open.desktop](./eris-open.desktop), [eris-link.xml](./eris-link.xml), and [eris48.png](./eris48.png) should be installed in their appropriate locations.
 
@@ -62,12 +62,12 @@ A simple example:
 URL=http://[::1]:80
 ```
 
-### verify
+### eriscmd verify
 
 The `eriscmd verify` utility will fetch all blocks that constitute a read capability. It parses capabilities on the command-line in URN form and otherwise parses CBOR on standard input to find capabilities.
 
 ```sh
-eriscmd verify urn:eris:BIAMSY42PLVLXF2GQAVOONCNWPEU2PLOYXZXAVFZIRVACKI424N24CMJPPRK7QNWH3LNRE7Q3ENOAJWPKCNUJOLCHIWSEOO6RW5KH7MJ2A
+$ eriscmd verify urn:eris:BIAMSY42PLVLXF2GQAVOONCNWPEU2PLOYXZXAVFZIRVACKI424N24CMJPPRK7QNWH3LNRE7Q3ENOAJWPKCNUJOLCHIWSEOO6RW5KH7MJ2A
 
 cat *.eris | eriscmd verify
 ```
@@ -88,7 +88,7 @@ application/x-eris-link+cbor = execm /some/path/to/rclerislink
 ## Nix development
 
 ```sh
-nix develop git+https://codeberg.org/eris/nix-eris#nim-eris
+$ nix develop git+https://codeberg.org/eris/nix-eris#nim-eris
 ```
 
 ---
