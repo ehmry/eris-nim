@@ -1,0 +1,810 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "metadata": {
+    "component": {
+      "type": "application",
+      "bom-ref": "pkg:nim/eris",
+      "name": "eris",
+      "description": "Encoding for Robust Immutable Storage",
+      "version": "20240829",
+      "authors": [
+        {
+          "name": "Endo Renberg"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Unlicense"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "nim:skipExt",
+          "value": "nim"
+        },
+        {
+          "name": "nim:bin:eris/helpers/rclerislink",
+          "value": "eris/helpers/rclerislink"
+        },
+        {
+          "name": "nim:bin:eris/eriscmd",
+          "value": "eris/eriscmd"
+        },
+        {
+          "name": "nim:srcDir",
+          "value": "src"
+        },
+        {
+          "name": "nim:backend",
+          "value": "cpp"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/base32",
+      "name": "base32",
+      "version": "0.1.3",
+      "externalReferences": [
+        {
+          "url": "https://github.com/OpenSystemsLab/base32.nim/archive/f541038fbe49fdb118cc2002d29824b9fc4bfd61.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "https://github.com/OpenSystemsLab/base32.nim",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/qcnchjsak3hyn4c6r0zd6qvm7j8y1747-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "f541038fbe49fdb118cc2002d29824b9fc4bfd61"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "16gh1ifp9hslsg0is0v1ya7rxqfhq5hjqzc3pfdqvcgibp5ybh06"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://github.com/OpenSystemsLab/base32.nim/archive/f541038fbe49fdb118cc2002d29824b9fc4bfd61.tar.gz"
+        },
+        {
+          "name": "nix:fod:ref",
+          "value": "0.1.3"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/coap",
+      "name": "coap",
+      "version": "20230331",
+      "externalReferences": [
+        {
+          "url": "https://codeberg.org/eris/nim-coap/archive/a134213b51a8d250684f2ba26802ffa97fae4ffb.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "https://codeberg.org/eris/nim-coap.git",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/pqj933cnw7r7hp46jrpjlwh1yr0jvckp-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "a134213b51a8d250684f2ba26802ffa97fae4ffb"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "1wbix6d8l26nj7m3xinh4m2f27n4ma0yzs3x5lpann2ha0y51k8b"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://codeberg.org/eris/nim-coap/archive/a134213b51a8d250684f2ba26802ffa97fae4ffb.tar.gz"
+        },
+        {
+          "name": "nix:fod:ref",
+          "value": "20230331"
+        },
+        {
+          "name": "nix:fod:srcDir",
+          "value": "src"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/cbor",
+      "name": "cbor",
+      "version": "20240823",
+      "externalReferences": [
+        {
+          "url": "https://git.sr.ht/~ehmry/nim_cbor/archive/598716d7b47905311cdb6b0ed1cec863bb2bb497.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "git+https://git.sr.ht/~ehmry/nim_cbor",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/3r5kv4i1ypz6cpr2pm99zlqr885z3dpr-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "598716d7b47905311cdb6b0ed1cec863bb2bb497"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "1g03jjd73k65sbjarv17yyy8jccwryjg5ak6zfb5zjasr3fy4zjx"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://git.sr.ht/~ehmry/nim_cbor/archive/598716d7b47905311cdb6b0ed1cec863bb2bb497.tar.gz"
+        },
+        {
+          "name": "nix:fod:ref",
+          "value": "20240823"
+        },
+        {
+          "name": "nix:fod:srcDir",
+          "value": "src"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/taps",
+      "name": "taps",
+      "version": "20240405",
+      "externalReferences": [
+        {
+          "url": "https://git.sr.ht/~ehmry/nim_taps/archive/8c8572cd971d1283e6621006b310993c632da247.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "git+https://git.sr.ht/~ehmry/nim_taps",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/6y14ia52kr7jyaa0izx37mlablmq9s65-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "8c8572cd971d1283e6621006b310993c632da247"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "1dp166bv9x773jmfqppg5i3v3rilgff013vb11yzwcid9l7s3iy8"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://git.sr.ht/~ehmry/nim_taps/archive/8c8572cd971d1283e6621006b310993c632da247.tar.gz"
+        },
+        {
+          "name": "nix:fod:ref",
+          "value": "20240405"
+        },
+        {
+          "name": "nix:fod:srcDir",
+          "value": "src"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/freedesktop_org",
+      "name": "freedesktop_org",
+      "version": "20230210",
+      "externalReferences": [
+        {
+          "url": "https://git.sr.ht/~ehmry/freedesktop_org/archive/fb04d0862aca4be2edcc0eafa94b1840030231c8.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "git+https://git.sr.ht/~ehmry/freedesktop_org",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/98wncmx58cfnhv3y96lzwm22zvyk9b1h-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "fb04d0862aca4be2edcc0eafa94b1840030231c8"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "0wj5m09x1pr36gv8p5r72p6l3wwl01y8scpnlzx7q0h5ij6jaj6s"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://git.sr.ht/~ehmry/freedesktop_org/archive/fb04d0862aca4be2edcc0eafa94b1840030231c8.tar.gz"
+        },
+        {
+          "name": "nix:fod:ref",
+          "value": "20230210"
+        },
+        {
+          "name": "nix:fod:srcDir",
+          "value": "src"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/tkrzw",
+      "name": "tkrzw",
+      "version": "20220922",
+      "externalReferences": [
+        {
+          "url": "https://git.sr.ht/~ehmry/nim-tkrzw/archive/efd87edb7b063182c1a1fa018006a87b515d589b.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "git+https://git.sr.ht/~ehmry/nim-tkrzw",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/4x9wxyli4dy719svg1zaww0c0b3xckp0-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "efd87edb7b063182c1a1fa018006a87b515d589b"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "1h0sdvai4gkkz48xfh67wa1xz2k8bkkba8q6snnbllmhmywd9apb"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://git.sr.ht/~ehmry/nim-tkrzw/archive/efd87edb7b063182c1a1fa018006a87b515d589b.tar.gz"
+        },
+        {
+          "name": "nix:fod:ref",
+          "value": "20220922"
+        },
+        {
+          "name": "nix:fod:srcDir",
+          "value": "src"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/illwill",
+      "name": "illwill",
+      "version": "v0.4.1",
+      "externalReferences": [
+        {
+          "url": "https://github.com/johnnovak/illwill/archive/99a120f7f69868b94f5d35ce7e21dd12535de70c.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "https://github.com/johnnovak/illwill",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/k3sxzm7qnkgnwkrfd8hc3gkwzbayb1h1-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "99a120f7f69868b94f5d35ce7e21dd12535de70c"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "0hiic5yjsaw6sgl1jzmfpm5g6a5ckzmd29c3pzg30glchn2g94sk"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://github.com/johnnovak/illwill/archive/99a120f7f69868b94f5d35ce7e21dd12535de70c.tar.gz"
+        },
+        {
+          "name": "nix:fod:ref",
+          "value": "v0.4.1"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/taps",
+      "name": "taps",
+      "version": "20240405",
+      "externalReferences": [
+        {
+          "url": "https://git.sr.ht/~ehmry/nim_taps/archive/8c8572cd971d1283e6621006b310993c632da247.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "https://git.sr.ht/~ehmry/nim_taps",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/6y14ia52kr7jyaa0izx37mlablmq9s65-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "8c8572cd971d1283e6621006b310993c632da247"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "1dp166bv9x773jmfqppg5i3v3rilgff013vb11yzwcid9l7s3iy8"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://git.sr.ht/~ehmry/nim_taps/archive/8c8572cd971d1283e6621006b310993c632da247.tar.gz"
+        },
+        {
+          "name": "nix:fod:ref",
+          "value": "20240405"
+        },
+        {
+          "name": "nix:fod:srcDir",
+          "value": "src"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/bigints",
+      "name": "bigints",
+      "version": "20231006",
+      "externalReferences": [
+        {
+          "url": "https://github.com/ehmry/nim-bigints/archive/86ea14d31eea9275e1408ca34e6bfe9c99989a96.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "https://github.com/ehmry/nim-bigints.git",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/jvrm392g8adfsgf36prgwkbyd7vh5jsw-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "86ea14d31eea9275e1408ca34e6bfe9c99989a96"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "15pcpmnk1bnw3k8769rjzcpg00nahyrypwbxs88jnwr4aczp99j4"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://github.com/ehmry/nim-bigints/archive/86ea14d31eea9275e1408ca34e6bfe9c99989a96.tar.gz"
+        },
+        {
+          "name": "nix:fod:ref",
+          "value": "20231006"
+        },
+        {
+          "name": "nix:fod:srcDir",
+          "value": "src"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/getdns",
+      "name": "getdns",
+      "version": "20230806",
+      "externalReferences": [
+        {
+          "url": "https://git.sr.ht/~ehmry/getdns-nim/archive/e4ae0992ed7c5540e6d498f3074d06c8f454a0b6.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "https://git.sr.ht/~ehmry/getdns-nim",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/j8i20k9aarzppg4p234449140nnnaycq-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "e4ae0992ed7c5540e6d498f3074d06c8f454a0b6"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "1dp53gndr6d9s9601dd5ipkiq94j53hlx46mxv8gpr8nd98bqysg"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://git.sr.ht/~ehmry/getdns-nim/archive/e4ae0992ed7c5540e6d498f3074d06c8f454a0b6.tar.gz"
+        },
+        {
+          "name": "nix:fod:ref",
+          "value": "20230806"
+        },
+        {
+          "name": "nix:fod:srcDir",
+          "value": "src"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/sys",
+      "name": "sys",
+      "version": "0.0.4",
+      "externalReferences": [
+        {
+          "url": "https://github.com/alaviss/nim-sys/archive/c117ee60542f084525f254e6ade590675a6a2ed6.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "https://github.com/alaviss/nim-sys.git",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/vf9ls2wip6d8xhsi3rjh0dqsqg597i6b-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "c117ee60542f084525f254e6ade590675a6a2ed6"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "12qzx2lnh84xqfgypy0pka8nflq0y8n1izfwx8mb4zya5nzawmyf"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://github.com/alaviss/nim-sys/archive/c117ee60542f084525f254e6ade590675a6a2ed6.tar.gz"
+        },
+        {
+          "name": "nix:fod:ref",
+          "value": "0.0.4"
+        },
+        {
+          "name": "nix:fod:srcDir",
+          "value": "src"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/cps",
+      "name": "cps",
+      "version": "c90530ac57f98a842b7be969115c6ef08bdcc564",
+      "externalReferences": [
+        {
+          "url": "https://github.com/ehmry/cps/archive/c90530ac57f98a842b7be969115c6ef08bdcc564.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "https://github.com/ehmry/cps",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/8gbhwni0akqskdb3qhn5nfgv6gkdz0vz-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "c90530ac57f98a842b7be969115c6ef08bdcc564"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "0h8ghs2fqg68j3jdcg7grnxssmllmgg99kym2w0a3vlwca1zvr62"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://github.com/ehmry/cps/archive/c90530ac57f98a842b7be969115c6ef08bdcc564.tar.gz"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/solo5_dispatcher",
+      "name": "solo5_dispatcher",
+      "version": "20240522",
+      "externalReferences": [
+        {
+          "url": "https://git.sr.ht/~ehmry/solo5_dispatcher/archive/cc64ef99416b22b12e4a076d33de9e25a163e57d.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "https://git.sr.ht/~ehmry/solo5_dispatcher",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/4jj467pg4hs6warhksb8nsxn9ykz8c7c-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "cc64ef99416b22b12e4a076d33de9e25a163e57d"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "1v9i9fqgx1g76yrmz2xwj9mxfwbjfpar6dsyygr68fv9031cqxq7"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://git.sr.ht/~ehmry/solo5_dispatcher/archive/cc64ef99416b22b12e4a076d33de9e25a163e57d.tar.gz"
+        },
+        {
+          "name": "nix:fod:ref",
+          "value": "20240522"
+        },
+        {
+          "name": "nix:fod:srcDir",
+          "value": "pkg"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/configparser",
+      "name": "configparser",
+      "version": "newSection",
+      "externalReferences": [
+        {
+          "url": "https://github.com/ehmry/nim-configparser/archive/695f1285d63f1954c25eb1f42798d90fa7bcbe14.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "https://github.com/ehmry/nim-configparser.git",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/4zl5v7i6cj3f9sayvsjcx2h20lqwr9a6-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "695f1285d63f1954c25eb1f42798d90fa7bcbe14"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "0b0pb5i0kir130ia2zf8zcgdz8awms161i6p83ri3nbgibbjnr37"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://github.com/ehmry/nim-configparser/archive/695f1285d63f1954c25eb1f42798d90fa7bcbe14.tar.gz"
+        },
+        {
+          "name": "nix:fod:ref",
+          "value": "newSection"
+        },
+        {
+          "name": "nix:fod:srcDir",
+          "value": "src"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nim/stew",
+      "name": "stew",
+      "version": "3c91b8694e15137a81ec7db37c6c58194ec94a6a",
+      "externalReferences": [
+        {
+          "url": "https://github.com/status-im/nim-stew/archive/3c91b8694e15137a81ec7db37c6c58194ec94a6a.tar.gz",
+          "type": "source-distribution"
+        },
+        {
+          "url": "https://github.com/status-im/nim-stew",
+          "type": "vcs"
+        }
+      ],
+      "properties": [
+        {
+          "name": "nix:fod:method",
+          "value": "fetchzip"
+        },
+        {
+          "name": "nix:fod:path",
+          "value": "/nix/store/mqg8qzsbcc8xqabq2yzvlhvcyqypk72c-source"
+        },
+        {
+          "name": "nix:fod:rev",
+          "value": "3c91b8694e15137a81ec7db37c6c58194ec94a6a"
+        },
+        {
+          "name": "nix:fod:sha256",
+          "value": "17lfhfxp5nxvld78xa83p258y80ks5jb4n53152cdr57xk86y07w"
+        },
+        {
+          "name": "nix:fod:url",
+          "value": "https://github.com/status-im/nim-stew/archive/3c91b8694e15137a81ec7db37c6c58194ec94a6a.tar.gz"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:nim/eris",
+      "dependsOn": [
+        "pkg:nim/base32",
+        "pkg:nim/coap",
+        "pkg:nim/cbor",
+        "pkg:nim/taps",
+        "pkg:nim/freedesktop_org",
+        "pkg:nim/tkrzw",
+        "pkg:nim/illwill"
+      ]
+    },
+    {
+      "ref": "pkg:nim/base32",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:nim/coap",
+      "dependsOn": [
+        "pkg:nim/taps"
+      ]
+    },
+    {
+      "ref": "pkg:nim/cbor",
+      "dependsOn": [
+        "pkg:nim/bigints"
+      ]
+    },
+    {
+      "ref": "pkg:nim/taps",
+      "dependsOn": [
+        "pkg:nim/getdns",
+        "pkg:nim/sys",
+        "pkg:nim/cps",
+        "pkg:nim/solo5_dispatcher"
+      ]
+    },
+    {
+      "ref": "pkg:nim/freedesktop_org",
+      "dependsOn": [
+        "pkg:nim/configparser"
+      ]
+    },
+    {
+      "ref": "pkg:nim/tkrzw",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:nim/illwill",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:nim/taps",
+      "dependsOn": [
+        "pkg:nim/getdns",
+        "pkg:nim/sys",
+        "pkg:nim/cps",
+        "pkg:nim/solo5_dispatcher"
+      ]
+    },
+    {
+      "ref": "pkg:nim/bigints",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:nim/getdns",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:nim/sys",
+      "dependsOn": [
+        "pkg:nim/cps",
+        "pkg:nim/stew"
+      ]
+    },
+    {
+      "ref": "pkg:nim/cps",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:nim/solo5_dispatcher",
+      "dependsOn": [
+        "pkg:nim/cps"
+      ]
+    },
+    {
+      "ref": "pkg:nim/configparser",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:nim/stew",
+      "dependsOn": []
+    }
+  ]
+}
